@@ -1,0 +1,26 @@
+{
+  "name": "inkjet",
+  "version": "1.0.0",
+  "description": "Image processor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gchudnov/inkjet.git"
+  },
+  "keywords": [
+    "photocopy",
+    "photo",
+    "jpeg",
+    "exif",
+    "image"
+  ],
+  "author": "Grigoriy Chudnov <g.chudnov@gmail.com> (https://github.com/gchudnov)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gchudnov/inkjet/issues"
+  },
+  "homepage": "https://github.com/gchudnov/inkjet"
+}
