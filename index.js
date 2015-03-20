@@ -45,10 +45,16 @@ function decode(buf, cb) {
         return parser.height;
       },
       get data() {
-        return parser.getData(parser.width, parser.height, false);
+        return this.getData(parser.width, parser.height);
       },
       getData: function (width, height) {
-        return parser.getData(width, height, false);
+        var dest = {
+          width: width,
+          height: height,
+          data: new Uint8Array(width * height * 4)
+        };
+        j.copyToImageData(dest);
+        return dest.data;
       }
     };
 
