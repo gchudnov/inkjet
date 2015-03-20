@@ -1,8 +1,17 @@
 # inkjet
 Image processor
 
+## EXIF
+https://github.com/mattiasw/ExifReader
 
-## jpgjs -- Updating to a fresh version
+## DECODE
+https://github.com/notmasteryet/jpgjs
+
+## ENCODE
+https://github.com/eugeneware/jpeg-js
+
+
+### jpgjs -- Updating to a fresh version
 ```
 $ cd projects/
 $ git clone https://github.com/notmasteryet/jpgjs.git
@@ -12,7 +21,7 @@ $ grunt
 $ cp ./build/pdfjs.js inkjet/lib/
 ```
 
-## ExifReader -- latest version
+### ExifReader -- latest version
 ```
 $ cd projects/
 $ git clone https://github.com/mattiasw/ExifReader.git
