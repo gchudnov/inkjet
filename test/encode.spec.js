@@ -21,7 +21,7 @@ describe('Encode', function() {
 
   var targetQuality = 80;
 
-  it('can be used to encode test data', function(done) {
+  it('can be used to process test data', function(done) {
     var width = 320;
     var height = 180;
     var frameData = new Buffer(width * height * 4);
