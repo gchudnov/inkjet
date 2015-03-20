@@ -15,7 +15,7 @@ describe('Decode', function() {
   var file5 = './images/jpeg-progressive.jpg';
 
 
-  it('can be used for ' + file1, function(done) {
+  it('can be used to decode ' + file1, function(done) {
     var filepath = path.join(__dirname, '..', file1);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
@@ -28,7 +28,7 @@ describe('Decode', function() {
     })
   });
 
-  it('can be used for ' + file2, function(done) {
+  it('can be used to decode ' + file2, function(done) {
     var filepath = path.join(__dirname, '..', file2);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
@@ -41,7 +41,7 @@ describe('Decode', function() {
     })
   });
 
-  it('can be used for ' + file3, function(done) {
+  it('can be used to decode ' + file3, function(done) {
     var filepath = path.join(__dirname, '..', file3);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
@@ -54,7 +54,7 @@ describe('Decode', function() {
     })
   });
 
-  it('can NOT be used for ' + file4, function(done) {
+  it('can NOT be used to decode ' + file4, function(done) {
     var filepath = path.join(__dirname, '..', file4);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
@@ -66,7 +66,7 @@ describe('Decode', function() {
     })
   });
 
-  it('can be used for ' + file5, function(done) {
+  it('can be used to decode ' + file5, function(done) {
     var filepath = path.join(__dirname, '..', file5);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
