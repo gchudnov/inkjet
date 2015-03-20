@@ -8,11 +8,16 @@ var lib = require('../index');
 
 describe('Encode', function() {
 
-  var file1 = './images/jpeg400jfif.jpg';
-  var file2 = './images/jpeg420exif.jpg';
-  var file3 = './images/jpeg422jfif.jpg';
-  var file4 = './images/jpeg444.jpg';
-  var file5 = './images/jpeg-progressive.jpg';
+  var outDir = path.join(__dirname, './out');
+  if(!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir);
+  }
+
+  var file1 = 'jpeg400jfif.jpg';
+  var file2 = 'jpeg420exif.jpg';
+  var file3 = 'jpeg422jfif.jpg';
+  //var file4 = 'jpeg444.jpg'; // 444 not supported
+  var file5 = 'jpeg-progressive.jpg';
 
   var targetQuality = 80;
 
@@ -41,7 +46,8 @@ describe('Encode', function() {
       (encoded.width).should.be.eql(320);
       (encoded.height).should.be.eql(180);
 
-      //fs.writeFileSync('output.jpg', encoded.data);
+      var file = 'custom.jpg';
+      fs.writeFileSync(path.join(__dirname, './out/' + file), encoded.data);
 
       done();
     });
@@ -49,7 +55,7 @@ describe('Encode', function() {
   });
 
   it('can be used to re-encode ' + file1, function(done) {
-    var filepath = path.join(__dirname, '..', file1);
+    var filepath = path.join(__dirname, '../images/', file1);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
     lib.decode(jpegU8Buf, function(err, decoded) {
@@ -64,7 +70,7 @@ describe('Encode', function() {
         (encoded.width).should.be.eql(600);
         (encoded.height).should.be.eql(800);
 
-        //fs.writeFileSync('output.jpg', encoded.data);
+        fs.writeFileSync(path.join(__dirname, './out/' + file1), encoded.data);
 
         done();
       });
@@ -72,7 +78,7 @@ describe('Encode', function() {
   });
 
   it('can be used to re-encode ' + file2, function(done) {
-    var filepath = path.join(__dirname, '..', file2);
+    var filepath = path.join(__dirname, '../images/', file2);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
     lib.decode(jpegU8Buf, function(err, decoded) {
@@ -81,13 +87,21 @@ describe('Encode', function() {
       (decoded.width).should.be.eql(2048);
       (decoded.height).should.be.eql(1536);
 
-      lib.encode(decoded, targetQuality, function(err, encoded) {
+      var targetWidth = decoded.width / 4;
+      var targetHeight = decoded.height / 4;
+      var raw = {
+        width: targetWidth,
+        height: targetHeight,
+        data: decoded.getData(targetWidth, targetHeight)
+      };
+
+      lib.encode(raw, targetQuality, function(err, encoded) {
         should.not.exist(err);
         should.exist(encoded);
-        (encoded.width).should.be.eql(2048);
-        (encoded.height).should.be.eql(1536);
+        (encoded.width).should.be.eql(targetWidth);
+        (encoded.height).should.be.eql(targetHeight);
 
-        //fs.writeFileSync('output.jpg', encoded.data);
+        fs.writeFileSync(path.join(__dirname, './out/' + file2), encoded.data);
 
         done();
       });
@@ -95,7 +109,7 @@ describe('Encode', function() {
   });
 
   it('can be used to re-encode ' + file3, function(done) {
-    var filepath = path.join(__dirname, '..', file3);
+    var filepath = path.join(__dirname, '../images/', file3);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
     lib.decode(jpegU8Buf, function(err, decoded) {
@@ -110,54 +124,30 @@ describe('Encode', function() {
         (encoded.width).should.be.eql(2048);
         (encoded.height).should.be.eql(1536);
 
-        //fs.writeFileSync('output.jpg', encoded.data);
+        fs.writeFileSync(path.join(__dirname, './out/' + file3), encoded.data);
 
         done();
       });
     });
   });
 
-  //it('can be used to re-encode ' + file4, function(done) {
-  //  var filepath = path.join(__dirname, '..', file4);
-  //  var jpegData = fs.readFileSync(filepath);
-  //  var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-  //  lib.decode(jpegU8Buf, function(err, decoded) {
-  //    should.not.exist(err);
-  //    should.exist(decoded);
-  //    (decoded.width).should.be.eql(600);
-  //    (decoded.height).should.be.eql(800);
-  //
-  //
-  //    lib.encode(decoded, 80, function(err, encoded) {
-  //      should.not.exist(err);
-  //      should.exist(encoded);
-  //      (encoded.width).should.be.eql(600);
-  //      (encoded.height).should.be.eql(800);
-  //
-  //      //fs.writeFileSync('output.jpg', encoded.data);
-  //
-  //      done();
-  //    });
-  //  });
-  //});
-
   it('can be used to re-encode ' + file5, function(done) {
-    var filepath = path.join(__dirname, '..', file5);
+    var filepath = path.join(__dirname, '../images/', file5);
     var jpegData = fs.readFileSync(filepath);
     var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
     lib.decode(jpegU8Buf, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
-      (decoded.width).should.be.eql(600);
-      (decoded.height).should.be.eql(800);
+      (decoded.width).should.be.eql(341);
+      (decoded.height).should.be.eql(486);
 
       lib.encode(decoded, targetQuality, function(err, encoded) {
         should.not.exist(err);
         should.exist(encoded);
-        (encoded.width).should.be.eql(600);
-        (encoded.height).should.be.eql(800);
+        (encoded.width).should.be.eql(341);
+        (encoded.height).should.be.eql(486);
 
-        //fs.writeFileSync('output.jpg', encoded.data);
+        fs.writeFileSync(path.join(__dirname, './out/' + file5), encoded.data);
 
         done();
       });
