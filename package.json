@@ -25,5 +25,9 @@
   "homepage": "https://github.com/gchudnov/inkjet",
   "dependencies": {
     "exif-reader": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.1",
+    "should": "^5.2.0"
   }
 }
