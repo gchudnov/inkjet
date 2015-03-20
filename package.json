@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/gchudnov/inkjet/issues"
   },
-  "homepage": "https://github.com/gchudnov/inkjet"
+  "homepage": "https://github.com/gchudnov/inkjet",
+  "dependencies": {
+    "exif-reader": "^1.0.0"
+  }
 }
