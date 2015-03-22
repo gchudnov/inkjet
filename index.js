@@ -6,6 +6,10 @@ var exif = require('./lib/exif');
 var decode = require('./lib/decode');
 var encode = require('./lib/encode');
 
+var exifWorker = require('./lib/exif-worker');
+var decodeWorker = require('./lib/decode-worker');
+var encodeWorker = require('./lib/encode-worker');
+
 
 module.exports.decode = decodeBuffer;
 module.exports.encode = encodeBuffer;
@@ -39,7 +43,23 @@ function encodeBuffer(buf, options, cb) {
  */
 function exifBuffer(buf, options, cb) {
   if(hasWorker) {
-    // TODO: implement this
+    var wr = require('webworkify')(exifWorker);
+    wr.onmessage = function(ev) {
+      var msg = ev.data;
+
+      cb(msg.err, msg.result);
+    };
+
+    var msg = {
+      buf: buf
+    };
+
+    if (options.transferable) {
+      wr.postMessage(msg, [ buf ]);
+    } else {
+      wr.postMessage(msg);
+    }
+
   } else {
     exif(buf, options, cb);
   }
