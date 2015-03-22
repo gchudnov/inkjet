@@ -18,7 +18,7 @@ describe('Exif', function() {
     var filepath = path.join(__dirname, '../images/', file1);
     var jpegData = fs.readFileSync(filepath);
     var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.readExif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegArrBuf, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
@@ -29,7 +29,7 @@ describe('Exif', function() {
     var filepath = path.join(__dirname, '../images/', file2);
     var jpegData = fs.readFileSync(filepath);
     var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.readExif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegArrBuf, function(err, data) {
       should.not.exist(err);
       should.exist(data);
       done();
@@ -40,7 +40,7 @@ describe('Exif', function() {
     var filepath = path.join(__dirname, '../images/', file3);
     var jpegData = fs.readFileSync(filepath);
     var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.readExif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegArrBuf, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
@@ -51,7 +51,7 @@ describe('Exif', function() {
     var filepath = path.join(__dirname, '../images/', file4);
     var jpegData = fs.readFileSync(filepath);
     var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.readExif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegArrBuf, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
@@ -62,7 +62,7 @@ describe('Exif', function() {
     var filepath = path.join(__dirname, '../images/', file5);
     var jpegData = fs.readFileSync(filepath);
     var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.readExif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegArrBuf, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
