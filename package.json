@@ -4,7 +4,8 @@
   "description": "Image processor",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "browser": "./node_modules/.bin/gulp script"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,18 @@
   },
   "homepage": "https://github.com/gchudnov/inkjet",
   "dependencies": {
-    "exif-reader": "^1.0.0",
     "webworkify": "^1.0.2"
   },
   "devDependencies": {
+    "browserify": "^9.0.3",
+    "gulp": "^3.8.11",
+    "gulp-header": "^1.2.2",
+    "gulp-load-plugins": "^0.9.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
     "mocha": "^2.2.1",
-    "should": "^5.2.0"
+    "should": "^5.2.0",
+    "vinyl-source-stream2": "^0.1.1"
   }
 }
