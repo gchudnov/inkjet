@@ -1,10 +1,10 @@
 'use strict';
 
-var exifLib = require('./lib/exif');
-var decodeLib = require('./lib/decode');
-var encodeLib = require('./lib/encode');
+var exif = require('./lib/exif');
+var decode = require('./lib/decode');
+var encode = require('./lib/encode');
 
 
-module.exports.decode = decodeLib.decode;
-module.exports.encode = encodeLib.encode;
-module.exports.exif = exifLib.exif;
+module.exports.decode = decode;
+module.exports.encode = encode;
+module.exports.exif = exif;
