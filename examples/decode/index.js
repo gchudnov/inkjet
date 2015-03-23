@@ -11,7 +11,7 @@
     el.innerHTML = err ? err.message : '';
   }
 
-  function displaySource(decoded) {
+  function displayDecodedData(decoded) {
     var canvas = document.getElementById('source-canvas');
     canvas.width = decoded.width;
     canvas.height = decoded.height;
@@ -41,7 +41,7 @@
           if(err) {
             displayError(err);
           } else {
-            displaySource(decoded);
+            displayDecodedData(decoded);
           }
         });
       } catch (err) {
