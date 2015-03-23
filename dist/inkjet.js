@@ -33,6 +33,11 @@ function decodeBuffer(buf, options, cb) {
     options = {};
   }
 
+  if(buf instanceof ArrayBuffer) {
+    buf = new Uint8Array(buf, 0);
+  }
+
+  hasWorker = false;
   if(hasWorker) {
     // TODO: implement this
   } else {
@@ -6559,6 +6564,10 @@ function decode(buf, options, cb) {
 
     cb(null, result);
   } catch(err) {
+    if(typeof err === 'string') {
+      // jpg.js throws 'string' values, convert to an Error
+      err = new Error(err);
+    }
     cb(err);
   }
 }

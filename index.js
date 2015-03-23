@@ -25,6 +25,11 @@ function decodeBuffer(buf, options, cb) {
     options = {};
   }
 
+  if(buf instanceof ArrayBuffer) {
+    buf = new Uint8Array(buf, 0);
+  }
+
+  hasWorker = false;
   if(hasWorker) {
     // TODO: implement this
   } else {
