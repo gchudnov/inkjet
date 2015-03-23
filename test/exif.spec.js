@@ -32,9 +32,18 @@ describe('Exif', function() {
     lib.exif(jpegArrBuf, function(err, data) {
       should.not.exist(err);
       should.exist(data);
+      done();
+    })
+  });
 
-      console.log(data);
-
+  it('should be detected for ' + file2 + ' (first 128Kb taken)', function(done) {
+    var filepath = path.join(__dirname, '../images/', file2);
+    var jpegData = fs.readFileSync(filepath);
+    var jpegArrBuf = bu.toArrayBuffer(jpegData);
+    jpegArrBuf = jpegArrBuf.slice(0, 128 * 1024);
+    lib.exif(jpegArrBuf, function(err, data) {
+      should.not.exist(err);
+      should.exist(data);
       done();
     })
   });
