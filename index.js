@@ -20,6 +20,11 @@ module.exports.exif = exifBuffer;
  * Decode the provided buffer
  */
 function decodeBuffer(buf, options, cb) {
+  if(typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
   if(hasWorker) {
     // TODO: implement this
   } else {
@@ -31,6 +36,11 @@ function decodeBuffer(buf, options, cb) {
  * Encode the provided buffer
  */
 function encodeBuffer(buf, options, cb) {
+  if(typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
   if(hasWorker) {
     // TODO: implement this
   } else {
@@ -42,12 +52,18 @@ function encodeBuffer(buf, options, cb) {
  * Get EXIF data for the provided buffer
  */
 function exifBuffer(buf, options, cb) {
+  if(typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
   if(hasWorker) {
     var wr = require('webworkify')(exifWorker);
+
     wr.onmessage = function(ev) {
       var msg = ev.data;
-
-      cb(msg.err, msg.result);
+      var err = msg.err ? new Error(msg.err) : undefined;
+      cb(err, msg.result);
     };
 
     var msg = {

@@ -25,13 +25,16 @@ describe('Exif', function() {
     })
   });
 
-  it('should be detected for ' + file2, function(done) {
+  it.only('should be detected for ' + file2, function(done) {
     var filepath = path.join(__dirname, '../images/', file2);
     var jpegData = fs.readFileSync(filepath);
     var jpegArrBuf = bu.toArrayBuffer(jpegData);
     lib.exif(jpegArrBuf, function(err, data) {
       should.not.exist(err);
       should.exist(data);
+
+      console.log(data);
+
       done();
     })
   });

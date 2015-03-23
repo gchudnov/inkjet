@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>EXIF Reader</title>
+  <script src="./../../dist/inkjet.js"></script>
+  <script src="./index.js"></script>
+</head>
+<body>
+<form>
+  <label for="file">
+    Choose a file from your computer:<br />
+    <input type="file" id="file" name="file" />
+  </label>
+</form>
+<table style="margin-top: 12px;">
+  <thead>
+  <tr>
+    <th>Tag name</th>
+    <th>Tag value</th>
+  </tr>
+  </thead>
+  <tbody id="exif-table-body">
+  </tbody>
+</table>
+</body>
+</html>

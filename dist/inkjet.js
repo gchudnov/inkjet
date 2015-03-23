@@ -28,6 +28,11 @@ module.exports.exif = exifBuffer;
  * Decode the provided buffer
  */
 function decodeBuffer(buf, options, cb) {
+  if(typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
   if(hasWorker) {
     // TODO: implement this
   } else {
@@ -39,6 +44,11 @@ function decodeBuffer(buf, options, cb) {
  * Encode the provided buffer
  */
 function encodeBuffer(buf, options, cb) {
+  if(typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
   if(hasWorker) {
     // TODO: implement this
   } else {
@@ -50,12 +60,18 @@ function encodeBuffer(buf, options, cb) {
  * Get EXIF data for the provided buffer
  */
 function exifBuffer(buf, options, cb) {
+  if(typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
   if(hasWorker) {
     var wr = require('webworkify')(exifWorker);
+
     wr.onmessage = function(ev) {
       var msg = ev.data;
-
-      cb(msg.err, msg.result);
+      var err = msg.err ? new Error(msg.err) : undefined;
+      cb(err, msg.result);
     };
 
     var msg = {
@@ -6517,11 +6533,6 @@ module.exports = decode;
  * @param cb Callback to invoke on completion
  */
 function decode(buf, options, cb) {
-  if(typeof options === 'function') {
-    cb = options;
-    options = {};
-  }
-
   function getData(j, width, height) {
     var dest = {
       width: width,
@@ -6609,9 +6620,10 @@ module.exports = function(self) {
 
   self.onmessage = function (ev) {
     var msg = ev.data;
-    exif(msg.buf, function(err, result) {
+    exif(msg.buf, {}, function(err, result) {
       if (err) {
-        self.postMessage({ err: err });
+        var msg = err instanceof Error ? err.message : err; // Error is not clonable
+        self.postMessage({ err: msg });
       } else {
         self.postMessage({ result: result });
       }
@@ -6634,15 +6646,17 @@ module.exports = exif;
  * @param cb
  */
 function exif(buf, options, cb) {
-  if(typeof options === 'function') {
-    cb = options;
-    options = {};
-  }
-
   try {
     var exif = new ExifReader();
     exif.load(buf);
+
+    // The MakerNote tag can be really large. Remove it to lower memory usage.
+    if(!options.hasOwnProperty('hasMakerNote') || !options.hasMakerNote) {
+      exif.deleteTag('MakerNote');
+    }
+
     var metadata = exif.getAllTags();
+
     cb(null, metadata);
   } catch(err) {
     cb(err);
