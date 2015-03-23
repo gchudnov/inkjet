@@ -25,7 +25,7 @@ describe('Exif', function() {
     })
   });
 
-  it.only('should be detected for ' + file2, function(done) {
+  it('should be detected for ' + file2, function(done) {
     var filepath = path.join(__dirname, '../images/', file2);
     var jpegData = fs.readFileSync(filepath);
     var jpegArrBuf = bu.toArrayBuffer(jpegData);
