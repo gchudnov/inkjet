@@ -29,9 +29,25 @@ function decodeBuffer(buf, options, cb) {
     buf = new Uint8Array(buf, 0);
   }
 
-  hasWorker = false;
   if(hasWorker) {
-    // TODO: implement this
+    var wr = require('webworkify')(decodeWorker);
+
+    wr.onmessage = function(ev) {
+      var msg = ev.data;
+      var err = msg.err ? new Error(msg.err) : undefined;
+      cb(err, msg.result);
+    };
+
+    var msg = {
+      buf: buf
+    };
+
+    if (options.transferable) {
+      wr.postMessage(msg, [ buf ]);
+    } else {
+      wr.postMessage(msg);
+    }
+
   } else {
     decode(buf, options, cb);
   }
