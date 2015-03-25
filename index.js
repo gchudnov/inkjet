@@ -17,7 +17,11 @@ module.exports.exif = exifBuffer;
 
 
 /**
- * Decode the provided buffer
+ * Decode
+ *
+ * @param buf
+ * @param options
+ * @param cb
  */
 function decodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -54,7 +58,11 @@ function decodeBuffer(buf, options, cb) {
 }
 
 /**
- * Encode the provided buffer
+ * Encode
+ *
+ * @param buf
+ * @param options
+ * @param cb
  */
 function encodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -62,6 +70,11 @@ function encodeBuffer(buf, options, cb) {
     options = {};
   }
 
+  if(typeof options === 'number') {
+    options = { quality: options };
+  }
+
+  hasWorker = false;
   if(hasWorker) {
     // TODO: implement this
   } else {
@@ -70,7 +83,11 @@ function encodeBuffer(buf, options, cb) {
 }
 
 /**
- * Get EXIF data for the provided buffer
+ * Get EXIF
+ *
+ * @param buf
+ * @param options
+ * @param cb
  */
 function exifBuffer(buf, options, cb) {
   if(typeof options === 'function') {

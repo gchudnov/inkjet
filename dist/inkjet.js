@@ -25,7 +25,11 @@ module.exports.exif = exifBuffer;
 
 
 /**
- * Decode the provided buffer
+ * Decode
+ *
+ * @param buf
+ * @param options
+ * @param cb
  */
 function decodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -62,7 +66,11 @@ function decodeBuffer(buf, options, cb) {
 }
 
 /**
- * Encode the provided buffer
+ * Encode
+ *
+ * @param buf
+ * @param options
+ * @param cb
  */
 function encodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -70,6 +78,11 @@ function encodeBuffer(buf, options, cb) {
     options = {};
   }
 
+  if(typeof options === 'number') {
+    options = { quality: options };
+  }
+
+  hasWorker = false;
   if(hasWorker) {
     // TODO: implement this
   } else {
@@ -78,7 +91,11 @@ function encodeBuffer(buf, options, cb) {
 }
 
 /**
- * Get EXIF data for the provided buffer
+ * Get EXIF
+ *
+ * @param buf
+ * @param options
+ * @param cb
  */
 function exifBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -1513,9 +1530,9 @@ JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom
 Basic GUI blocking jpeg encoder
 */
 
-var btoa = btoa || function(buf) {
-  return new Buffer(buf).toString('base64');
-};
+//var btoa = btoa || function(buf) {
+//  return new Buffer(buf).toString('base64');
+//};
 
 function JPEGEncoder(quality) {
   var self = this;
@@ -2164,19 +2181,19 @@ function JPEGEncoder(quality) {
 	
 			writeWord(0xFFD9); //EOI
 
-      //return new Uint8Array(byteout);
-      return new Buffer(byteout);
-
-			var jpegDataUri = 'data:image/jpeg;base64,' + btoa(byteout.join(''));
-			
-			byteout = [];
-			
-			// benchmarking
-			var duration = new Date().getTime() - time_start;
-    		//console.log('Encoding time: '+ duration + 'ms');
-    		//
-			
-			return jpegDataUri			
+      return new Uint8Array(byteout);
+      //return new Buffer(byteout);
+      //
+			//var jpegDataUri = 'data:image/jpeg;base64,' + btoa(byteout.join(''));
+			//
+			//byteout = [];
+			//
+			//// benchmarking
+			//var duration = new Date().getTime() - time_start;
+    		////console.log('Encoding time: '+ duration + 'ms');
+    		////
+			//
+			//return jpegDataUri
 	}
 	
 	function setQuality(quality){
@@ -2232,16 +2249,16 @@ function encode(imgData, qu) {
 }
 
 // helper function to get the imageData of an existing image on the current page.
-function getImageDataFromImage(idOrElement){
-	var theImg = (typeof(idOrElement)=='string')? document.getElementById(idOrElement):idOrElement;
-	var cvs = document.createElement('canvas');
-	cvs.width = theImg.width;
-	cvs.height = theImg.height;
-	var ctx = cvs.getContext("2d");
-	ctx.drawImage(theImg,0,0);
-	
-	return (ctx.getImageData(0, 0, cvs.width, cvs.height));
-}
+//function getImageDataFromImage(idOrElement){
+//	var theImg = (typeof(idOrElement)=='string')? document.getElementById(idOrElement):idOrElement;
+//	var cvs = document.createElement('canvas');
+//	cvs.width = theImg.width;
+//	cvs.height = theImg.height;
+//	var ctx = cvs.getContext("2d");
+//	ctx.drawImage(theImg,0,0);
+//
+//	return (ctx.getImageData(0, 0, cvs.width, cvs.height));
+//}
 
 },{}],4:[function(require,module,exports){
 /**
@@ -6551,9 +6568,13 @@ module.exports = decode;
 
 /**
  * Decode the JPEG data
+ *
  * @param buf Uint8Array
  * @param options A set of decode params
  * @param cb Callback to invoke on completion
+ *
+ * Return Value:
+ * { width, height, data }
  */
 function decode(buf, options, cb) {
   function getData(j, width, height) {
@@ -6615,24 +6636,24 @@ var encoder = require('./3rd-party/encoder');
 module.exports = encode;
 
 /**
- * encode the data to JPEG format
+ * Encode the data to JPEG format
  *
- * data: { width, height, data }
+ * @param buf buffer to encode
+ * @param options encoding params { width, height, quality }
+ * @param cb callback to invoke on completion
  *
- * @param buf Buffer to encode
- * @param options Encoding params
- * @param cb Callback to invoke on completion
+ * Return value:
+ * { width, height, data }
+ *
  */
 function encode(buf, options, cb) {
-  var quality;
-  if(typeof options === 'number') {
-    quality = options;
-  } else {
-    quality = options.quality;
-  }
-
   try {
-    var data = encoder(buf, quality);
+    var imageData = {
+      data: buf,
+      width: options.width,
+      height: options.height
+    };
+    var data = encoder(imageData, options.quality);
     cb(null, data);
   } catch(err) {
     cb(err);
@@ -6668,9 +6689,13 @@ module.exports = exif;
 
 /**
  * Read EXIF data from the provided buffer
+ *
  * @param buf
  * @param options
  * @param cb
+ *
+ * Return value:
+ * { name: value, ... }
  */
 function exif(buf, options, cb) {
   try {

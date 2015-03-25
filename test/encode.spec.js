@@ -34,13 +34,14 @@ describe('Encode', function() {
       frameData[i++] = 0xFF; // alpha - ignored in JPEGs
     }
 
-    var rawImageData = {
-      data: frameData,
+    var buf = frameData;
+    var options = {
       width: width,
-      height: height
+      height: height,
+      quality: targetQuality
     };
 
-    lib.encode(rawImageData, targetQuality, function(err, encoded) {
+    lib.encode(buf, options, function(err, encoded) {
       should.not.exist(err);
       should.exist(encoded);
       (encoded.width).should.be.eql(320);
@@ -64,7 +65,14 @@ describe('Encode', function() {
       (decoded.width).should.be.eql(600);
       (decoded.height).should.be.eql(800);
 
-      lib.encode(decoded, targetQuality, function(err, encoded) {
+      var buf = decoded.data;
+      var options = {
+        width: decoded.width,
+        height: decoded.height,
+        quality: 80
+      };
+
+      lib.encode(buf, options, function(err, encoded) {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(600);
@@ -87,7 +95,14 @@ describe('Encode', function() {
       (decoded.width).should.be.eql(512);
       (decoded.height).should.be.eql(384);
 
-      lib.encode(decoded, targetQuality, function(err, encoded) {
+      var buf = decoded.data;
+      var options = {
+        width: decoded.width,
+        height: decoded.height,
+        quality: 80
+      };
+
+      lib.encode(buf, options, function(err, encoded) {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(512);
@@ -110,7 +125,14 @@ describe('Encode', function() {
       (decoded.width).should.be.eql(2048);
       (decoded.height).should.be.eql(1536);
 
-      lib.encode(decoded, targetQuality, function(err, encoded) {
+      var buf = decoded.data;
+      var options = {
+        width: decoded.width,
+        height: decoded.height,
+        quality: 80
+      };
+
+      lib.encode(buf, options, function(err, encoded) {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(2048);
@@ -133,7 +155,14 @@ describe('Encode', function() {
       (decoded.width).should.be.eql(341);
       (decoded.height).should.be.eql(486);
 
-      lib.encode(decoded, targetQuality, function(err, encoded) {
+      var buf = decoded.data;
+      var options = {
+        width: decoded.width,
+        height: decoded.height,
+        quality: 80
+      };
+
+      lib.encode(buf, options, function(err, encoded) {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(341);
