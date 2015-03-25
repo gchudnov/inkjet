@@ -13,15 +13,7 @@ describe('Encode', function() {
     fs.mkdirSync(outDir);
   }
 
-  var file1 = 'jpeg400jfif.jpg';
-  var file2 = 'jpeg420exif.jpg';
-  var file3 = 'jpeg422jfif.jpg';
-  //var file4 = 'jpeg444.jpg'; // 444 not supported
-  var file5 = 'jpeg-progressive.jpg';
-
-  var targetQuality = 80;
-
-  it('can be used to process test data', function(done) {
+  it('can be used to create a JPEG image', function(done) {
     var width = 320;
     var height = 180;
     var frameData = new Buffer(width * height * 4);
@@ -38,7 +30,7 @@ describe('Encode', function() {
     var options = {
       width: width,
       height: height,
-      quality: targetQuality
+      quality: 80
     };
 
     lib.encode(buf, options, function(err, encoded) {
@@ -53,126 +45,6 @@ describe('Encode', function() {
       done();
     });
 
-  });
-
-  it('can be used to re-encode ' + file1, function(done) {
-    var filepath = path.join(__dirname, '../images/', file1);
-    var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, decoded) {
-      should.not.exist(err);
-      should.exist(decoded);
-      (decoded.width).should.be.eql(600);
-      (decoded.height).should.be.eql(800);
-
-      var buf = decoded.data;
-      var options = {
-        width: decoded.width,
-        height: decoded.height,
-        quality: 80
-      };
-
-      lib.encode(buf, options, function(err, encoded) {
-        should.not.exist(err);
-        should.exist(encoded);
-        (encoded.width).should.be.eql(600);
-        (encoded.height).should.be.eql(800);
-
-        fs.writeFileSync(path.join(__dirname, './out/' + file1), encoded.data);
-
-        done();
-      });
-    });
-  });
-
-  it('can be used to re-encode ' + file2, function(done) {
-    var filepath = path.join(__dirname, '../images/', file2);
-    var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, { width: 512, height: 384 }, function(err, decoded) {
-      should.not.exist(err);
-      should.exist(decoded);
-      (decoded.width).should.be.eql(512);
-      (decoded.height).should.be.eql(384);
-
-      var buf = decoded.data;
-      var options = {
-        width: decoded.width,
-        height: decoded.height,
-        quality: 80
-      };
-
-      lib.encode(buf, options, function(err, encoded) {
-        should.not.exist(err);
-        should.exist(encoded);
-        (encoded.width).should.be.eql(512);
-        (encoded.height).should.be.eql(384);
-
-        fs.writeFileSync(path.join(__dirname, './out/' + file2), encoded.data);
-
-        done();
-      });
-    });
-  });
-
-  it('can be used to re-encode ' + file3, function(done) {
-    var filepath = path.join(__dirname, '../images/', file3);
-    var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, decoded) {
-      should.not.exist(err);
-      should.exist(decoded);
-      (decoded.width).should.be.eql(2048);
-      (decoded.height).should.be.eql(1536);
-
-      var buf = decoded.data;
-      var options = {
-        width: decoded.width,
-        height: decoded.height,
-        quality: 80
-      };
-
-      lib.encode(buf, options, function(err, encoded) {
-        should.not.exist(err);
-        should.exist(encoded);
-        (encoded.width).should.be.eql(2048);
-        (encoded.height).should.be.eql(1536);
-
-        fs.writeFileSync(path.join(__dirname, './out/' + file3), encoded.data);
-
-        done();
-      });
-    });
-  });
-
-  it('can be used to re-encode ' + file5, function(done) {
-    var filepath = path.join(__dirname, '../images/', file5);
-    var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, decoded) {
-      should.not.exist(err);
-      should.exist(decoded);
-      (decoded.width).should.be.eql(341);
-      (decoded.height).should.be.eql(486);
-
-      var buf = decoded.data;
-      var options = {
-        width: decoded.width,
-        height: decoded.height,
-        quality: 80
-      };
-
-      lib.encode(buf, options, function(err, encoded) {
-        should.not.exist(err);
-        should.exist(encoded);
-        (encoded.width).should.be.eql(341);
-        (encoded.height).should.be.eql(486);
-
-        fs.writeFileSync(path.join(__dirname, './out/' + file5), encoded.data);
-
-        done();
-      });
-    });
   });
 
 });
