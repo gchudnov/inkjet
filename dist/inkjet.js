@@ -10,6 +10,8 @@
 
 var hasWorker = require('./lib/has-worker').HAS_WORKER;
 
+var bufferUtils = require('./lib/buffer-utils');
+
 var exif = require('./lib/exif');
 var decode = require('./lib/decode');
 var encode = require('./lib/encode');
@@ -27,9 +29,11 @@ module.exports.exif = exifBuffer;
 /**
  * Decode
  *
- * @param buf
- * @param options
- * @param cb
+ * @param buf Buffer|ArrayBuffer|Uint8Array
+ * @param options Object { width: number, height: number }
+ * @param cb Callback to invoke on completion
+ *
+ * @callback { width: number, height: number, data: Uint8Array }
  */
 function decodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -37,40 +41,44 @@ function decodeBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(buf instanceof ArrayBuffer) {
-    buf = new Uint8Array(buf, 0);
-  }
+  try {
+    buf = bufferUtils.toUint8Array(buf);
 
-  if(hasWorker) {
-    var wr = require('webworkify')(decodeWorker);
+    if(hasWorker) {
+      var wr = require('webworkify')(decodeWorker);
 
-    wr.onmessage = function(ev) {
-      var msg = ev.data;
-      var err = msg.err ? new Error(msg.err) : undefined;
-      cb(err, msg.result);
-    };
+      wr.onmessage = function(ev) {
+        var msg = ev.data;
+        var err = msg.err ? new Error(msg.err) : undefined;
+        cb(err, msg.result);
+      };
 
-    var msg = {
-      buf: buf,
-      options: options
-    };
+      var msg = {
+        buf: buf,
+        options: options
+      };
 
-    if (options.transferable) {
-      wr.postMessage(msg, [ buf ]);
+      if (options.transferable) {
+        wr.postMessage(msg, [ buf ]);
+      } else {
+        wr.postMessage(msg);
+      }
     } else {
-      wr.postMessage(msg);
+      decode(buf, options, cb);
     }
-  } else {
-    decode(buf, options, cb);
+  } catch(err) {
+    cb(err);
   }
 }
 
 /**
  * Encode
  *
- * @param buf
- * @param options
- * @param cb
+ * @param buf Buffer|ArrayBuffer|Uint8Array
+ * @param options Object { width: number, height: number, quality: number }
+ * @param cb Callback to invoke on completion
+ *
+ * @callback { width: number, height: number, data: Uint8Array }
  */
 function encodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -78,40 +86,48 @@ function encodeBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
-    return cb(new Error('Provide width & height of the buffer'));
-  }
+  try {
+    buf = bufferUtils.toArrayLike(buf);
 
-  if(hasWorker) {
-    var wr = require('webworkify')(encodeWorker);
-
-    wr.onmessage = function(ev) {
-      var msg = ev.data;
-      var err = msg.err ? new Error(msg.err) : undefined;
-      cb(err, msg.result);
-    };
-
-    var msg = {
-      buf: buf,
-      options: options
-    };
-
-    if (options.transferable) {
-      wr.postMessage(msg, [ buf ]);
-    } else {
-      wr.postMessage(msg);
+    if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
+      return cb(new Error('Provide width & height of the buffer'));
     }
-  } else {
-    encode(buf, options, cb);
+
+    if(hasWorker) {
+      var wr = require('webworkify')(encodeWorker);
+
+      wr.onmessage = function(ev) {
+        var msg = ev.data;
+        var err = msg.err ? new Error(msg.err) : undefined;
+        cb(err, msg.result);
+      };
+
+      var msg = {
+        buf: buf,
+        options: options
+      };
+
+      if (options.transferable) {
+        wr.postMessage(msg, [ buf ]);
+      } else {
+        wr.postMessage(msg);
+      }
+    } else {
+      encode(buf, options, cb);
+    }
+  } catch(err) {
+    cb(err);
   }
 }
 
 /**
  * Get EXIF
  *
- * @param buf
- * @param options
- * @param cb
+ * @param buf Buffer|ArrayBuffer|Uint8Array
+ * @param options Object { hasMakerNote: true|false }
+ * @param cb Callback to invoke on completion
+ *
+ * @callback Object { name: value, ... }
  */
 function exifBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -119,30 +135,36 @@ function exifBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(hasWorker) {
-    var wr = require('webworkify')(exifWorker);
+  try {
+    buf = bufferUtils.toArrayBuffer(buf);
 
-    wr.onmessage = function(ev) {
-      var msg = ev.data;
-      var err = msg.err ? new Error(msg.err) : undefined;
-      cb(err, msg.result);
-    };
+    if(hasWorker) {
+      var wr = require('webworkify')(exifWorker);
 
-    var msg = {
-      buf: buf
-    };
+      wr.onmessage = function(ev) {
+        var msg = ev.data;
+        var err = msg.err ? new Error(msg.err) : undefined;
+        cb(err, msg.result);
+      };
 
-    if (options.transferable) {
-      wr.postMessage(msg, [ buf ]);
+      var msg = {
+        buf: buf
+      };
+
+      if (options.transferable) {
+        wr.postMessage(msg, [ buf ]);
+      } else {
+        wr.postMessage(msg);
+      }
     } else {
-      wr.postMessage(msg);
+      exif(buf, options, cb);
     }
-  } else {
-    exif(buf, options, cb);
+  } catch(err) {
+    cb(err);
   }
 }
 
-},{"./lib/decode":6,"./lib/decode-worker":5,"./lib/encode":8,"./lib/encode-worker":7,"./lib/exif":10,"./lib/exif-worker":9,"./lib/has-worker":11,"webworkify":12}],2:[function(require,module,exports){
+},{"./lib/buffer-utils":5,"./lib/decode":7,"./lib/decode-worker":6,"./lib/encode":9,"./lib/encode-worker":8,"./lib/exif":11,"./lib/exif-worker":10,"./lib/has-worker":12,"webworkify":13}],2:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.2
 /*
 # ExifReader 1.1.1
@@ -6557,6 +6579,90 @@ var Jbig2Decoder = PDFJS.Jbig2Image;
 },{}],5:[function(require,module,exports){
 'use strict';
 
+module.exports.toArrayBuffer = toArrayBuffer;
+module.exports.toUint8Array = toUint8Array;
+module.exports.toArrayLike = toArrayLike;
+
+module.exports.bufferToArrayBuffer = bufferToArrayBuffer;
+module.exports.arrayBufferToBuffer = arrayBufferToBuffer;
+
+/**
+ * Converts any buffer to ArrayBuffer
+ * @param buf Buffer|ArrayBuffer|Uint8Array
+ * @returns ArrayBuffer
+ */
+function toArrayBuffer(buf) {
+  if(buf instanceof ArrayBuffer) {
+    return buf;
+  } else if((typeof global !== 'undefined') && ('Buffer' in global) && (buf instanceof global.Buffer)) {
+    return bufferToArrayBuffer(buf);
+  } else if(buf instanceof Uint8Array) {
+    return bufferToArrayBuffer(buf);
+  } else {
+    return buf; // type unknown, trust the user
+  }
+}
+
+/**
+ * Converts any buffer to Uint8Array
+ * @param buf Buffer|ArrayBuffer|Uint8Array
+ * @returns Uint8Array
+ */
+function toUint8Array(buf) {
+  if(buf instanceof Uint8Array) {
+    return buf;
+  } else if(buf instanceof ArrayBuffer) {
+    return new Uint8Array(buf);
+  } else if((typeof global !== 'undefined') && ('Buffer' in global) && (buf instanceof global.Buffer)) {
+    return new Uint8Array(buf);
+  } else {
+    return buf; // type unknown, trust the user
+  }
+}
+
+/**
+ * Convert any buffer to array like structure: Uint8Array|Buffer
+ * @param buf Buffer|ArrayBuffer|Uint8Array
+ * @returns Buffer|Uint8Array
+ */
+function toArrayLike(buf) {
+  if(buf instanceof Uint8Array) {
+    return buf;
+  } else if(buf instanceof ArrayBuffer) {
+    return new Uint8Array(buf);
+  } else if((typeof global !== 'undefined') && ('Buffer' in global) && (buf instanceof global.Buffer)) {
+    return buf;
+  } else {
+    return buf; // type unknown, trust the user
+  }
+}
+
+/**
+ * Buffer -> ArrayBuffer
+ * @param buf Buffer|Uint8Array
+ * @returns ArrayBuffer
+ */
+function bufferToArrayBuffer(buf) {
+  var arr = new ArrayBuffer(buf.length);
+  var view = new Uint8Array(arr);
+  for (var i = 0; i < buf.length; ++i) {
+    view[i] = buf[i];
+  }
+  return arr;
+}
+
+/**
+ * ArrayBuffer -> Buffer
+ * @param arr
+ * @returns {Buffer}
+ */
+function arrayBufferToBuffer(arr) {
+  return new Buffer(new Uint8Array(arr));
+}
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
 module.exports = function(self) {
   var decode = require('./decode');
 
@@ -6573,7 +6679,7 @@ module.exports = function(self) {
   };
 };
 
-},{"./decode":6}],6:[function(require,module,exports){
+},{"./decode":7}],7:[function(require,module,exports){
 'use strict';
 
 var JpegImage = require('./3rd-party/jpg').JpegImage;
@@ -6585,11 +6691,10 @@ module.exports = decode;
  * Decode the JPEG data
  *
  * @param buf Uint8Array
- * @param options A set of decode params
+ * @param options Object { width: number, height: number }
  * @param cb Callback to invoke on completion
  *
- * Return Value:
- * { width, height, data }
+ * @callback { width: number, height: number, data: Uint8Array }
  */
 function decode(buf, options, cb) {
   function getData(j, width, height) {
@@ -6626,7 +6731,7 @@ function decode(buf, options, cb) {
   }
 }
 
-},{"./3rd-party/jpg":4}],7:[function(require,module,exports){
+},{"./3rd-party/jpg":4}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = function(self) {
@@ -6645,7 +6750,7 @@ module.exports = function(self) {
   };
 };
 
-},{"./encode":8}],8:[function(require,module,exports){
+},{"./encode":9}],9:[function(require,module,exports){
 'use strict';
 
 var encoder = require('./3rd-party/encoder');
@@ -6655,13 +6760,11 @@ module.exports = encode;
 /**
  * Encode the data to JPEG format
  *
- * @param buf buffer to encode
- * @param options encoding params { width, height, quality }
- * @param cb callback to invoke on completion
+ * @param buf Buffer|Uint8Array
+ * @param options Object { width: number, height: number, quality: number }
+ * @param cb Callback to invoke on completion
  *
- * Return value:
- * { width, height, data }
- *
+ * @callback { width: number, height: number, data: Uint8Array }
  */
 function encode(buf, options, cb) {
   try {
@@ -6677,7 +6780,7 @@ function encode(buf, options, cb) {
   }
 }
 
-},{"./3rd-party/encoder":3}],9:[function(require,module,exports){
+},{"./3rd-party/encoder":3}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = function(self) {
@@ -6696,7 +6799,7 @@ module.exports = function(self) {
   };
 };
 
-},{"./exif":10}],10:[function(require,module,exports){
+},{"./exif":11}],11:[function(require,module,exports){
 'use strict';
 
 var ExifReader = require('./3rd-party/ExifReader').ExifReader;
@@ -6707,12 +6810,11 @@ module.exports = exif;
 /**
  * Read EXIF data from the provided buffer
  *
- * @param buf
- * @param options
- * @param cb
+ * @param buf ArrayBuffer
+ * @param options Object { hasMakerNote: true|false }
+ * @param cb Callback to invoke on completion
  *
- * Return value:
- * { name: value, ... }
+ * @callback Object { name: value, ... }
  */
 function exif(buf, options, cb) {
   try {
@@ -6732,7 +6834,7 @@ function exif(buf, options, cb) {
   }
 }
 
-},{"./3rd-party/ExifReader":2}],11:[function(require,module,exports){
+},{"./3rd-party/ExifReader":2}],12:[function(require,module,exports){
 'use strict';
 
 var HAS_WORKER = (typeof window !== 'undefined') && ('Worker' in window);
@@ -6747,7 +6849,7 @@ if (HAS_WORKER) {
 
 module.exports.HAS_WORKER = HAS_WORKER;
 
-},{"webworkify":12}],12:[function(require,module,exports){
+},{"webworkify":13}],13:[function(require,module,exports){
 var bundleFn = arguments[3];
 var sources = arguments[4];
 var cache = arguments[5];
