@@ -3,7 +3,6 @@
 var path = require('path');
 var should = require('should');
 var fs = require('fs');
-var bu = require('../lib/buffer-utils');
 var lib = require('../index');
 
 describe('Encode', function() {
