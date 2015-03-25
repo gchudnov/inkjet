@@ -11,6 +11,16 @@
     el.innerHTML = err ? err.message : '';
   }
 
+  function clearError() {
+    displayError()
+  }
+
+  function clearCanvas() {
+    var canvas = document.getElementById('source-canvas');
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect (0 , 0 , canvas.width, canvas.height);
+  }
+
   function displayDecodedData(decoded) {
     var canvas = document.getElementById('source-canvas');
     canvas.width = decoded.width;
@@ -49,7 +59,8 @@
       }
     };
 
-    displayError();
+    clearError();
+    clearCanvas();
 
     // We only need the start of the file for the Exif info.
     reader.readAsArrayBuffer(files[0]);
