@@ -2,6 +2,8 @@
 
 var hasWorker = require('./lib/has-worker').HAS_WORKER;
 
+var bufferUtils = require('./lib/buffer-utils');
+
 var exif = require('./lib/exif');
 var decode = require('./lib/decode');
 var encode = require('./lib/encode');
@@ -19,9 +21,11 @@ module.exports.exif = exifBuffer;
 /**
  * Decode
  *
- * @param buf
- * @param options
- * @param cb
+ * @param buf Uint8Array|ArrayBuffer|Buffer
+ * @param options Object { width: number, height: number }
+ * @param cb Callback to invoke on completion
+ *
+ * @callback { width: number, height: number, data: Uint8Array }
  */
 function decodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -29,40 +33,44 @@ function decodeBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(buf instanceof ArrayBuffer) {
-    buf = new Uint8Array(buf, 0);
-  }
+  try {
+    buf = bufferUtils.toUint8Array(buf);
 
-  if(hasWorker) {
-    var wr = require('webworkify')(decodeWorker);
+    if(hasWorker) {
+      var wr = require('webworkify')(decodeWorker);
 
-    wr.onmessage = function(ev) {
-      var msg = ev.data;
-      var err = msg.err ? new Error(msg.err) : undefined;
-      cb(err, msg.result);
-    };
+      wr.onmessage = function(ev) {
+        var msg = ev.data;
+        var err = msg.err ? new Error(msg.err) : undefined;
+        cb(err, msg.result);
+      };
 
-    var msg = {
-      buf: buf,
-      options: options
-    };
+      var msg = {
+        buf: buf,
+        options: options
+      };
 
-    if (options.transferable) {
-      wr.postMessage(msg, [ buf ]);
+      if (options.transferable) {
+        wr.postMessage(msg, [ buf ]);
+      } else {
+        wr.postMessage(msg);
+      }
     } else {
-      wr.postMessage(msg);
+      decode(buf, options, cb);
     }
-  } else {
-    decode(buf, options, cb);
+  } catch(err) {
+    cb(err);
   }
 }
 
 /**
  * Encode
  *
- * @param buf
- * @param options
- * @param cb
+ * @param buf Buffer
+ * @param options Object { width: number, height: number, quality: number }
+ * @param cb Callback to invoke on completion
+ *
+ * @callback { width: number, height: number, data: Uint8Array }
  */
 function encodeBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -70,40 +78,46 @@ function encodeBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
-    return cb(new Error('Provide width & height of the buffer'));
-  }
-
-  if(hasWorker) {
-    var wr = require('webworkify')(encodeWorker);
-
-    wr.onmessage = function(ev) {
-      var msg = ev.data;
-      var err = msg.err ? new Error(msg.err) : undefined;
-      cb(err, msg.result);
-    };
-
-    var msg = {
-      buf: buf,
-      options: options
-    };
-
-    if (options.transferable) {
-      wr.postMessage(msg, [ buf ]);
-    } else {
-      wr.postMessage(msg);
+  try {
+    if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
+      return cb(new Error('Provide width & height of the buffer'));
     }
-  } else {
-    encode(buf, options, cb);
+
+    if(hasWorker) {
+      var wr = require('webworkify')(encodeWorker);
+
+      wr.onmessage = function(ev) {
+        var msg = ev.data;
+        var err = msg.err ? new Error(msg.err) : undefined;
+        cb(err, msg.result);
+      };
+
+      var msg = {
+        buf: buf,
+        options: options
+      };
+
+      if (options.transferable) {
+        wr.postMessage(msg, [ buf ]);
+      } else {
+        wr.postMessage(msg);
+      }
+    } else {
+      encode(buf, options, cb);
+    }
+  } catch(err) {
+    cb(err);
   }
 }
 
 /**
  * Get EXIF
  *
- * @param buf
- * @param options
- * @param cb
+ * @param buf Buffer|ArrayBuffer
+ * @param options Object { hasMakerNote: true|false }
+ * @param cb Callback to invoke on completion
+ *
+ * @callback Object { name: value, ... }
  */
 function exifBuffer(buf, options, cb) {
   if(typeof options === 'function') {
@@ -111,25 +125,31 @@ function exifBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(hasWorker) {
-    var wr = require('webworkify')(exifWorker);
+  try {
+    buf = bufferUtils.toArrayBuffer(buf);
 
-    wr.onmessage = function(ev) {
-      var msg = ev.data;
-      var err = msg.err ? new Error(msg.err) : undefined;
-      cb(err, msg.result);
-    };
+    if(hasWorker) {
+      var wr = require('webworkify')(exifWorker);
 
-    var msg = {
-      buf: buf
-    };
+      wr.onmessage = function(ev) {
+        var msg = ev.data;
+        var err = msg.err ? new Error(msg.err) : undefined;
+        cb(err, msg.result);
+      };
 
-    if (options.transferable) {
-      wr.postMessage(msg, [ buf ]);
+      var msg = {
+        buf: buf
+      };
+
+      if (options.transferable) {
+        wr.postMessage(msg, [ buf ]);
+      } else {
+        wr.postMessage(msg);
+      }
     } else {
-      wr.postMessage(msg);
+      exif(buf, options, cb);
     }
-  } else {
-    exif(buf, options, cb);
+  } catch(err) {
+    cb(err);
   }
 }

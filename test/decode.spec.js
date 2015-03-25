@@ -3,7 +3,7 @@
 var path = require('path');
 var should = require('should');
 var fs = require('fs');
-var bu = require('../lib/buffer-utils');
+var bufferUtils = require('../lib/buffer-utils');
 var lib = require('../index');
 
 describe('Decode', function() {
@@ -18,12 +18,12 @@ describe('Decode', function() {
   it('can be used to process ' + file1, function(done) {
     var filepath = path.join(__dirname, '../images/', file1);
     var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, data) {
+    lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
-      should.exist(data);
-      (data.width).should.be.eql(600);
-      (data.height).should.be.eql(800);
+      should.exist(decoded);
+      (decoded.width).should.be.eql(600);
+      (decoded.height).should.be.eql(800);
+      (decoded.data).should.be.instanceOf(Uint8Array);
       done();
     })
   });
@@ -31,12 +31,12 @@ describe('Decode', function() {
   it('can be used to process ' + file2, function(done) {
     var filepath = path.join(__dirname, '../images/', file2);
     var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, data) {
+    lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
-      should.exist(data);
-      (data.width).should.be.eql(2048);
-      (data.height).should.be.eql(1536);
+      should.exist(decoded);
+      (decoded.width).should.be.eql(2048);
+      (decoded.height).should.be.eql(1536);
+      (decoded.data).should.be.instanceOf(Uint8Array);
       done();
     })
   });
@@ -44,12 +44,12 @@ describe('Decode', function() {
   it('can be used to process ' + file3, function(done) {
     var filepath = path.join(__dirname, '../images/', file3);
     var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, data) {
+    lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
-      should.exist(data);
-      (data.width).should.be.eql(2048);
-      (data.height).should.be.eql(1536);
+      should.exist(decoded);
+      (decoded.width).should.be.eql(2048);
+      (decoded.height).should.be.eql(1536);
+      (decoded.data).should.be.instanceOf(Uint8Array);
       done();
     })
   });
@@ -57,11 +57,9 @@ describe('Decode', function() {
   it('can NOT be used to process ' + file4, function(done) {
     var filepath = path.join(__dirname, '../images/', file4);
     var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, data) {
+    lib.decode(jpegData, function(err, decoded) {
       should.exist(err);
-      should.not.exist(data);
-
+      should.not.exist(decoded);
       done();
     })
   });
@@ -69,12 +67,12 @@ describe('Decode', function() {
   it('can be used to process ' + file5, function(done) {
     var filepath = path.join(__dirname, '../images/', file5);
     var jpegData = fs.readFileSync(filepath);
-    var jpegU8Buf = bu.toUint8ArrayBuffer(jpegData);
-    lib.decode(jpegU8Buf, function(err, data) {
+    lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
-      should.exist(data);
-      (data.width).should.be.eql(341);
-      (data.height).should.be.eql(486);
+      should.exist(decoded);
+      (decoded.width).should.be.eql(341);
+      (decoded.height).should.be.eql(486);
+      (decoded.data).should.be.instanceOf(Uint8Array);
       done();
     })
   });

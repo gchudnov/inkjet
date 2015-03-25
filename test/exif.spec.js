@@ -3,8 +3,8 @@
 var path = require('path');
 var should = require('should');
 var fs = require('fs');
-var bu = require('../lib/buffer-utils');
 var lib = require('../index');
+var bufferUtils = require('../lib/buffer-utils');
 
 describe('Exif', function() {
 
@@ -17,8 +17,7 @@ describe('Exif', function() {
   it('should NOT be detected for ' + file1, function(done) {
     var filepath = path.join(__dirname, '../images/', file1);
     var jpegData = fs.readFileSync(filepath);
-    var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.exif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegData, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
@@ -28,8 +27,7 @@ describe('Exif', function() {
   it('should be detected for ' + file2, function(done) {
     var filepath = path.join(__dirname, '../images/', file2);
     var jpegData = fs.readFileSync(filepath);
-    var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.exif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegData, function(err, data) {
       should.not.exist(err);
       should.exist(data);
       done();
@@ -39,9 +37,30 @@ describe('Exif', function() {
   it('should be detected for ' + file2 + ' (first 128Kb taken)', function(done) {
     var filepath = path.join(__dirname, '../images/', file2);
     var jpegData = fs.readFileSync(filepath);
-    var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    jpegArrBuf = jpegArrBuf.slice(0, 128 * 1024);
-    lib.exif(jpegArrBuf, function(err, data) {
+    jpegData = jpegData.slice(0, 128 * 1024);
+    lib.exif(jpegData, function(err, data) {
+      should.not.exist(err);
+      should.exist(data);
+      done();
+    })
+  });
+
+  it('should be detected for ' + file2 + ' (Buffer)', function(done) {
+    var filepath = path.join(__dirname, '../images/', file2);
+    var jpegBuffer = fs.readFileSync(filepath);
+    jpegBuffer.should.be.an.instanceOf(Buffer);
+    lib.exif(jpegBuffer, function(err, data) {
+      should.not.exist(err);
+      should.exist(data);
+      done();
+    })
+  });
+
+  it('should be detected for ' + file2 + ' (ArrayBuffer)', function(done) {
+    var filepath = path.join(__dirname, '../images/', file2);
+    var jpegBuffer = bufferUtils.bufferToArrayBuffer(fs.readFileSync(filepath));
+    jpegBuffer.should.be.an.instanceOf(ArrayBuffer);
+    lib.exif(jpegBuffer, function(err, data) {
       should.not.exist(err);
       should.exist(data);
       done();
@@ -51,8 +70,7 @@ describe('Exif', function() {
   it('should NOT be detected for ' + file3, function(done) {
     var filepath = path.join(__dirname, '../images/', file3);
     var jpegData = fs.readFileSync(filepath);
-    var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.exif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegData, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
@@ -62,8 +80,7 @@ describe('Exif', function() {
   it('should NOT be detected for ' + file4, function(done) {
     var filepath = path.join(__dirname, '../images/', file4);
     var jpegData = fs.readFileSync(filepath);
-    var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.exif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegData, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
@@ -73,8 +90,7 @@ describe('Exif', function() {
   it('should NOT be detected for ' + file5, function(done) {
     var filepath = path.join(__dirname, '../images/', file5);
     var jpegData = fs.readFileSync(filepath);
-    var jpegArrBuf = bu.toArrayBuffer(jpegData);
-    lib.exif(jpegArrBuf, function(err, data) {
+    lib.exif(jpegData, function(err, data) {
       should.exist(err);
       should.not.exist(data);
       done();
