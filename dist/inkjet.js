@@ -51,7 +51,8 @@ function decodeBuffer(buf, options, cb) {
     };
 
     var msg = {
-      buf: buf
+      buf: buf,
+      options: options
     };
 
     if (options.transferable) {
@@ -59,7 +60,6 @@ function decodeBuffer(buf, options, cb) {
     } else {
       wr.postMessage(msg);
     }
-
   } else {
     decode(buf, options, cb);
   }
@@ -78,13 +78,29 @@ function encodeBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(typeof options === 'number') {
-    options = { quality: options };
+  if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
+    return cb(new Error('Provide width & height of the buffer'));
   }
 
-  hasWorker = false;
   if(hasWorker) {
-    // TODO: implement this
+    var wr = require('webworkify')(encodeWorker);
+
+    wr.onmessage = function(ev) {
+      var msg = ev.data;
+      var err = msg.err ? new Error(msg.err) : undefined;
+      cb(err, msg.result);
+    };
+
+    var msg = {
+      buf: buf,
+      options: options
+    };
+
+    if (options.transferable) {
+      wr.postMessage(msg, [ buf ]);
+    } else {
+      wr.postMessage(msg);
+    }
   } else {
     encode(buf, options, cb);
   }
@@ -121,7 +137,6 @@ function exifBuffer(buf, options, cb) {
     } else {
       wr.postMessage(msg);
     }
-
   } else {
     exif(buf, options, cb);
   }
@@ -6547,7 +6562,7 @@ module.exports = function(self) {
 
   self.onmessage = function (ev) {
     var msg = ev.data;
-    decode(msg.buf, {}, function(err, result) {
+    decode(msg.buf, msg.options, function(err, result) {
       if (err) {
         var errValue = err instanceof Error ? err.message : err; // Error is not clonable
         self.postMessage({ err: errValue });
@@ -6618,11 +6633,13 @@ module.exports = function(self) {
   var encode = require('./encode');
 
   self.onmessage = function (ev) {
-    encode(ev.data, ev.options, function(err, output) {
+    var msg = ev.data;
+    encode(msg.buf, msg.options, function(err, result) {
       if (err) {
-        self.postMessage({ err: err });
+        var errValue = err instanceof Error ? err.message : err; // Error is not clonable
+        self.postMessage({ err: errValue });
       } else {
-        self.postMessage({ output: output }, [ output.data ]);
+        self.postMessage({ result: result });
       }
     });
   };

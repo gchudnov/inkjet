@@ -43,7 +43,8 @@ function decodeBuffer(buf, options, cb) {
     };
 
     var msg = {
-      buf: buf
+      buf: buf,
+      options: options
     };
 
     if (options.transferable) {
@@ -51,7 +52,6 @@ function decodeBuffer(buf, options, cb) {
     } else {
       wr.postMessage(msg);
     }
-
   } else {
     decode(buf, options, cb);
   }
@@ -70,13 +70,29 @@ function encodeBuffer(buf, options, cb) {
     options = {};
   }
 
-  if(typeof options === 'number') {
-    options = { quality: options };
+  if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
+    return cb(new Error('Provide width & height of the buffer'));
   }
 
-  hasWorker = false;
   if(hasWorker) {
-    // TODO: implement this
+    var wr = require('webworkify')(encodeWorker);
+
+    wr.onmessage = function(ev) {
+      var msg = ev.data;
+      var err = msg.err ? new Error(msg.err) : undefined;
+      cb(err, msg.result);
+    };
+
+    var msg = {
+      buf: buf,
+      options: options
+    };
+
+    if (options.transferable) {
+      wr.postMessage(msg, [ buf ]);
+    } else {
+      wr.postMessage(msg);
+    }
   } else {
     encode(buf, options, cb);
   }
@@ -113,7 +129,6 @@ function exifBuffer(buf, options, cb) {
     } else {
       wr.postMessage(msg);
     }
-
   } else {
     exif(buf, options, cb);
   }
