@@ -21,7 +21,7 @@ module.exports.exif = exifBuffer;
 /**
  * Decode
  *
- * @param buf Uint8Array|ArrayBuffer|Buffer
+ * @param buf Buffer|ArrayBuffer|Uint8Array
  * @param options Object { width: number, height: number }
  * @param cb Callback to invoke on completion
  *
@@ -66,7 +66,7 @@ function decodeBuffer(buf, options, cb) {
 /**
  * Encode
  *
- * @param buf Buffer
+ * @param buf Buffer|ArrayBuffer
  * @param options Object { width: number, height: number, quality: number }
  * @param cb Callback to invoke on completion
  *
