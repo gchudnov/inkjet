@@ -66,7 +66,7 @@ function decodeBuffer(buf, options, cb) {
 /**
  * Encode
  *
- * @param buf Buffer|ArrayBuffer
+ * @param buf Buffer|ArrayBuffer|Uint8Array
  * @param options Object { width: number, height: number, quality: number }
  * @param cb Callback to invoke on completion
  *
@@ -79,6 +79,8 @@ function encodeBuffer(buf, options, cb) {
   }
 
   try {
+    buf = bufferUtils.toArrayLike(buf);
+
     if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
       return cb(new Error('Provide width & height of the buffer'));
     }
@@ -113,7 +115,7 @@ function encodeBuffer(buf, options, cb) {
 /**
  * Get EXIF
  *
- * @param buf Buffer|ArrayBuffer
+ * @param buf Buffer|ArrayBuffer|Uint8Array
  * @param options Object { hasMakerNote: true|false }
  * @param cb Callback to invoke on completion
  *
