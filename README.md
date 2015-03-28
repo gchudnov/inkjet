@@ -1,5 +1,5 @@
 # inkjet
-JPEG-Image decoding, encoding & EXIF reading library.
+JPEG-Image decoding, encoding & EXIF reading library for browser and node.js
 
 ## Installation
 
