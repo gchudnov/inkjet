@@ -12,11 +12,13 @@
     "url": "https://github.com/gchudnov/inkjet.git"
   },
   "keywords": [
-    "photocopy",
-    "photo",
     "jpeg",
     "exif",
-    "image"
+    "image",
+    "photo",
+    "decode",
+    "encode",
+    "metadata"
   ],
   "author": "Grigoriy Chudnov <g.chudnov@gmail.com> (https://github.com/gchudnov)",
   "license": "MIT",
