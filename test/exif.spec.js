@@ -7,6 +7,7 @@ var lib = require('../index');
 var bufferUtils = require('../lib/buffer-utils');
 
 describe('Exif', function() {
+  this.timeout(5000);
 
   var file1 = 'jpeg400jfif.jpg';
   var file2 = 'jpeg420exif.jpg';

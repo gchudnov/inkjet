@@ -7,6 +7,7 @@ var bu = require('../lib/buffer-utils');
 var lib = require('../index');
 
 describe('Re-Encode', function() {
+  this.timeout(5000);
 
   var outDir = path.join(__dirname, './out');
   if(!fs.existsSync(outDir)) {

@@ -7,6 +7,7 @@ var bufferUtils = require('../lib/buffer-utils');
 var lib = require('../index');
 
 describe('Decode', function() {
+  this.timeout(5000);
 
   var file1 = 'jpeg400jfif.jpg';
   var file2 = 'jpeg420exif.jpg';
