@@ -1,5 +1,5 @@
 # inkjet
-Image processor
+JPEG-Image decoding, encoding & EXIF reading library.
 
 ## Installation
 
