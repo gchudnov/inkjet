@@ -29,9 +29,9 @@ $ bower install inkjet
 var inkjet = require('inkjet');
 
 var filepath = './images/jpeg420exif.jpg';
-var jpegData = fs.readFileSync(filepath);
+var buf = fs.readFileSync(filepath);
 
-inkjet.decode(jpegData, function(err, decoded) {
+inkjet.decode(buf, function(err, decoded) {
   // decoded: { width: number, height: number, data: Uint8Array }
 });
 ```
@@ -69,8 +69,8 @@ inkjet.encode(buf, options, function(err, encoded) {
 var inkjet = require('inkjet');
 
 var filepath = './images/jpeg420exif.jpg';
-var jpegData = fs.readFileSync(filepath);
-inkjet.exif(jpegData, function(err, metadata) {
+var buf = fs.readFileSync(filepath);
+inkjet.exif(buf, function(err, metadata) {
   // metadata -- an object that maps EXIF tags to string values
 });
 ```
