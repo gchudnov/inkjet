@@ -1,5 +1,7 @@
 # ![inkjet logo](http://i.imgur.com/tOd3r4M.png)
 
+[![Build Status](https://travis-ci.org/gchudnov/inkjet.svg)](https://travis-ci.org/gchudnov/inkjet)
+
 > JPEG-image decoding, encoding & EXIF reading library for browser and node.js
 
 ## Installation
