@@ -25,7 +25,7 @@ describe('Decode', function() {
       (decoded.height).should.be.eql(800);
       (decoded.data).should.be.instanceOf(Uint8Array);
       done();
-    })
+    });
   });
 
   it('can be used to process ' + file2, function(done) {
@@ -38,7 +38,7 @@ describe('Decode', function() {
       (decoded.height).should.be.eql(1536);
       (decoded.data).should.be.instanceOf(Uint8Array);
       done();
-    })
+    });
   });
 
   it('can be used to process ' + file3, function(done) {
@@ -61,7 +61,7 @@ describe('Decode', function() {
       should.exist(err);
       should.not.exist(decoded);
       done();
-    })
+    });
   });
 
   it('can be used to process ' + file5, function(done) {
@@ -74,7 +74,7 @@ describe('Decode', function() {
       (decoded.height).should.be.eql(486);
       (decoded.data).should.be.instanceOf(Uint8Array);
       done();
-    })
+    });
   });
 
 });
