@@ -21,7 +21,7 @@ describe('Exif', function() {
       should.exist(err);
       should.not.exist(data);
       done();
-    })
+    });
   });
 
   it('should be detected for ' + file2, function(done) {
@@ -31,7 +31,7 @@ describe('Exif', function() {
       should.not.exist(err);
       should.exist(data);
       done();
-    })
+    });
   });
 
   it('should be detected for ' + file2 + ' (first 128Kb taken)', function(done) {
@@ -42,7 +42,7 @@ describe('Exif', function() {
       should.not.exist(err);
       should.exist(data);
       done();
-    })
+    });
   });
 
   it('should be detected for ' + file2 + ' (Buffer)', function(done) {
@@ -53,7 +53,7 @@ describe('Exif', function() {
       should.not.exist(err);
       should.exist(data);
       done();
-    })
+    });
   });
 
   it('should be detected for ' + file2 + ' (ArrayBuffer)', function(done) {
@@ -64,7 +64,7 @@ describe('Exif', function() {
       should.not.exist(err);
       should.exist(data);
       done();
-    })
+    });
   });
 
   it('should NOT be detected for ' + file3, function(done) {
@@ -74,7 +74,7 @@ describe('Exif', function() {
       should.exist(err);
       should.not.exist(data);
       done();
-    })
+    });
   });
 
   it('should NOT be detected for ' + file4, function(done) {
@@ -84,7 +84,7 @@ describe('Exif', function() {
       should.exist(err);
       should.not.exist(data);
       done();
-    })
+    });
   });
 
   it('should NOT be detected for ' + file5, function(done) {
@@ -94,7 +94,7 @@ describe('Exif', function() {
       should.exist(err);
       should.not.exist(data);
       done();
-    })
+    });
   });
 
 });
