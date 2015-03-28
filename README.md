@@ -1,5 +1,6 @@
-# inkjet
-JPEG-image decoding, encoding & EXIF reading library for browser and node.js
+# ![inkjet logo](http://i.imgur.com/tOd3r4M.png)
+
+> JPEG-image decoding, encoding & EXIF reading library for browser and node.js
 
 ## Installation
 
