@@ -1,5 +1,5 @@
 /*
- * inkjet - Image processor
+ * inkjet - JPEG-image decoding, encoding & EXIF reading library for browser and node.js
  * @version v1.0.0
  * @author Grigoriy Chudnov <g.chudnov@gmail.com> (https://github.com/gchudnov)
  * @link https://github.com/gchudnov/inkjet
@@ -6682,7 +6682,7 @@ module.exports = function(self) {
 },{"./decode":7}],7:[function(require,module,exports){
 'use strict';
 
-var JpegImage = require('./3rd-party/jpg').JpegImage;
+var JpegImage = require('./backend/jpg').JpegImage;
 
 module.exports = decode;
 
@@ -6731,7 +6731,7 @@ function decode(buf, options, cb) {
   }
 }
 
-},{"./3rd-party/jpg":4}],8:[function(require,module,exports){
+},{"./backend/jpg":4}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = function(self) {
@@ -6753,7 +6753,7 @@ module.exports = function(self) {
 },{"./encode":9}],9:[function(require,module,exports){
 'use strict';
 
-var encoder = require('./3rd-party/encoder');
+var encoder = require('./backend/encoder');
 
 module.exports = encode;
 
@@ -6780,7 +6780,7 @@ function encode(buf, options, cb) {
   }
 }
 
-},{"./3rd-party/encoder":3}],10:[function(require,module,exports){
+},{"./backend/encoder":3}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = function(self) {
@@ -6802,7 +6802,7 @@ module.exports = function(self) {
 },{"./exif":11}],11:[function(require,module,exports){
 'use strict';
 
-var ExifReader = require('./3rd-party/ExifReader').ExifReader;
+var ExifReader = require('./backend/ExifReader').ExifReader;
 
 module.exports = exif;
 
@@ -6834,7 +6834,7 @@ function exif(buf, options, cb) {
   }
 }
 
-},{"./3rd-party/ExifReader":2}],12:[function(require,module,exports){
+},{"./backend/ExifReader":2}],12:[function(require,module,exports){
 'use strict';
 
 var HAS_WORKER = (typeof window !== 'undefined') && ('Worker' in window);
