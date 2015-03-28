@@ -1,7 +1,30 @@
 # inkjet
 Image processor
 
-## Decode JPEG
+## Installation
+
+installing with npm:
+```bash
+$ npm install inkjet --save
+```
+
+## In browser
+
+To use _inkjet_ in a browser, use the `inkjet.js` file in the `/dist` directory of this repository, or build it manually. To build a fresh version:
+
+```bash
+$ npm install
+$ npm run browser
+```
+
+installing with bower:
+```bash
+$ bower install inkjet
+```
+
+## Usage
+
+### Decode JPEG
 ```javascript
 var inkjet = require('inkjet');
 
@@ -13,7 +36,7 @@ inkjet.decode(jpegData, function(err, decoded) {
 });
 ```
 
-## Encode JPEG
+### Encode JPEG
 ```javascript
 var inkjet = require('inkjet');
 
@@ -36,18 +59,62 @@ var options = {
   quality: 80
 };
 
-lib.encode(buf, options, function(err, encoded) {
+inkjet.encode(buf, options, function(err, encoded) {
   // encoded: { width: number, height: number, data: Uint8Array }
 });
 ```
 
-## Read EXIF
+### Read EXIF
 ```javascript
 var inkjet = require('inkjet');
 
 var filepath = './images/jpeg420exif.jpg';
 var jpegData = fs.readFileSync(filepath);
-lib.exif(jpegData, function(err, metadata) {
+inkjet.exif(jpegData, function(err, metadata) {
   // metadata -- an object that maps EXIF tags to string values
 });
 ```
+
+## API
+
+### .exif(buf, [options], cb)
+Get EXIF metadata for the image. The metadata tags defined in the Exif standard cover date and time information, camera settings, descriptions, resolution and  location information.
+
+```javascript
+inkjet.exif(buf, function(err, metadata) {
+  // ...
+});
+```
+
+### .decode(buf, [options], cb)
+Decodes the JPEG image.
+decoded: { width: number, height: number, data: Uint8Array }
+```javsscript
+inkjet.decode(buf, function(err, decoded) {
+  // ...
+});
+```
+
+### .encode(buf, options, cb);
+Encodes buffer to a JPEG format.
+```javascript
+inkjet.encode(buf, function(err, encoded) {
+  // ...
+});
+```
+
+## Tests
+
+To run the tests for _inkjet_:
+```bash
+$ npm test
+```
+
+## Contact
+
+[Grigoriy Chudnov] (mailto:g.chudnov@gmail.com)
+
+
+## License
+
+Distributed under the [The MIT License (MIT)](https://github.com/gchudnov/inkjet/blob/master/LICENSE).
