@@ -95,7 +95,7 @@ inkjet.decode(buf, function(err, decoded) {
 });
 ```
 
-### .encode(buf, options, cb);
+### .encode(buf, [options], cb);
 Encodes buffer to a JPEG format.
 ```javascript
 inkjet.encode(buf, function(err, encoded) {
