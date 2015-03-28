@@ -1,7 +1,7 @@
 {
   "name": "inkjet",
   "version": "1.0.0",
-  "description": "Image processor",
+  "description": "JPEG-image decoding, encoding & EXIF reading library for browser and node.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
