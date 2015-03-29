@@ -142,6 +142,9 @@ To run the tests for _inkjet_:
 $ npm test
 ```
 
+## Implementation details
+Internally, *decoding*, *encoding* and *EXIF extraction* provided by the following great libraries: [jpgjs](https://github.com/notmasteryet/jpgjs), [jpeg-js](https://github.com/eugeneware/jpeg-js) and [ExifReader](https://github.com/mattiasw/ExifReader).
+
 ## Contact
 
 [Grigoriy Chudnov] (mailto:g.chudnov@gmail.com)
