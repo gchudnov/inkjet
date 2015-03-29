@@ -80,18 +80,18 @@ inkjet.exif(buf, function(err, metadata) {
 
 ## API
 
-### .exif(buf, [options], cb)
-Get EXIF metadata for the image. The metadata tags defined in the Exif standard cover date and time information, camera settings, descriptions, resolution and  location information.
-
-```javascript
-inkjet.exif(buf, function(err, metadata) {
-  // ...
-});
-```
-
 ### .decode(buf, [options], cb)
 Decodes the JPEG image.
-decoded: { width: number, height: number, data: Uint8Array }
+
+Arguments:
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `[options]` - an optional object with settings to decode an image. Supported options:
+  * `width` - override image width
+  * `height` - override image height
+* `cb` - a callback that gets 2 arguments:
+  * `err` - decoding `Error`
+  * `decoded` - an object that describes the decoded image: `{ width: number, height: number, data: Uint8Array }`
+
 ```javsscript
 inkjet.decode(buf, function(err, decoded) {
   // ...
@@ -100,8 +100,36 @@ inkjet.decode(buf, function(err, decoded) {
 
 ### .encode(buf, [options], cb);
 Encodes buffer to a JPEG format.
+
+Arguments:
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `[options]` - an optional object with settings to encode an image. Supported options:
+  * `width` - width of the image in `buf`
+  * `height`- height of the image in `buf`
+  * `quality` - a numberic value [0-100], describes quality of encoding. 0 - low quality, 100 - high quality.
+* `cb` - a callback that gets 2 arguments:
+  * `err` - encoding `Error`
+  * `encoded` - an object that describes the encoded image: `{ width: number, height: number, data: Uint8Array }`
+
 ```javascript
 inkjet.encode(buf, function(err, encoded) {
+  // ...
+});
+```
+
+### .exif(buf, [options], cb)
+Get EXIF metadata for the image. The metadata tags defined in the Exif standard cover date and time information, camera settings, descriptions, resolution and  location information.
+
+Arguments:
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `[options]` - an optional object with settings to encode an image. Supported options:
+  * `hasMakerNote` - exclude MakerNote tag from metadata. Default: `true`
+* `cb` - a callback that gets 2 arguments:
+  * `err` - encoding `Error`
+  * `encoded` - metadata object, a set of tags and their values.
+
+```javascript
+inkjet.exif(buf, function(err, metadata) {
   // ...
 });
 ```
