@@ -81,7 +81,7 @@ inkjet.exif(buf, function(err, metadata) {
 ## API
 
 ### .decode(buf, [options], cb)
-Decodes the JPEG image.
+Decodes a JPEG image.
 
 Arguments:
 * `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
