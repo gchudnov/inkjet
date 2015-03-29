@@ -26,6 +26,7 @@ $ bower install inkjet
 ```
 
 ## Usage
+Decoding, encoding and EXIF extraction operations are offloaded to [WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) if the environment supports them.
 
 ### Decode JPEG
 ```javascript
@@ -123,7 +124,7 @@ Get EXIF metadata for the image. The metadata tags defined in the Exif standard 
 Arguments:
 * `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
 * `[options]` - an optional object with settings to encode an image. Supported options:
-  * `hasMakerNote` - exclude MakerNote tag from metadata. Default: `true`
+  * `hasMakerNote` - exclude *MakerNote* tag from metadata. Default value: `true`, *MakerNote* tag is excluded.
 * `cb` - a callback that gets 2 arguments:
   * `err` - encoding `Error`
   * `encoded` - metadata object, a set of tags and their values.
