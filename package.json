@@ -31,6 +31,7 @@
     "webworkify": "^1.0.2"
   },
   "devDependencies": {
+    "brfs": "^1.4.0",
     "browserify": "^9.0.4",
     "gulp": "^3.8.11",
     "gulp-header": "^1.2.2",
@@ -42,5 +43,8 @@
     "should": "^5.2.0",
     "vinyl-source-stream2": "^0.1.1",
     "zuul": "^2.1.1"
+  },
+  "browserify": {
+    "transform": [ "brfs" ]
   }
 }
