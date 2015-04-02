@@ -48,8 +48,11 @@ describe('Decode', function() {
   it('can NOT be used to process ' + images.name444, function(done) {
     var jpegData = images.buf444;
     lib.decode(jpegData, function(err, decoded) {
-      should.exist(err);
-      should.not.exist(decoded);
+      should.not.exist(err);
+      should.exist(decoded);
+      (decoded.width).should.be.eql(1052);
+      (decoded.height).should.be.eql(1052);
+      (decoded.data).should.be.instanceOf(Uint8Array);
       done();
     });
   });

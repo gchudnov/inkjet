@@ -6,7 +6,7 @@ var path = require('path');
 var file420 = 'js_logo-4-2-0.jpg';
 var file422h = 'js_logo-4-2-2-horz.jpg';
 var file422v = 'js_logo-4-2-2-vert.jpg';
-var file444 = 'js_logo-4-4-4.jpg'; // 444 not supported
+var file444 = 'js_logo-4-4-4.jpg';
 var fileExif = 'js_logo-exif.jpg';
 
 module.exports.name420 = file420;
