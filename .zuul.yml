@@ -3,10 +3,16 @@ browsers:
   - name: chrome
     version: latest
   - name: ie
-    version: 9..latest
+    version: 10..latest
   - name: firefox
     version: latest
   - name: safari
+    version: latest
+  - name: ipad
+    version: latest
+  - name: iphone
+    version: latest
+  - name: android
     version: latest
 browserify:
   - ignore: ./test/util/file-writer.js
