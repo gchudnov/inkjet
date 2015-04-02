@@ -6,12 +6,14 @@ var fs = require('fs');
 var lib = require('../index');
 
 describe('Encode', function() {
-  this.timeout(5000);
+  this.timeout(60000);
 
-  var outDir = path.join(__dirname, './out');
-  if(!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir);
-  }
+  before(function() {
+    var outDir = path.join(__dirname, './out');
+    if(typeof fs !== 'undefined' && fs.hasOwnProperty('existsSync') && !fs.existsSync(outDir)) {
+      fs.mkdirSync(outDir);
+    }
+  });
 
   it('can be used to create a JPEG image (Buffer)', function(done) {
     var width = 320;
@@ -40,8 +42,10 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      var file = 'encoded-red.jpg';
-      fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+        var file = 'encoded-red.jpg';
+        fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      }
 
       done();
     });
@@ -76,8 +80,10 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      var file = 'encoded-green.jpg';
-      fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+        var file = 'encoded-green.jpg';
+        fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      }
 
       done();
     });
@@ -111,8 +117,10 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      var file = 'encoded-blue.jpg';
-      fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+        var file = 'encoded-blue.jpg';
+        fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      }
 
       done();
     });

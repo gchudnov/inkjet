@@ -10,3 +10,5 @@ browsers:
     version: latest
 browserify:
   - transform: brfs
+  - options:
+      transform: brfs
