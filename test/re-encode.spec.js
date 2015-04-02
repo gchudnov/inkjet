@@ -10,12 +10,12 @@ var images = require('./images');
 describe('Re-Encode', function() {
   this.timeout(60000);
 
-  before(function() {
-    var outDir = path.join(__dirname, './out');
-    if(typeof fs !== 'undefined' && fs.hasOwnProperty('existsSync') && !fs.existsSync(outDir)) {
-      fs.mkdirSync(outDir);
-    }
-  });
+  //before(function() {
+  //  var outDir = path.join(__dirname, './out');
+  //  if(typeof fs !== 'undefined' && fs.hasOwnProperty('existsSync') && !fs.existsSync(outDir)) {
+  //    fs.mkdirSync(outDir);
+  //  }
+  //});
 
   it('can be used to process ' + images.name420, function(done) {
     var jpegData = images.buf420;
@@ -40,9 +40,9 @@ describe('Re-Encode', function() {
         (encoded.height).should.be.eql(1052);
         (encoded.data).should.be.instanceOf(Uint8Array);
 
-        if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-          fs.writeFileSync(path.join(__dirname, './out/' + images.name420), new Buffer(encoded.data));
-        }
+        //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+        //  fs.writeFileSync(path.join(__dirname, './out/' + images.name420), new Buffer(encoded.data));
+        //}
 
         done();
       });
@@ -72,9 +72,9 @@ describe('Re-Encode', function() {
         (encoded.height).should.be.eql(1052);
         (encoded.data).should.be.instanceOf(Uint8Array);
 
-        if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-          fs.writeFileSync(path.join(__dirname, './out/' + images.name422h), new Buffer(encoded.data));
-        }
+        //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+        //  fs.writeFileSync(path.join(__dirname, './out/' + images.name422h), new Buffer(encoded.data));
+        //}
 
         done();
       });
@@ -104,9 +104,9 @@ describe('Re-Encode', function() {
         (encoded.height).should.be.eql(1052);
         (encoded.data).should.be.instanceOf(Uint8Array);
 
-        if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-          fs.writeFileSync(path.join(__dirname, './out/' + images.name422v), new Buffer(encoded.data));
-        }
+        //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+        //  fs.writeFileSync(path.join(__dirname, './out/' + images.name422v), new Buffer(encoded.data));
+        //}
 
         done();
       });
@@ -136,9 +136,9 @@ describe('Re-Encode', function() {
         (encoded.height).should.be.eql(1052);
         (encoded.data).should.be.instanceOf(Uint8Array);
 
-        if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-          fs.writeFileSync(path.join(__dirname, './out/' + images.nameExif), new Buffer(encoded.data));
-        }
+        //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+        //  fs.writeFileSync(path.join(__dirname, './out/' + images.nameExif), new Buffer(encoded.data));
+        //}
 
         done();
       });

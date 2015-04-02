@@ -1,19 +1,21 @@
 'use strict';
 
+var fs = require('fs');
 var path = require('path');
 var should = require('should');
-var fs = require('fs');
 var lib = require('../index');
 
 describe('Encode', function() {
   this.timeout(60000);
 
-  before(function() {
-    var outDir = path.join(__dirname, './out');
-    if(typeof fs !== 'undefined' && fs.hasOwnProperty('existsSync') && !fs.existsSync(outDir)) {
-      fs.mkdirSync(outDir);
-    }
-  });
+  //before(function() {
+  //  if(typeof fs !== 'undefined' && 'existsSync' in fs) {
+  //    var outDir = path.join(__dirname, './out');
+  //    if(!fs.existsSync(outDir)) {
+  //      fs.mkdirSync(outDir);
+  //    }
+  //  }
+  //});
 
   it('can be used to create a JPEG image (Buffer)', function(done) {
     var width = 320;
@@ -42,10 +44,10 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-        var file = 'encoded-red.jpg';
-        fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
-      }
+      //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+      //  var file = 'encoded-red.jpg';
+      //  fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      //}
 
       done();
     });
@@ -80,10 +82,10 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-        var file = 'encoded-green.jpg';
-        fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
-      }
+      //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+      //  var file = 'encoded-green.jpg';
+      //  fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      //}
 
       done();
     });
@@ -117,10 +119,10 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-        var file = 'encoded-blue.jpg';
-        fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
-      }
+      //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
+      //  var file = 'encoded-blue.jpg';
+      //  fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
+      //}
 
       done();
     });

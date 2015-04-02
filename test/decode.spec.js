@@ -45,7 +45,7 @@ describe('Decode', function() {
     })
   });
 
-  it('can NOT be used to process ' + images.name444, function(done) {
+  it('can be used to process ' + images.name444, function(done) {
     var jpegData = images.buf444;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
