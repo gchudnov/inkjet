@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - "0.10"
-  - "iojs"
+  - iojs
 script:
+  - "test $SAUCE_USERNAME && npm run zuul || echo 'not running on saucelabs'"
   - npm test
+env:
+  global:
+    - secure: cME3WwLVqHYkraFOQigmmGoaaVBTn8NLdlsb7CiARDzYz4CeHeW2Vh+oPHhMc9E5RpwgTdAuAXceJSG4A5wkVnpaEwLrrWznoea6qWY13y+hgUq0fPUDTEX+RTcEwGDGVAabMpEg+mgDs54QgRAOsM40XzaPS4RcVm5a/k+Dfxk=
+    - secure: LJEo2USmd5/aA+dREqQ5UlNL3f1Ufj2uDRHjEmatZ1trv2znMF8VWR1/rd/chWJZSXfnHX9oDCuxo6wY9Gov1kv+vHB8R2MxMDMrYOTXHRrN2AQBDKLc2RLUc1QxOyT0mACCi6m6fH9jzxk6E5iOkWyZRNAaLxLjidHNkcy35DM=
