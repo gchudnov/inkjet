@@ -12,7 +12,7 @@ module.exports.writeFileSync = writeFileSync;
  * @param arr
  */
 function writeFileSync(filepath, arr) {
-  var outDir = path.join(__dirname, './out');
+  var outDir = path.join(__dirname, '../out');
 
   if(!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir);
