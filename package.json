@@ -43,8 +43,5 @@
     "should": "^5.2.0",
     "vinyl-source-stream2": "^0.1.1",
     "zuul": "^2.1.1"
-  },
-  "browserify": {
-    "transform": [ "brfs" ]
   }
 }

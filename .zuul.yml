@@ -9,6 +9,6 @@ browsers:
   - name: safari
     version: latest
 browserify:
-  - transform: brfs
+  - ignore: ./test/util/file-writer.js
   - options:
       transform: brfs

@@ -1,21 +1,12 @@
 'use strict';
 
-var fs = require('fs');
 var path = require('path');
 var should = require('should');
 var lib = require('../index');
+var writer = require('./util/file-writer');
 
 describe('Encode', function() {
   this.timeout(60000);
-
-  //before(function() {
-  //  if(typeof fs !== 'undefined' && 'existsSync' in fs) {
-  //    var outDir = path.join(__dirname, './out');
-  //    if(!fs.existsSync(outDir)) {
-  //      fs.mkdirSync(outDir);
-  //    }
-  //  }
-  //});
 
   it('can be used to create a JPEG image (Buffer)', function(done) {
     var width = 320;
@@ -44,10 +35,9 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-      //  var file = 'encoded-red.jpg';
-      //  fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
-      //}
+      if('writeFileSync' in writer) {
+        writer.writeFileSync(path.join(__dirname, './out/' + 'encoded-red.jpg'), encoded.data);
+      }
 
       done();
     });
@@ -82,10 +72,9 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-      //  var file = 'encoded-green.jpg';
-      //  fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
-      //}
+      if('writeFileSync' in writer) {
+        writer.writeFileSync(path.join(__dirname, './out/' + 'encoded-green.jpg'), encoded.data);
+      }
 
       done();
     });
@@ -119,10 +108,9 @@ describe('Encode', function() {
       (encoded.height).should.be.eql(180);
       (encoded.data).should.be.instanceOf(Uint8Array);
 
-      //if(typeof fs !== 'undefined' && fs.hasOwnProperty('writeFileSync')) {
-      //  var file = 'encoded-blue.jpg';
-      //  fs.writeFileSync(path.join(__dirname, './out/' + file), new Buffer(encoded.data));
-      //}
+      if('writeFileSync' in writer) {
+        writer.writeFileSync(path.join(__dirname, './out/' + 'encoded-blue.jpg'), encoded.data);
+      }
 
       done();
     });
