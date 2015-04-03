@@ -1,7 +1,7 @@
 {
   "name": "inkjet",
   "main": "./dist/inkjet.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/gchudnov/inkjet",
   "authors": [
     "Grigoriy Chudnov <g.chudnov@gmail.com>"
