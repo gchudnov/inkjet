@@ -1826,8 +1826,8 @@ function JPEGEncoder(quality) {
 			/* Pass 1: process rows. */
 			var dataOff=0;
 			var i;
-			const I8 = 8;
-			const I64 = 64;
+			var I8 = 8;
+			var I64 = 64;
 			for (i=0; i<I8; ++i)
 			{
 				d0 = data[dataOff];
@@ -2062,9 +2062,9 @@ function JPEGEncoder(quality) {
 			var EOB = HTAC[0x00];
 			var M16zeroes = HTAC[0xF0];
 			var pos;
-			const I16 = 16;
-			const I63 = 63;
-			const I64 = 64;
+			var I16 = 16;
+			var I63 = 63;
+			var I64 = 64;
 			var DU_DCT = fDCTQuant(CDU, fdtbl);
 			//ZigZag reorder
 			for (var j=0;j<I64;++j) {
@@ -6837,17 +6837,17 @@ function exif(buf, options, cb) {
 },{"./backend/ExifReader":2}],12:[function(require,module,exports){
 'use strict';
 
-var HAS_WORKER = (typeof window !== 'undefined') && ('Worker' in window);
-if (HAS_WORKER) {
+var hasWorker = (typeof window !== 'undefined') && ('Worker' in window);
+if (hasWorker) {
   try {
-    var wkr = require('webworkify')(function () {});
-    wkr.terminate();
+    var w = require('webworkify')(function () {});
+    w.terminate();
   } catch (e) {
-    HAS_WORKER = false;
+    hasWorker = false;
   }
 }
 
-module.exports.HAS_WORKER = HAS_WORKER;
+module.exports.HAS_WORKER = hasWorker;
 
 },{"webworkify":13}],13:[function(require,module,exports){
 var bundleFn = arguments[3];
