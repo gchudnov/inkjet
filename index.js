@@ -7,6 +7,7 @@ var bufferUtils = require('./lib/buffer-utils');
 var exif = require('./lib/exif');
 var decode = require('./lib/decode');
 var encode = require('./lib/encode');
+var magic = require('./lib/magic');
 
 var exifWorker = require('./lib/exif-worker');
 var decodeWorker = require('./lib/decode-worker');
@@ -16,6 +17,7 @@ var encodeWorker = require('./lib/encode-worker');
 module.exports.decode = decodeBuffer;
 module.exports.encode = encodeBuffer;
 module.exports.exif = exifBuffer;
+module.exports.magic = magicBuffer;
 
 
 /**
@@ -151,6 +153,20 @@ function exifBuffer(buf, options, cb) {
     } else {
       exif(buf, options, cb);
     }
+  } catch(err) {
+    cb(err);
+  }
+}
+
+/**
+ * Detect mime-type for the Buffer
+ * @param {Buffer} buf Data buffer
+ * @param {function} cb Callback to invoke on completion
+ */
+function magicBuffer(buf, cb) {
+  try {
+    buf = bufferUtils.toBuffer(buf);
+    magic.lookup(buf, cb);
   } catch(err) {
     cb(err);
   }

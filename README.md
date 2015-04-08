@@ -82,6 +82,17 @@ inkjet.exif(buf, function(err, metadata) {
 });
 ```
 
+### Deduce image type
+```javascript
+var inkjet = require('inkjet');
+
+var filepath = './images/jpeg420exif.jpg';
+var buf = fs.readFileSync(filepath);
+inkjet.magic(buf, function(err, data) {
+  // data -- an object that contains mime-type and extension
+});
+```
+
 ## API
 
 ### .decode(buf, [options], cb)
@@ -130,7 +141,22 @@ Arguments:
   * `hasMakerNote` - exclude *MakerNote* tag from metadata. Default value: `true`, *MakerNote* tag is excluded.
 * `cb` - a callback that gets 2 arguments:
   * `err` - encoding `Error`
-  * `encoded` - metadata object, a set of tags and their values.
+  * `metadata` - metadata object, a set of tags and their values.
+
+```javascript
+inkjet.exif(buf, function(err, metadata) {
+  // ...
+});
+```
+
+### .magic(buf, cb)
+Deduce image type (mime type and extension) for the provided buffer
+
+Arguments:
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `cb` - a callback that gets 2 arguments:
+  * `err` - encoding `Error`
+  * `data` - { "mime": string, "extension": string }
 
 ```javascript
 inkjet.exif(buf, function(err, metadata) {
