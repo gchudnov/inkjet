@@ -186,7 +186,9 @@ Arguments:
 
 ```javascript
 inkjet.info(buf, function(err, data) {
-  // ...
+  // data: {
+  //   type: "image"
+  //   mimeType: ...
 });
 ```
 
