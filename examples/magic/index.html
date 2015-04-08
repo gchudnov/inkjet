@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Image Type Deduction</title>
+  <script src="./../../dist/inkjet.js"></script>
+  <script src="./index.js"></script>
+</head>
+<body>
+<form>
+  <label for="file">
+    Choose a file from your computer:<br/>
+    <input type="file" id="file" name="file"/>
+  </label>
+</form>
+<table style="margin-top: 12px;">
+  <thead>
+    <tr>
+      <th>MIME Type</th>
+      <th>Extension</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td id="file_mime"></td>
+    <td id="file_extension"></td>
+  </tr>
+  </tbody>
+</table>
+<div id="error">
+</div>
+</body>
+</html>
