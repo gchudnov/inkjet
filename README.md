@@ -159,7 +159,7 @@ Arguments:
   * `data` - { "mime": string, "extension": string }
 
 ```javascript
-inkjet.exif(buf, function(err, metadata) {
+inkjet.magic(buf, function(err, data) {
   // ...
 });
 ```
