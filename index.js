@@ -8,6 +8,7 @@ var exif = require('./lib/exif');
 var decode = require('./lib/decode');
 var encode = require('./lib/encode');
 var magic = require('./lib/magic');
+var info = require('./lib/info');
 
 var exifWorker = require('./lib/exif-worker');
 var decodeWorker = require('./lib/decode-worker');
@@ -18,14 +19,15 @@ module.exports.decode = decodeBuffer;
 module.exports.encode = encodeBuffer;
 module.exports.exif = exifBuffer;
 module.exports.magic = magicBuffer;
+module.exports.info = infoBuffer;
 
 
 /**
  * Decode
  *
- * @param buf Buffer|ArrayBuffer|Uint8Array
- * @param options Object { width: number, height: number }
- * @param cb Callback to invoke on completion
+ * @param {Buffer|ArrayBuffer|Uint8Array} buf
+ * @param {object} options Params: { width: number, height: number }
+ * @param {function} cb Callback to invoke on completion
  *
  * @callback { width: number, height: number, data: Uint8Array }
  */
@@ -68,9 +70,9 @@ function decodeBuffer(buf, options, cb) {
 /**
  * Encode
  *
- * @param buf Buffer|ArrayBuffer|Uint8Array
- * @param options Object { width: number, height: number, quality: number }
- * @param cb Callback to invoke on completion
+ * @param {Buffer|ArrayBuffer|Uint8Array} buf
+ * @param {object} options Params { width: number, height: number, quality: number }
+ * @param {function} cb Callback to invoke on completion
  *
  * @callback { width: number, height: number, data: Uint8Array }
  */
@@ -117,9 +119,9 @@ function encodeBuffer(buf, options, cb) {
 /**
  * Get EXIF
  *
- * @param buf Buffer|ArrayBuffer|Uint8Array
- * @param options Object { hasMakerNote: true|false }
- * @param cb Callback to invoke on completion
+ * @param {Buffer|ArrayBuffer|Uint8Array} buf
+ * @param {object} options Params { hasMakerNote: true|false }
+ * @param {function} cb Callback to invoke on completion
  *
  * @callback Object { name: value, ... }
  */
@@ -160,13 +162,27 @@ function exifBuffer(buf, options, cb) {
 
 /**
  * Detect mime-type for the Buffer
- * @param {Buffer} buf Data buffer
+ * @param {Buffer|ArrayBuffer|Uint8Array} buf Data buffer
  * @param {function} cb Callback to invoke on completion
  */
 function magicBuffer(buf, cb) {
   try {
     buf = bufferUtils.toBuffer(buf);
     magic.lookup(buf, cb);
+  } catch(err) {
+    cb(err);
+  }
+}
+
+/**
+ * Get image information without reading and decoding a file
+ * @param {Buffer|ArrayBuffer|Uint8Array} buf Data buffer
+ * @param {function} cb Callback to invoke on completion
+ */
+function infoBuffer(buf, cb) {
+  try {
+    buf = bufferUtils.toBuffer(buf);
+    info.collect(buf, cb);
   } catch(err) {
     cb(err);
   }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Image information</title>
+  <script src="./../../dist/inkjet.js"></script>
+  <script src="./index.js"></script>
+</head>
+<body>
+<form>
+  <label for="file">
+    Choose a file from your computer:<br />
+    <input type="file" id="file" name="file" />
+  </label>
+</form>
+<table style="margin-top: 12px;">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  </thead>
+  <tbody id="info-table-body">
+  </tbody>
+</table>
+<div id="error"></div>
+</body>
+</html>

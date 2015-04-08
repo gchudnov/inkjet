@@ -31,6 +31,7 @@
   "homepage": "https://github.com/gchudnov/inkjet",
   "dependencies": {
     "debug": "^2.1.3",
+    "imageinfo": "^1.0.4",
     "lodash.find": "^3.2.0",
     "webworkify": "^1.0.2"
   },
