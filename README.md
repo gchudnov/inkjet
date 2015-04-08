@@ -93,6 +93,17 @@ inkjet.magic(buf, function(err, data) {
 });
 ```
 
+### Image information
+```javascript
+var inkjet = require('inkjet');
+
+var filepath = './images/jpeg420exif.jpg';
+var buf = fs.readFileSync(filepath);
+inkjet.info(buf, function(err, data) {
+  // data -- an object that contains width, height, mime type and extension data
+});
+```
+
 ## API
 
 ### .decode(buf, [options], cb)
@@ -140,7 +151,7 @@ Arguments:
 * `[options]` - an optional object with settings to encode an image. Supported options:
   * `hasMakerNote` - exclude *MakerNote* tag from metadata. Default value: `true`, *MakerNote* tag is excluded.
 * `cb` - a callback that gets 2 arguments:
-  * `err` - encoding `Error`
+  * `err` - exif extraction `Error`
   * `metadata` - metadata object, a set of tags and their values.
 
 ```javascript
@@ -150,16 +161,31 @@ inkjet.exif(buf, function(err, metadata) {
 ```
 
 ### .magic(buf, cb)
-Deduce image type (mime type and extension) for the provided buffer
+Deduce image type (mime type and extension) for the provided buffer.
 
 Arguments:
 * `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
 * `cb` - a callback that gets 2 arguments:
-  * `err` - encoding `Error`
-  * `data` - { "mime": string, "extension": string }
+  * `err` - `Error` object
+  * `data` - data object { "mimeType": string, "extension": string }
 
 ```javascript
 inkjet.magic(buf, function(err, data) {
+  // ...
+});
+```
+
+### .info(buf, cb)
+Get image information without reading and decoding an image.
+
+Arguments:
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `cb` - a callback that gets 2 arguments:
+  * `err` - `Error` object
+  * `data` - data object { "type": string, "mimeType": string, "extension": string, "width": number, "height: number" }
+
+```javascript
+inkjet.info(buf, function(err, data) {
   // ...
 });
 ```
