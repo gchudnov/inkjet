@@ -14,7 +14,7 @@ describe('Magic number', function() {
       should.not.exist(err);
       should.exist(result);
 
-      result.mime.should.be.equal('image/jpeg');
+      result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
       done();
@@ -34,7 +34,7 @@ describe('Magic number', function() {
       should.not.exist(err);
       should.exist(result);
 
-      result.mime.should.be.equal('image/jpeg');
+      result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
       done();
@@ -54,7 +54,7 @@ describe('Magic number', function() {
       should.not.exist(err);
       should.exist(result);
 
-      result.mime.should.be.equal('image/jpeg');
+      result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
       done();
@@ -70,7 +70,7 @@ describe('Magic number', function() {
       should.not.exist(err);
       should.exist(result);
 
-      result.mime.should.be.equal('image/jpeg');
+      result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
       done();
@@ -86,7 +86,7 @@ describe('Magic number', function() {
       should.not.exist(err);
       should.exist(result);
 
-      result.mime.should.be.equal('image/png');
+      result.mimeType.should.be.equal('image/png');
       result.extension.should.be.equal('png');
 
       done();

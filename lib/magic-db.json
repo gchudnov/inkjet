@@ -1,54 +1,54 @@
 {
   "474946383961": {
-    "mime": "image/gif",
+    "mimeType": "image/gif",
     "extension": "gif"
   },
   "474946383761": {
-    "mime": "image/gif",
+    "mimeType": "image/gif",
     "extension": "gif"
   },
   "89504e470d0a1a0a": {
-    "mime": "image/png",
+    "mimeType": "image/png",
     "extension": "png"
   },
   "ffd8ff": {
-    "mime": "image/jpeg",
+    "mimeType": "image/jpeg",
     "extension": "jpg"
   },
   "57454250": {
-    "mime": "image/webp",
+    "mimeType": "image/webp",
     "extension": "webp"
   },
   "49492a00": {
-    "mime": "image/tiff",
+    "mimeType": "image/tiff",
     "extension": "tiff"
   },
   "4d4d002a": {
-    "mime": "image/tiff",
+    "mimeType": "image/tiff",
     "extension": "tiff"
   },
   "424d": {
-    "mime": "image/bmp",
+    "mimeType": "image/bmp",
     "extension": "bmp"
   },
   "000000146674797069736f6d": {
-    "mime": "video/mp4",
+    "mimeType": "video/mp4",
     "extension": "mp4"
   },
   "000000186674797033677035": {
-    "mime": "video/mp4",
+    "mimeType": "video/mp4",
     "extension": "mp4"
   },
   "000000146674797071742020": {
-    "mime": "video/quicktime",
+    "mimeType": "video/quicktime",
     "extension": "mov"
   },
   "1a45dfa3": {
-    "mime": "video/webm",
+    "mimeType": "video/webm",
     "extension": "webm"
   },
   "25504446": {
-    "mime": "application/pdf",
+    "mimeType": "application/pdf",
     "extension": "pdf"
   }
 }
