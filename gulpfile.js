@@ -21,9 +21,8 @@ var banner = [
 gulp.task('script', function() {
   var bundleStream = browserify({
     entries: './index.js',
-    builtins: null,
     insertGlobals: false,
-    detectGlobals: false,
+    detectGlobals: true,
     standalone: 'inkjet',
     fullPaths: false
   })
