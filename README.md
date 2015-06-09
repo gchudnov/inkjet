@@ -5,7 +5,7 @@
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/inkjet.svg)](https://saucelabs.com/u/inkjet)
 
 
-> JPEG-image decoding, encoding & EXIF reading library for browser and node.js
+> JPEG-image decoding, encoding & EXIF reading library for a browser and node.js
 
 ## Installation
 
