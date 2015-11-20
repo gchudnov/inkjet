@@ -1,14 +1,14 @@
 {
   "name": "inkjet",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "JPEG-image decoding, encoding & EXIF reading library for browser and node.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "browser": "./node_modules/.bin/gulp script",
+    "browser": "gulp script",
     "zuul": "zuul -- ./test/*.spec.js",
-    "zuul-local": "zuul --local 8080 --ui mocha-bdd -- ./test/*.spec.js",
-    "istanbul-local": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && rm -rf ./coverage"
+    "zuul:local": "zuul --local 8080 --ui mocha-bdd -- ./test/*.spec.js",
+    "istanbul:local": "istanbul cover ./node_modules/mocha/bin/mocha --report lcovonly -- -R spec && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
