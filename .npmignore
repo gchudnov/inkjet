@@ -1,6 +1,6 @@
-coverage
-node_modules
 .idea
+coverage
 examples
+node_modules
 images
 test
