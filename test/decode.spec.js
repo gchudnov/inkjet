@@ -8,7 +8,6 @@ describe('Decode', function() {
   this.timeout(60000);
 
   it('can be used to process ' + images.name420, function(done) {
-
     var jpegData = images.buf420;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);

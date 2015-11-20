@@ -6,7 +6,7 @@ var images = require('./images');
 
 describe('Info', function() {
 
-  it('can be fetched for a JPG file', function(done) {
+  it('can be fetched for a JPEG file', function(done) {
     var buf = images.buf420;
     lib.info(buf, function(err, data) {
       should.not.exist(err);
@@ -33,6 +33,16 @@ describe('Info', function() {
       data.should.have.a.property('extension').equal('png');
       data.should.have.a.property('width').equal(1052);
       data.should.have.a.property('height').equal(1052);
+
+      done();
+    });
+  });
+
+  it('cannot be fetched for a broken JPEG file', function(done) {
+    var buf = images.bufBroken;
+    lib.info(buf, function(err, data) {
+      should.exist(err);
+      should.not.exist(data);
 
       done();
     });
