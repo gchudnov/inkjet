@@ -68,4 +68,14 @@ describe('Decode', function() {
     });
   });
 
+  it('fails to decode a broken JPEG image', function(done) {
+    var jpegData = images.bufBroken;
+    lib.decode(jpegData, function(err, decoded) {
+      should.exist(err);
+      should.not.exist(decoded);
+      err.should.be.an.instanceOf(Error);
+      done();
+    });
+  });
+
 });

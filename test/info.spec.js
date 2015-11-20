@@ -43,7 +43,7 @@ describe('Info', function() {
     lib.info(buf, function(err, data) {
       should.exist(err);
       should.not.exist(data);
-
+      err.should.be.an.instanceOf(Error);
       done();
     });
   });

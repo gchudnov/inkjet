@@ -90,7 +90,7 @@ describe('Magic number', function() {
     lib.magic(buf, function(err, result) {
       should.exist(err);
       should.not.exist(result);
-
+      err.should.be.an.instanceOf(Error);
       done();
     });
   });
