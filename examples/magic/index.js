@@ -7,12 +7,16 @@
   }
 
   function displayError(err) {
-    var errEl = document.getElementById('error');
-    errEl.innerHTML = err.message;
+    var el = document.getElementById('errors');
+    el.innerHTML = err ? err.message : '';
+  }
+
+  function clearError() {
+    displayError()
   }
 
   function displayData(data) {
-    var mimeType = (data && data.mime) || '';
+    var mimeType = (data && data.mimeType) || '';
     var extension = (data && data.extension) || '';
 
     var mimeEl = document.getElementById('file_mime');
@@ -20,6 +24,14 @@
 
     var extEl = document.getElementById('file_extension');
     extEl.innerHTML = extension;
+  }
+
+  function clearData() {
+    var mimeEl = document.getElementById('file_mime');
+    mimeEl.innerHTML = '';
+
+    var extEl = document.getElementById('file_extension');
+    extEl.innerHTML = '';
   }
 
   var handleFile = function (event) {
@@ -41,6 +53,9 @@
         displayError(err);
       }
     };
+
+    clearError();
+    clearData();
 
     reader.readAsArrayBuffer(files[0]);
   };

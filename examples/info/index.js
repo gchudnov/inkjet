@@ -7,15 +7,16 @@
   }
 
   function displayError(err) {
-    var errEl = document.getElementById('error');
-    errEl.innerHTML = err.message;
+    var el = document.getElementById('errors');
+    el.innerHTML = err ? err.message : '';
+  }
+
+  function clearError() {
+    displayError()
   }
 
   function displayData(data) {
     var tableBody = document.getElementById('info-table-body');
-    while (tableBody.firstChild) {
-      tableBody.removeChild(tableBody.firstChild);
-    }
 
     var row;
     for (name in data) {
@@ -24,6 +25,13 @@
         row.innerHTML = '<td>' + name + '</td><td>' + data[name] + '</td>';
         tableBody.appendChild(row);
       }
+    }
+  }
+
+  function clearData() {
+    var tableBody = document.getElementById('info-table-body');
+    while (tableBody.firstChild) {
+      tableBody.removeChild(tableBody.firstChild);
     }
   }
 
@@ -46,6 +54,9 @@
         displayData(err);
       }
     };
+
+    clearError();
+    clearData();
 
     // We only need the start of the file to get the info.
     var bufferSize = 16 * 1024;

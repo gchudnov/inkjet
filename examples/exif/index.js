@@ -6,12 +6,17 @@
     return;
   }
 
+  function displayError(err) {
+    var el = document.getElementById('errors');
+    el.innerHTML = err ? err.message : '';
+  }
+
+  function clearError() {
+    displayError()
+  }
+
   function displayMetadata(tags) {
     var tableBody = document.getElementById('exif-table-body');
-    while (tableBody.firstChild) {
-      tableBody.removeChild(tableBody.firstChild);
-    }
-
     var row;
     for (name in tags) {
       if (tags.hasOwnProperty(name)) {
@@ -19,6 +24,13 @@
         row.innerHTML = '<td>' + name + '</td><td>' + tags[name].description + '</td>';
         tableBody.appendChild(row);
       }
+    }
+  }
+
+  function clearMetadata() {
+    var tableBody = document.getElementById('exif-table-body');
+    while (tableBody.firstChild) {
+      tableBody.removeChild(tableBody.firstChild);
     }
   }
 
@@ -31,16 +43,19 @@
       try {
         inkjet.exif(event.target.result, function(err, tags) {
           if(err) {
-            displayMetadata({ ERROR: { description: err.message } });
+            displayError(err);
           } else {
             displayMetadata(tags);
           }
         });
 
       } catch (err) {
-        displayMetadata({ ERROR: { description: err.message } });
+        displayError(err);
       }
     };
+
+    clearMetadata();
+    clearError();
 
     // We only need the start of the file for the Exif info.
     var bufferSize = 128 * 1024;
