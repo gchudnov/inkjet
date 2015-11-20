@@ -12,16 +12,18 @@ describe('Exif', function() {
     lib.exif(jpegData, function(err, data) {
       should.not.exist(err);
       should.exist(data);
+      data.should.have.properties('ImageDescription');
       done();
     });
   });
 
-  it('should be detected for ' + constants.nameExif + ' (first 128Kb taken)', function(done) {
+  it('should be detected for ' + constants.nameExif + ' (take 128Kb)', function(done) {
     var jpegData = constants.bufExif;
     jpegData = jpegData.slice(0, 128 * 1024);
     lib.exif(jpegData, function(err, data) {
       should.not.exist(err);
       should.exist(data);
+      data.should.have.properties('ImageDescription');
       done();
     });
   });
@@ -29,8 +31,8 @@ describe('Exif', function() {
   it('should NOT be detected for ' + constants.name420, function(done) {
     var jpegData = constants.buf420;
     lib.exif(jpegData, function(err, data) {
-      should.exist(err);
-      should.not.exist(data);
+      should.not.exist(err);
+      should.exist(data);
       done();
     });
   });
