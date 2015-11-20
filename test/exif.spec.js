@@ -37,7 +37,7 @@ describe('Exif', function() {
     });
   });
 
-  it('should NOT be detected for ' + constants.nameBroken, function(done) {
+  it('should return an error for ' + constants.nameBroken, function(done) {
     var jpegData = constants.bufBroken;
     lib.exif(jpegData, function(err, data) {
       should.exist(err);
