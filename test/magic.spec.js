@@ -2,7 +2,7 @@
 
 var should = require('should');
 var lib = require('../index');
-var images = require('./images');
+var constants = require('./constants');
 
 describe('Magic number', function() {
 
@@ -57,7 +57,7 @@ describe('Magic number', function() {
   });
 
   it('can be detected for a JPEG file', function(done) {
-    var buf = images.buf420;
+    var buf = constants.buf420;
 
     lib.magic(buf, function(err, result) {
       should.not.exist(err);
@@ -71,7 +71,7 @@ describe('Magic number', function() {
   });
 
   it('can be detected for a PNG file', function(done) {
-    var buf = images.bufPng;
+    var buf = constants.bufPng;
 
     lib.magic(buf, function(err, result) {
       should.not.exist(err);
@@ -85,7 +85,7 @@ describe('Magic number', function() {
   });
 
   it('cannot be detected for a broken JPEG file', function(done) {
-    var buf = images.bufBroken;
+    var buf = constants.bufBroken;
 
     lib.magic(buf, function(err, result) {
       should.exist(err);

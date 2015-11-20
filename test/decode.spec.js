@@ -2,13 +2,13 @@
 
 var should = require('should');
 var lib = require('../index');
-var images = require('./images');
+var constants = require('./constants');
 
 describe('Decode', function() {
   this.timeout(60000);
 
-  it('can be used to process ' + images.name420, function(done) {
-    var jpegData = images.buf420;
+  it('can be used to process ' + constants.name420, function(done) {
+    var jpegData = constants.buf420;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -20,8 +20,8 @@ describe('Decode', function() {
     });
   });
 
-  it('can be used to process ' + images.name422h, function(done) {
-    var jpegData = images.buf422h;
+  it('can be used to process ' + constants.name422h, function(done) {
+    var jpegData = constants.buf422h;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -32,8 +32,8 @@ describe('Decode', function() {
     });
   });
 
-  it('can be used to process ' + images.name422v, function(done) {
-    var jpegData = images.buf422v;
+  it('can be used to process ' + constants.name422v, function(done) {
+    var jpegData = constants.buf422v;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -44,8 +44,8 @@ describe('Decode', function() {
     })
   });
 
-  it('can be used to process ' + images.name444, function(done) {
-    var jpegData = images.buf444;
+  it('can be used to process ' + constants.name444, function(done) {
+    var jpegData = constants.buf444;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -56,8 +56,8 @@ describe('Decode', function() {
     });
   });
 
-  it('can be used to process ' + images.nameExif, function(done) {
-    var jpegData = images.bufExif;
+  it('can be used to process ' + constants.nameExif, function(done) {
+    var jpegData = constants.bufExif;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -69,7 +69,7 @@ describe('Decode', function() {
   });
 
   it('fails to decode a broken JPEG image', function(done) {
-    var jpegData = images.bufBroken;
+    var jpegData = constants.bufBroken;
     lib.decode(jpegData, function(err, decoded) {
       should.exist(err);
       should.not.exist(decoded);

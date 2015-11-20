@@ -3,15 +3,15 @@
 var path = require('path');
 var should = require('should');
 var lib = require('../index');
-var images = require('./images');
+var constants = require('./constants');
 var writer = require('./util/file-writer');
 
 
 describe('Re-Encode', function() {
   this.timeout(60000);
 
-  it('can be used to process ' + images.name420, function(done) {
-    var jpegData = images.buf420;
+  it('can be used to process ' + constants.name420, function(done) {
+    var jpegData = constants.buf420;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -34,7 +34,7 @@ describe('Re-Encode', function() {
         (encoded.data).should.be.instanceOf(Uint8Array);
 
         if('writeFileSync' in writer) {
-          writer.writeFileSync(path.join(__dirname, './out/' + images.name420), encoded.data);
+          writer.writeFileSync(path.join(__dirname, './out/' + constants.name420), encoded.data);
         }
 
         done();
@@ -42,8 +42,8 @@ describe('Re-Encode', function() {
     });
   });
 
-  it('can be used to process ' + images.name422h, function(done) {
-    var jpegData = images.buf422h;
+  it('can be used to process ' + constants.name422h, function(done) {
+    var jpegData = constants.buf422h;
     lib.decode(jpegData, { width: 1052, height: 1052 }, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -66,7 +66,7 @@ describe('Re-Encode', function() {
         (encoded.data).should.be.instanceOf(Uint8Array);
 
         if('writeFileSync' in writer) {
-          writer.writeFileSync(path.join(__dirname, './out/' + images.name422h), encoded.data);
+          writer.writeFileSync(path.join(__dirname, './out/' + constants.name422h), encoded.data);
         }
 
         done();
@@ -74,8 +74,8 @@ describe('Re-Encode', function() {
     });
   });
 
-  it('can be used to process ' + images.name422v, function(done) {
-    var jpegData = images.buf422v;
+  it('can be used to process ' + constants.name422v, function(done) {
+    var jpegData = constants.buf422v;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -98,7 +98,7 @@ describe('Re-Encode', function() {
         (encoded.data).should.be.instanceOf(Uint8Array);
 
         if('writeFileSync' in writer) {
-          writer.writeFileSync(path.join(__dirname, './out/' + images.name422v), encoded.data);
+          writer.writeFileSync(path.join(__dirname, './out/' + constants.name422v), encoded.data);
         }
 
         done();
@@ -106,8 +106,8 @@ describe('Re-Encode', function() {
     });
   });
 
-  it('can be used to process ' + images.nameExif, function(done) {
-    var jpegData = images.bufExif;
+  it('can be used to process ' + constants.nameExif, function(done) {
+    var jpegData = constants.bufExif;
     lib.decode(jpegData, function(err, decoded) {
       should.not.exist(err);
       should.exist(decoded);
@@ -130,7 +130,7 @@ describe('Re-Encode', function() {
         (encoded.data).should.be.instanceOf(Uint8Array);
 
         if('writeFileSync' in writer) {
-          writer.writeFileSync(path.join(__dirname, './out/' + images.nameExif), encoded.data);
+          writer.writeFileSync(path.join(__dirname, './out/' + constants.nameExif), encoded.data);
         }
 
         done();

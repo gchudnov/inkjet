@@ -2,13 +2,13 @@
 
 var should = require('should');
 var lib = require('../index');
-var images = require('./images');
+var constants = require('./constants');
 
 describe('Exif', function() {
   this.timeout(60000);
 
-  it('should be detected for ' + images.nameExif, function(done) {
-    var jpegData = images.bufExif;
+  it('should be detected for ' + constants.nameExif, function(done) {
+    var jpegData = constants.bufExif;
     lib.exif(jpegData, function(err, data) {
       should.not.exist(err);
       should.exist(data);
@@ -16,8 +16,8 @@ describe('Exif', function() {
     });
   });
 
-  it('should be detected for ' + images.nameExif + ' (first 128Kb taken)', function(done) {
-    var jpegData = images.bufExif;
+  it('should be detected for ' + constants.nameExif + ' (first 128Kb taken)', function(done) {
+    var jpegData = constants.bufExif;
     jpegData = jpegData.slice(0, 128 * 1024);
     lib.exif(jpegData, function(err, data) {
       should.not.exist(err);
@@ -26,8 +26,8 @@ describe('Exif', function() {
     });
   });
 
-  it('should NOT be detected for ' + images.name420, function(done) {
-    var jpegData = images.buf420;
+  it('should NOT be detected for ' + constants.name420, function(done) {
+    var jpegData = constants.buf420;
     lib.exif(jpegData, function(err, data) {
       should.exist(err);
       should.not.exist(data);
@@ -35,4 +35,12 @@ describe('Exif', function() {
     });
   });
 
+  it('should NOT be detected for ' + constants.nameBroken, function(done) {
+    var jpegData = constants.bufBroken;
+    lib.exif(jpegData, function(err, data) {
+      should.exist(err);
+      should.not.exist(data);
+      done();
+    });
+  });
 });

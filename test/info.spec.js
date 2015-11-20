@@ -2,12 +2,12 @@
 
 var should = require('should');
 var lib = require('../index');
-var images = require('./images');
+var constants = require('./constants');
 
 describe('Info', function() {
 
   it('can be fetched for a JPEG file', function(done) {
-    var buf = images.buf420;
+    var buf = constants.buf420;
     lib.info(buf, function(err, data) {
       should.not.exist(err);
       should.exist(data);
@@ -23,7 +23,7 @@ describe('Info', function() {
   });
 
   it('can be fetched for a PNG file', function(done) {
-    var buf = images.bufPng;
+    var buf = constants.bufPng;
     lib.info(buf, function(err, data) {
       should.not.exist(err);
       should.exist(data);
@@ -39,7 +39,7 @@ describe('Info', function() {
   });
 
   it('cannot be fetched for a broken JPEG file', function(done) {
-    var buf = images.bufBroken;
+    var buf = constants.bufBroken;
     lib.info(buf, function(err, data) {
       should.exist(err);
       should.not.exist(data);
