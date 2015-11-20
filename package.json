@@ -36,18 +36,18 @@
     "webworkify": "^1.0.2"
   },
   "devDependencies": {
-    "brfs": "^1.4.0",
-    "browserify": "^10.2.4",
+    "brfs": "^1.4.1",
+    "browserify": "^12.0.1",
     "gulp": "^3.9.0",
-    "gulp-header": "^1.2.2",
-    "gulp-load-plugins": "^1.0.0-rc",
+    "gulp-header": "^1.7.1",
+    "gulp-load-plugins": "^1.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.5",
-    "istanbul": "^0.3.15",
-    "mocha": "^2.2.5",
-    "should": "^6.0.3",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "istanbul": "^0.4.0",
+    "mocha": "^2.3.4",
+    "should": "^7.1.1",
     "vinyl-source-stream2": "^0.1.1",
-    "zuul": "^3.0.0"
+    "zuul": "^3.7.3"
   }
 }
