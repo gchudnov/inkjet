@@ -16,7 +16,7 @@ $ npm install inkjet --save
 
 ## In browser
 
-To use _inkjet_ in a browser, use the `inkjet.js` file in the `/dist` directory of this repository, or build it manually. To build a fresh version:
+To use _inkjet_ in a browser, use `inkjet.js` or `inkjet.min.js` in `/dist` directory, or build it manually:
 
 ```bash
 $ npm install
