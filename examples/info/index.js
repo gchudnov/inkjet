@@ -59,7 +59,7 @@
     clearData();
 
     // We only need the start of the file to get the info.
-    var bufferSize = 16 * 1024;
+    var bufferSize = 1024 * 1024;
     reader.readAsArrayBuffer(files[0].slice(0, bufferSize));
   };
 
