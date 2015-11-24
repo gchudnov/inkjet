@@ -1,10 +1,12 @@
 language: node_js
 node_js:
-  - iojs
+  - stable
 script:
   - "test $SAUCE_USERNAME && npm run zuul || echo 'not running on saucelabs'"
   - npm test
+addons:
+  sauce_connect: true
 env:
   global:
-    - secure: cME3WwLVqHYkraFOQigmmGoaaVBTn8NLdlsb7CiARDzYz4CeHeW2Vh+oPHhMc9E5RpwgTdAuAXceJSG4A5wkVnpaEwLrrWznoea6qWY13y+hgUq0fPUDTEX+RTcEwGDGVAabMpEg+mgDs54QgRAOsM40XzaPS4RcVm5a/k+Dfxk=
-    - secure: LJEo2USmd5/aA+dREqQ5UlNL3f1Ufj2uDRHjEmatZ1trv2znMF8VWR1/rd/chWJZSXfnHX9oDCuxo6wY9Gov1kv+vHB8R2MxMDMrYOTXHRrN2AQBDKLc2RLUc1QxOyT0mACCi6m6fH9jzxk6E5iOkWyZRNAaLxLjidHNkcy35DM=
+    - secure: fevSXO9Hii7xCJTmP7bWrEx5fG+iJuMQFQDxzBooBMl8zRF3r4LCw8/3PxgwzqtXsCorB8zDez0eW6wb3KobC31xxwA7G5WLBhRRr/V2g5sZNX5v8h/4jyPHYZ2guLpIa5lgC5wj3+L9onNwcb54+m0z+XfN41LJrBk+gejGd2U=
+    - secure: AppXfkeS1ZKqCfriajA7eOMsYn8hhAPRRhOqeF/dgCdKN9Ez+SqW1Q4tZH3NvQmUPgQraJpzvFOxz8QcNqWTTzdPIUIHBTsB+JnZMEdBfSaWKeBud6dPZI6T0jl3v4nFo9Kl0F8zKIAN2RWusSQ/EdI6dTmvYtg2osMZrXD5jkA=
