@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/gchudnov/inkjet.svg)](https://travis-ci.org/gchudnov/inkjet)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/inkjet.svg)](https://saucelabs.com/u/inkjet)
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/gchudnov-open.svg)](https://saucelabs.com/u/gchudnov-open)
 
 
 > JPEG-image decoding, encoding & EXIF reading library for a browser and node.js
