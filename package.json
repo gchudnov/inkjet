@@ -1,6 +1,6 @@
 {
   "name": "inkjet",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JPEG-image decoding, encoding & EXIF reading library for browser and node.js",
   "main": "index.js",
   "scripts": {
@@ -32,22 +32,22 @@
   "dependencies": {
     "debug": "^2.2.0",
     "imageinfo": "^1.0.4",
-    "lodash.find": "^3.2.1",
-    "webworkify": "^1.0.2"
+    "lodash.find": "^4.2.0",
+    "webworkify": "^1.1.0"
   },
   "devDependencies": {
-    "brfs": "^1.4.1",
-    "browserify": "^12.0.1",
-    "gulp": "^3.9.0",
+    "brfs": "^1.4.3",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
     "gulp-header": "^1.7.1",
-    "gulp-load-plugins": "^1.1.0",
+    "gulp-load-plugins": "^1.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.1",
+    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "istanbul": "^0.4.0",
-    "mocha": "^2.3.4",
-    "should": "^7.1.1",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "should": "^8.3.0",
     "vinyl-source-stream2": "^0.1.1",
-    "zuul": "^3.7.3"
+    "zuul": "^3.10.1"
   }
 }

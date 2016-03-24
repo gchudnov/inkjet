@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.1
+- Updated dependencies.
+
 ## 2.0.0
 - Refined API:
     - `.info()` returns an Error for a broken image.
