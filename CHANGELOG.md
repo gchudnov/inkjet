@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.2
+- Updated dependencies.
+- Fixed missing /dist directory.
+
 ## 2.0.1
 - Updated dependencies.
 

@@ -1,6 +1,7 @@
 .idea
 coverage
 examples
-node_modules
 images
+node_modules
 test
+gulpfile.js
