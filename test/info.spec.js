@@ -1,14 +1,12 @@
-'use strict';
+import should from 'should';
+import lib from '../index';
+import constants from './constants';
 
-var should = require('should');
-var lib = require('../index');
-var constants = require('./constants');
+describe('Info', () => {
 
-describe('Info', function() {
-
-  it('can be fetched for a JPEG file', function(done) {
-    var buf = constants.buf420;
-    lib.info(buf, function(err, data) {
+  it('can be fetched for a JPEG file', (done) => {
+    const buf = constants.buf420;
+    lib.info(buf, (err, data) => {
       should.not.exist(err);
       should.exist(data);
 
@@ -22,9 +20,9 @@ describe('Info', function() {
     });
   });
 
-  it('can be fetched for a PNG file', function(done) {
-    var buf = constants.bufPng;
-    lib.info(buf, function(err, data) {
+  it('can be fetched for a PNG file', (done) => {
+    const buf = constants.bufPng;
+    lib.info(buf, (err, data) => {
       should.not.exist(err);
       should.exist(data);
 
@@ -38,9 +36,9 @@ describe('Info', function() {
     });
   });
 
-  it('cannot be fetched for a broken JPEG file', function(done) {
-    var buf = constants.bufBroken;
-    lib.info(buf, function(err, data) {
+  it('cannot be fetched for a broken JPEG file', (done) => {
+    const buf = constants.bufBroken;
+    lib.info(buf, (err, data) => {
       should.exist(err);
       should.not.exist(data);
       err.should.be.an.instanceOf(Error);

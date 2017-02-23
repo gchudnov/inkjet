@@ -1,14 +1,15 @@
 {
   "name": "inkjet",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "JPEG-image decoding, encoding & EXIF reading library for browser and node.js",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --require register --recursive",
     "browser": "gulp script",
+    "browser:production": "NODE_ENV=production gulp script",
     "zuul": "zuul --no-coverage --sauce-connect -- ./test/*.spec.js",
     "zuul:local": "zuul --local 8080 --ui mocha-bdd -- ./test/*.spec.js",
-    "istanbul:local": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && rm -rf ./coverage"
+    "istanbul:local": "istanbul cover ./node_modules/mocha/bin/_mocha --require register --report lcovonly -- -R spec && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -30,24 +31,32 @@
   },
   "homepage": "https://github.com/gchudnov/inkjet",
   "dependencies": {
-    "debug": "^2.2.0",
     "imageinfo": "^1.0.4",
-    "lodash.find": "^4.3.0",
-    "webworkify": "^1.1.0"
+    "webworkify": "^1.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.23.0",
+    "babelify": "^7.3.0",
     "brfs": "^1.4.3",
-    "browserify": "^13.0.0",
+    "browserify": "^14.1.0",
     "gulp": "^3.9.1",
-    "gulp-header": "^1.7.1",
-    "gulp-load-plugins": "^1.2.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.3",
-    "gulp-util": "^3.0.7",
-    "istanbul": "^0.4.3",
-    "mocha": "^2.4.5",
-    "should": "^8.3.1",
+    "gulp-header": "^1.8.8",
+    "gulp-if": "^2.0.2",
+    "gulp-uglify": "^2.0.1",
+    "gulp-util": "^3.0.8",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "require-dir": "^0.3.1",
+    "should": "^11.2.0",
     "vinyl-source-stream2": "^0.1.1",
-    "zuul": "^3.10.1"
+    "zuul": "^3.11.1"
   }
 }

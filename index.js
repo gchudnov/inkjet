@@ -1,26 +1,16 @@
-'use strict';
+import { hasWorker } from './lib/has-worker';
 
-var hasWorker = require('./lib/has-worker').HAS_WORKER;
+import * as bufferUtils from './lib/buffer-utils';
 
-var bufferUtils = require('./lib/buffer-utils');
+import exif from './lib/exif';
+import decode from './lib/decode';
+import encode from './lib/encode';
+import magic from './lib/magic';
+import info from './lib/info';
 
-var exif = require('./lib/exif');
-var decode = require('./lib/decode');
-var encode = require('./lib/encode');
-var magic = require('./lib/magic');
-var info = require('./lib/info');
-
-var exifWorker = require('./lib/exif-worker');
-var decodeWorker = require('./lib/decode-worker');
-var encodeWorker = require('./lib/encode-worker');
-
-
-module.exports.decode = decodeBuffer;
-module.exports.encode = encodeBuffer;
-module.exports.exif = exifBuffer;
-module.exports.magic = magicBuffer;
-module.exports.info = infoBuffer;
-
+import exifWorker from './lib/exif-worker';
+import decodeWorker from './lib/decode-worker';
+import encodeWorker from './lib/encode-worker';
 
 /**
  * Decode
@@ -41,15 +31,14 @@ function decodeBuffer(buf, options, cb) {
     buf = bufferUtils.toUint8Array(buf);
 
     if(hasWorker) {
-      var wr = require('webworkify')(decodeWorker);
+      const wr = require('webworkify')(decodeWorker);
 
-      wr.onmessage = function(ev) {
-        var msg = ev.data;
-        var err = msg.err ? new Error(msg.err) : undefined;
+      wr.onmessage = ({ data: msg }) => {
+        const err = msg.err ? new Error(msg.err) : undefined;
         cb(err, msg.result);
       };
 
-      var msg = {
+      const msg = {
         buf: buf,
         options: options
       };
@@ -90,15 +79,14 @@ function encodeBuffer(buf, options, cb) {
     }
 
     if(hasWorker) {
-      var wr = require('webworkify')(encodeWorker);
+      const wr = require('webworkify')(encodeWorker);
 
-      wr.onmessage = function(ev) {
-        var msg = ev.data;
-        var err = msg.err ? new Error(msg.err) : undefined;
+      wr.onmessage = ({ data: msg }) => {
+        const err = msg.err ? new Error(msg.err) : undefined;
         cb(err, msg.result);
       };
 
-      var msg = {
+      const msg = {
         buf: buf,
         options: options
       };
@@ -135,15 +123,14 @@ function exifBuffer(buf, options, cb) {
     buf = bufferUtils.toArrayBuffer(buf);
 
     if(hasWorker) {
-      var wr = require('webworkify')(exifWorker);
+      const wr = require('webworkify')(exifWorker);
 
-      wr.onmessage = function(ev) {
-        var msg = ev.data;
-        var err = msg.err ? new Error(msg.err) : undefined;
+      wr.onmessage = ({ data: msg }) => {
+        const err = msg.err ? new Error(msg.err) : undefined;
         cb(err, msg.result);
       };
 
-      var msg = {
+      const msg = {
         buf: buf
       };
 
@@ -168,7 +155,7 @@ function exifBuffer(buf, options, cb) {
 function magicBuffer(buf, cb) {
   try {
     buf = bufferUtils.toBuffer(buf);
-    magic.lookup(buf, cb);
+    magic(buf, cb);
   } catch(err) {
     cb(err);
   }
@@ -182,8 +169,17 @@ function magicBuffer(buf, cb) {
 function infoBuffer(buf, cb) {
   try {
     buf = bufferUtils.toBuffer(buf);
-    info.collect(buf, cb);
+    info(buf, cb);
   } catch(err) {
     cb(err);
   }
+}
+
+
+export default {
+  decode: decodeBuffer,
+  encode: encodeBuffer,
+  exif: exifBuffer,
+  magic: magicBuffer,
+  info: infoBuffer,
 }

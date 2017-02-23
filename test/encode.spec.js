@@ -1,15 +1,13 @@
-'use strict';
-
-var path = require('path');
-var should = require('should');
-var lib = require('../index');
-var writer = require('./util/file-writer');
+import path from 'path';
+import should from 'should';
+import lib from '../index';
+import writer from './util/file-writer';
 
 function makeRgbBitmap(BufferType, r, g, b) {
-  var width = 320;
-  var height = 180;
-  var frameData = new Buffer(width * height * 4);
-  var i = 0;
+  const width = 320;
+  const height = 180;
+  const frameData = new Buffer(width * height * 4);
+  let i = 0;
 
   while (i < frameData.length) {
     frameData[i++] = 0xFF; // red
@@ -25,23 +23,18 @@ function makeRgbBitmap(BufferType, r, g, b) {
   }
 }
 
-describe('Encode', function() {
-  this.timeout(60000);
+describe('Encode', () => {
 
-  it('can be used to create a JPEG image (Buffer)', function(done) {
-    var bmp = makeRgbBitmap(Buffer, 0xFF, 0, 0);
+  it('can be used to create a JPEG image (Buffer)', (done) => {
+    const { width, height, data } = makeRgbBitmap(Buffer, 0xFF, 0, 0);
 
-    var width = bmp.width;
-    var height = bmp.height;
-    var buf = bmp.data;
-
-    var options = {
+    const options = {
       width: width,
       height: height,
       quality: 80
     };
 
-    lib.encode(buf, options, function(err, encoded) {
+    lib.encode(data, options, (err, encoded) => {
       should.not.exist(err);
       should.exist(encoded);
       (encoded.width).should.be.eql(320);
@@ -57,20 +50,16 @@ describe('Encode', function() {
 
   });
 
-  it('can be used to create a JPEG image (ArrayBuffer)', function(done) {
-    var bmp = makeRgbBitmap(ArrayBuffer, 0, 0xFF, 0);
+  it('can be used to create a JPEG image (ArrayBuffer)', (done) => {
+    const { width, height, data } = makeRgbBitmap(ArrayBuffer, 0, 0xFF, 0);
 
-    var width = bmp.width;
-    var height = bmp.height;
-    var buf = bmp.data;
-
-    var options = {
+    const options = {
       width: width,
       height: height,
       quality: 80
     };
 
-    lib.encode(buf, options, function(err, encoded) {
+    lib.encode(data, options, (err, encoded) => {
       should.not.exist(err);
       should.exist(encoded);
       (encoded.width).should.be.eql(320);
@@ -86,20 +75,16 @@ describe('Encode', function() {
 
   });
 
-  it('can be used to create a JPEG image (Uint8Array)', function(done) {
-    var bmp = makeRgbBitmap(Uint8Array, 0, 0, 0xFF);
+  it('can be used to create a JPEG image (Uint8Array)', (done) => {
+    const { width, height, data } = makeRgbBitmap(Uint8Array, 0, 0, 0xFF);
 
-    var width = bmp.width;
-    var height = bmp.height;
-    var buf = bmp.data;
-
-    var options = {
+    const options = {
       width: width,
       height: height,
       quality: 80
     };
 
-    lib.encode(buf, options, function(err, encoded) {
+    lib.encode(data, options, (err, encoded) => {
       should.not.exist(err);
       should.exist(encoded);
       (encoded.width).should.be.eql(320);
@@ -115,4 +100,4 @@ describe('Encode', function() {
 
   });
 
-});
+}).timeout(60000);

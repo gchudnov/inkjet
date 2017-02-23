@@ -1,15 +1,12 @@
-'use strict';
+import should from 'should';
+import lib from '../index';
+import constants from './constants';
 
-var should = require('should');
-var lib = require('../index');
-var constants = require('./constants');
+describe('Decode', () => {
 
-describe('Decode', function() {
-  this.timeout(60000);
-
-  it('can be used to process ' + constants.name420, function(done) {
-    var jpegData = constants.buf420;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.name420, (done) => {
+    const jpegData = constants.buf420;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
 
@@ -20,9 +17,9 @@ describe('Decode', function() {
     });
   });
 
-  it('can be used to process ' + constants.name422h, function(done) {
-    var jpegData = constants.buf422h;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.name422h, (done) => {
+    const jpegData = constants.buf422h;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
@@ -32,9 +29,9 @@ describe('Decode', function() {
     });
   });
 
-  it('can be used to process ' + constants.name422v, function(done) {
-    var jpegData = constants.buf422v;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.name422v, (done) => {
+    const jpegData = constants.buf422v;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
@@ -44,9 +41,9 @@ describe('Decode', function() {
     })
   });
 
-  it('can be used to process ' + constants.name444, function(done) {
-    var jpegData = constants.buf444;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.name444, (done) => {
+    const jpegData = constants.buf444;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
@@ -56,9 +53,9 @@ describe('Decode', function() {
     });
   });
 
-  it('can be used to process ' + constants.nameExif, function(done) {
-    var jpegData = constants.bufExif;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.nameExif, (done) => {
+    const jpegData = constants.bufExif;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
@@ -68,9 +65,9 @@ describe('Decode', function() {
     });
   });
 
-  it('fails to decode a broken JPEG image', function(done) {
-    var jpegData = constants.bufBroken;
-    lib.decode(jpegData, function(err, decoded) {
+  it('fails to decode a broken JPEG image', (done) => {
+    const jpegData = constants.bufBroken;
+    lib.decode(jpegData, (err, decoded) => {
       should.exist(err);
       should.not.exist(decoded);
       err.should.be.an.instanceOf(Error);
@@ -78,4 +75,4 @@ describe('Decode', function() {
     });
   });
 
-});
+}).timeout(60000);

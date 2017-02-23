@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.0
+- Updated dependencies.
+- Migrated code to ES6
+
 ## 2.0.2
 - Updated dependencies.
 - Fixed missing /dist directory.

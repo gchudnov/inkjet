@@ -1,15 +1,13 @@
-'use strict';
+import should from 'should';
+import lib from '../index';
+import constants from './constants';
 
-var should = require('should');
-var lib = require('../index');
-var constants = require('./constants');
+describe('Magic number', () => {
 
-describe('Magic number', function() {
+  it('can be detected for a JPEG Buffer', (done) => {
+    const buf = new Buffer([0xFF, 0xD8, 0xFF]);
 
-  it('can be detected for a JPEG Buffer', function(done) {
-    var buf = new Buffer([0xFF, 0xD8, 0xFF]);
-
-    lib.magic(buf, function(err, result) {
+    lib.magic(buf, (err, result) => {
       should.not.exist(err);
       should.exist(result);
 
@@ -20,14 +18,14 @@ describe('Magic number', function() {
     });
   });
 
-  it('can be detected for a JPEG ArrayBuffer', function(done) {
-    var buf = new ArrayBuffer(3);
-    var view   = new Uint8Array(buf);
+  it('can be detected for a JPEG ArrayBuffer', (done) => {
+    const buf = new ArrayBuffer(3);
+    const view = new Uint8Array(buf);
     view[0] = 0xFF;
     view[1] = 0xD8;
     view[2] = 0xFF;
 
-    lib.magic(buf, function(err, result) {
+    lib.magic(buf, (err, result) => {
       should.not.exist(err);
       should.exist(result);
 
@@ -38,14 +36,14 @@ describe('Magic number', function() {
     });
   });
 
-  it('can be detected for a JPEG Uint8Array', function(done) {
-    var buf = new ArrayBuffer(3);
-    var view   = new Uint8Array(buf);
+  it('can be detected for a JPEG Uint8Array', (done) => {
+    const buf = new ArrayBuffer(3);
+    const view = new Uint8Array(buf);
     view[0] = 0xFF;
     view[1] = 0xD8;
     view[2] = 0xFF;
 
-    lib.magic(view, function(err, result) {
+    lib.magic(view, (err, result) => {
       should.not.exist(err);
       should.exist(result);
 
@@ -56,10 +54,10 @@ describe('Magic number', function() {
     });
   });
 
-  it('can be detected for a JPEG file', function(done) {
-    var buf = constants.buf420;
+  it('can be detected for a JPEG file', (done) => {
+    const buf = constants.buf420;
 
-    lib.magic(buf, function(err, result) {
+    lib.magic(buf, (err, result) => {
       should.not.exist(err);
       should.exist(result);
 
@@ -70,10 +68,10 @@ describe('Magic number', function() {
     });
   });
 
-  it('can be detected for a PNG file', function(done) {
-    var buf = constants.bufPng;
+  it('can be detected for a PNG file', (done) => {
+    const buf = constants.bufPng;
 
-    lib.magic(buf, function(err, result) {
+    lib.magic(buf, (err, result) => {
       should.not.exist(err);
       should.exist(result);
 
@@ -84,10 +82,10 @@ describe('Magic number', function() {
     });
   });
 
-  it('cannot be detected for a broken JPEG file', function(done) {
-    var buf = constants.bufBroken;
+  it('cannot be detected for a broken JPEG file', (done) => {
+    const buf = constants.bufBroken;
 
-    lib.magic(buf, function(err, result) {
+    lib.magic(buf, (err, result) => {
       should.exist(err);
       should.not.exist(result);
       err.should.be.an.instanceOf(Error);

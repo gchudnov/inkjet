@@ -1,32 +1,28 @@
-'use strict';
+import should from 'should';
+import path from 'path';
+import lib from '../index';
+import constants from './constants';
+import writer from './util/file-writer';
 
-var path = require('path');
-var should = require('should');
-var lib = require('../index');
-var constants = require('./constants');
-var writer = require('./util/file-writer');
+describe('Re-Encode', () => {
 
-
-describe('Re-Encode', function() {
-  this.timeout(60000);
-
-  it('can be used to process ' + constants.name420, function(done) {
-    var jpegData = constants.buf420;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.name420, (done) => {
+    const jpegData = constants.buf420;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data).should.be.instanceOf(Uint8Array);
 
-      var buf = decoded.data;
-      var options = {
+      const buf = decoded.data;
+      const options = {
         width: decoded.width,
         height: decoded.height,
         quality: 80
       };
 
-      lib.encode(buf, options, function(err, encoded) {
+      lib.encode(buf, options, (err, encoded) => {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
@@ -42,23 +38,23 @@ describe('Re-Encode', function() {
     });
   });
 
-  it('can be used to process ' + constants.name422h, function(done) {
-    var jpegData = constants.buf422h;
-    lib.decode(jpegData, { width: 1052, height: 1052 }, function(err, decoded) {
+  it('can be used to process ' + constants.name422h, (done) => {
+    const jpegData = constants.buf422h;
+    lib.decode(jpegData, { width: 1052, height: 1052 }, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data).should.be.instanceOf(Uint8Array);
 
-      var buf = decoded.data;
-      var options = {
+      const buf = decoded.data;
+      const options = {
         width: decoded.width,
         height: decoded.height,
         quality: 80
       };
 
-      lib.encode(buf, options, function(err, encoded) {
+      lib.encode(buf, options, (err, encoded) => {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
@@ -74,23 +70,23 @@ describe('Re-Encode', function() {
     });
   });
 
-  it('can be used to process ' + constants.name422v, function(done) {
-    var jpegData = constants.buf422v;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.name422v, (done) => {
+    const jpegData = constants.buf422v;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data).should.be.instanceOf(Uint8Array);
 
-      var buf = decoded.data;
-      var options = {
+      const buf = decoded.data;
+      const options = {
         width: decoded.width,
         height: decoded.height,
         quality: 80
       };
 
-      lib.encode(buf, options, function(err, encoded) {
+      lib.encode(buf, options, (err, encoded) => {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
@@ -106,23 +102,23 @@ describe('Re-Encode', function() {
     });
   });
 
-  it('can be used to process ' + constants.nameExif, function(done) {
-    var jpegData = constants.bufExif;
-    lib.decode(jpegData, function(err, decoded) {
+  it('can be used to process ' + constants.nameExif, (done) => {
+    const jpegData = constants.bufExif;
+    lib.decode(jpegData, (err, decoded) => {
       should.not.exist(err);
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data).should.be.instanceOf(Uint8Array);
 
-      var buf = decoded.data;
-      var options = {
+      const buf = decoded.data;
+      const options = {
         width: decoded.width,
         height: decoded.height,
         quality: 80
       };
 
-      lib.encode(buf, options, function(err, encoded) {
+      lib.encode(buf, options, (err, encoded) => {
         should.not.exist(err);
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
@@ -138,4 +134,4 @@ describe('Re-Encode', function() {
     });
   });
 
-});
+}).timeout(60000);
