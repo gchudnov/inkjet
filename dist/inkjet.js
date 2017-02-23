@@ -1,6 +1,6 @@
 /*
  * inkjet - JPEG-image decoding, encoding & EXIF reading library for browser and node.js
- * @version v2.1.0
+ * @version v2.1.1
  * @author Grigoriy Chudnov <g.chudnov@gmail.com> (https://github.com/gchudnov)
  * @link https://github.com/gchudnov/inkjet
  * @license MIT
