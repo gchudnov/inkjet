@@ -1,6 +1,6 @@
 import path from 'path';
 import should from 'should';
-import lib from '../index';
+import lib from '../src/index';
 import writer from './util/file-writer';
 
 function makeRgbBitmap(BufferType, r, g, b) {

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.1.2
+- Fixed import in node.js [#3](https://github.com/gchudnov/inkjet/issues/3)
+
 ## 2.1.1
 - Fixed entrypoint
 

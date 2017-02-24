@@ -5,4 +5,4 @@ require('babel-core/register')(babelSettings);
 
 const requireDir = require('require-dir');
 
-requireDir('./build', { recurse: true });
+requireDir('./config', { recurse: true });

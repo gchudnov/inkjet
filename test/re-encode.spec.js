@@ -1,6 +1,6 @@
 import should from 'should';
 import path from 'path';
-import lib from '../index';
+import lib from '../src/index';
 import constants from './constants';
 import writer from './util/file-writer';
 

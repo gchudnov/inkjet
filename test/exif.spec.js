@@ -1,5 +1,5 @@
 import should from 'should';
-import lib from '../index';
+import lib from '../src/index';
 import constants from './constants';
 
 describe('Exif', () => {

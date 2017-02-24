@@ -1,7 +1,9 @@
 .idea
+config
 coverage
 examples
 images
 node_modules
+src
 test
 gulpfile.js

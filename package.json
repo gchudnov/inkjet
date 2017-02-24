@@ -1,10 +1,11 @@
 {
   "name": "inkjet",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "JPEG-image decoding, encoding & EXIF reading library for browser and node.js",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "mocha --require register --recursive",
+    "build": "babel src -d build --plugins=add-module-exports,transform-es2015-modules-commonjs",
     "browser": "gulp script",
     "browser:production": "NODE_ENV=production gulp script",
     "zuul": "zuul --no-coverage --sauce-connect -- ./test/*.spec.js",
@@ -36,13 +37,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
-    "babel-core": "^6.23.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.23.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-latest": "^6.22.0",
-    "babel-preset-stage-2": "^6.22.0",
+    "babel-preset-env": "^1.1.9",
     "babel-register": "^6.23.0",
     "babelify": "^7.3.0",
     "brfs": "^1.4.3",

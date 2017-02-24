@@ -28,7 +28,7 @@ gulp.task('script', () => {
 
   const bundleConfig = {
     name: 'inkjet',
-    entries: [`./index.js`], // require.resolve('babel-polyfill'),
+    entries: [`./src/index.js`], // require.resolve('babel-polyfill'),
     dest: './dist',
     outputName: `inkjet${isProduction ? '.min' : ''}.js`,
     isUglify: isProduction,
@@ -54,15 +54,18 @@ gulp.task('script', () => {
 
   bundler
     .transform(babelify.configure({
-        "presets": [
-          ["es2015"],
-        ],
-        "plugins": [
-          "add-module-exports",
-          "transform-es2015-modules-commonjs",
-        ]
-      }
-    ));
+      "presets": [
+        ["env", {
+          "targets": {
+            "browsers": ["last 2 versions", "safari >= 9", "ie >= 10"]
+          }
+        }]
+      ],
+      "plugins": [
+        "add-module-exports",
+        "transform-es2015-modules-commonjs",
+      ]
+    }));
 
   bundle();
 });

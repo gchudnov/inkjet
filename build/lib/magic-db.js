@@ -1,4 +1,9 @@
-{
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
   "474946383961": {
     "mimeType": "image/gif",
     "extension": "gif"
@@ -51,4 +56,5 @@
     "mimeType": "application/pdf",
     "extension": "pdf"
   }
-}
+};
+module.exports = exports["default"];
