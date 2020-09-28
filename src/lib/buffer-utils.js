@@ -25,9 +25,9 @@ export function toArrayBuffer(buf) {
   if(buf instanceof ArrayBuffer) {
     return buf;
   } else if(Buffer.isBuffer(buf)) {
-    return bufferToArrayBuffer(buf);
+    return arrayLikeToArrayBuffer(buf);
   } else if(buf instanceof Uint8Array || buf instanceof Uint8ClampedArray) {
-    return bufferToArrayBuffer(buf);
+    return arrayLikeToArrayBuffer(buf);
   } else {
     return buf; // type unknown, trust the user
   }
@@ -69,16 +69,19 @@ export function toArrayLike(buf) {
 
 /**
  * Converts Buffer to ArrayBuffer
+ *
+ * NOTE: we cannot convert Buffer to ArrayBuffer via `buf.buffer` since the size of the returned ArrayBuffer might be biger than the actual.
+ *
  * @param {Buffer|Uint8Array|Uint8ClampedArray} buf
  * @returns {ArrayBuffer}
  */
-export function bufferToArrayBuffer(buf) {
-  const arr = new ArrayBuffer(buf.length);
-  const view = new Uint8Array(arr);
+function arrayLikeToArrayBuffer(buf) {
+  const arrBuf = new ArrayBuffer(buf.length);
+  const view = new Uint8Array(arrBuf);
   for (let i = 0; i < buf.length; ++i) {
     view[i] = buf[i];
   }
-  return arr;
+  return arrBuf;
 }
 
 /**
@@ -86,6 +89,6 @@ export function bufferToArrayBuffer(buf) {
  * @param {ArrayBuffer} arrBuf
  * @returns {Buffer}
  */
-export function arrayBufferToBuffer(arrBuf) {
+function arrayBufferToBuffer(arrBuf) {
   return Buffer.from(new Uint8Array(arrBuf));
 }
