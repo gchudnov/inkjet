@@ -1,7 +1,7 @@
 
 /**
  * Converts the buffer to Buffer
- * @param {Buffer|ArrayBuffer|Uint8Array} buf Input buffer
+ * @param {Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray} buf Input buffer
  * @returns {Buffer}
  */
 export function toBuffer(buf) {
@@ -18,7 +18,7 @@ export function toBuffer(buf) {
 
 /**
  * Converts any buffer to ArrayBuffer
- * @param {Buffer|ArrayBuffer|Uint8Array} buf Input buffer
+ * @param {Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray} buf Input buffer
  * @returns {ArrayBuffer}
  */
 export function toArrayBuffer(buf) {
@@ -35,7 +35,7 @@ export function toArrayBuffer(buf) {
 
 /**
  * Converts any buffer to Uint8Array
- * @param {Buffer|ArrayBuffer|Uint8Array} buf Input buffer
+ * @param {Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray} buf Input buffer
  * @returns {Uint8Array}
  */
 export function toUint8Array(buf) {
@@ -51,8 +51,8 @@ export function toUint8Array(buf) {
 }
 
 /**
- * Convert any buffer to array-like type: Uint8Array|Buffer
- * @param {Buffer|ArrayBuffer|Uint8Array} buf
+ * Convert any buffer to array-like type: Uint8Array|Uint8ClampedArray|Buffer
+ * @param {Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray} buf
  * @returns {Buffer|Uint8Array}
  */
 export function toArrayLike(buf) {
@@ -68,8 +68,8 @@ export function toArrayLike(buf) {
 }
 
 /**
- * Buffer -> ArrayBuffer
- * @param {Buffer|Uint8Array} buf
+ * Converts Buffer to ArrayBuffer
+ * @param {Buffer|Uint8Array|Uint8ClampedArray} buf
  * @returns {ArrayBuffer}
  */
 export function bufferToArrayBuffer(buf) {
