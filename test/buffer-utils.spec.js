@@ -129,4 +129,16 @@ describe('buffer-utils', () => {
     done();
   });
 
+  it('can convert Uint8ClampedArray to ArrayLike data structure', (done) => {
+    const input = new Uint8ClampedArray(arrData)
+
+    const actual = toArrayLike(input);
+    const actualArr = Array.prototype.slice.call(actual, 0);
+
+    (actual.length).should.be.eql(arrData.length);
+    (actualArr).should.be.eql(arrData);
+
+    done();
+  });
+
 });
