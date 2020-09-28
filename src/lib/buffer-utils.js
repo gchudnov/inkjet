@@ -82,10 +82,10 @@ export function bufferToArrayBuffer(buf) {
 }
 
 /**
- * ArrayBuffer -> Buffer
- * @param {ArrayBuffer} arr
+ * Convert ArrayBuffer to Buffer
+ * @param {ArrayBuffer} arrBuf
  * @returns {Buffer}
  */
-export function arrayBufferToBuffer(arr) {
-  return Buffer.from(new Uint8Array(arr));
+export function arrayBufferToBuffer(arrBuf) {
+  return Buffer.from(new Uint8Array(arrBuf));
 }
