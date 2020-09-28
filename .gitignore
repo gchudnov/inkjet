@@ -1,4 +1,4 @@
 .idea
+coverage
 node_modules
 test/out
-coverage

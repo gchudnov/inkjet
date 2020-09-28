@@ -1,4 +1,4 @@
-import { ExifReader } from './backend/ExifReader';
+import ExifReader from './backend/exif-reader';
 
 /**
  * Read EXIF data from the provided buffer
@@ -11,17 +11,12 @@ import { ExifReader } from './backend/ExifReader';
  */
 export default function exif(buf, options, cb) {
   try {
-    const exif = new ExifReader();
-    exif.load(buf);
+    const tags = ExifReader.load(buf);
 
     // The MakerNote tag can be really large. Remove it to lower memory usage.
-    if(!options.hasOwnProperty('hasMakerNote') || !options.hasMakerNote) {
-      exif.deleteTag('MakerNote');
-    }
+    delete tags['MakerNote'];
 
-    const metadata = exif.getAllTags();
-
-    cb(null, metadata);
+    cb(null, tags);
   } catch(err) {
     if(err.message === 'No Exif data') {
       cb(null, {});

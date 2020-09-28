@@ -9,8 +9,8 @@ export function toBuffer(buf) {
     return arrayBufferToBuffer(buf);
   } else if(Buffer.isBuffer(buf)) {
     return buf;
-  } else if(buf instanceof Uint8Array) {
-    return new Buffer(buf);
+  } else if(buf instanceof Uint8Array || buf instanceof Uint8ClampedArray) {
+    return Buffer.from(buf);
   } else {
     return buf; // type unknown, trust the user
   }
@@ -26,7 +26,7 @@ export function toArrayBuffer(buf) {
     return buf;
   } else if(Buffer.isBuffer(buf)) {
     return bufferToArrayBuffer(buf);
-  } else if(buf instanceof Uint8Array) {
+  } else if(buf instanceof Uint8Array || buf instanceof Uint8ClampedArray) {
     return bufferToArrayBuffer(buf);
   } else {
     return buf; // type unknown, trust the user
@@ -39,7 +39,7 @@ export function toArrayBuffer(buf) {
  * @returns {Uint8Array}
  */
 export function toUint8Array(buf) {
-  if(buf instanceof Uint8Array) {
+  if(buf instanceof Uint8Array || buf instanceof Uint8ClampedArray) {
     return buf;
   } else if(buf instanceof ArrayBuffer) {
     return new Uint8Array(buf);
@@ -56,7 +56,7 @@ export function toUint8Array(buf) {
  * @returns {Buffer|Uint8Array}
  */
 export function toArrayLike(buf) {
-  if(buf instanceof Uint8Array) {
+  if(buf instanceof Uint8Array || buf instanceof Uint8ClampedArray) {
     return buf;
   } else if(buf instanceof ArrayBuffer) {
     return new Uint8Array(buf);
@@ -87,5 +87,5 @@ export function bufferToArrayBuffer(buf) {
  * @returns {Buffer}
  */
 export function arrayBufferToBuffer(arr) {
-  return new Buffer(new Uint8Array(arr));
+  return Buffer.from(new Uint8Array(arr));
 }

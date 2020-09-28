@@ -10,14 +10,17 @@ import { JpegImage } from './backend/jpg';
  * @callback { width: number, height: number, data: Uint8Array }
  */
 export default function decode(buf, options, cb) {
+
+  // returns: Uint8ClampedArray(width * height * numComponents)
   function getData(j, width, height) {
-    const dest = {
+    const opts = {
       width: width,
       height: height,
-      data: new Uint8Array(width * height * 4)
+      forceRGB: true,
+      isSourcePDF: false
     };
-    j.copyToImageData(dest);
-    return dest.data;
+
+    return j.getData(opts);
   }
 
   try {

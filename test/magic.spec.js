@@ -5,7 +5,7 @@ import constants from './constants';
 describe('Magic number', () => {
 
   it('can be detected for a JPEG Buffer', (done) => {
-    const buf = new Buffer([0xFF, 0xD8, 0xFF]);
+    const buf = Buffer.from([0xFF, 0xD8, 0xFF]);
 
     lib.magic(buf, (err, result) => {
       should.not.exist(err);
