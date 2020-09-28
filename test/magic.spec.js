@@ -54,6 +54,24 @@ describe('Magic number', () => {
     });
   });
 
+  it('can be detected for a JPEG Uint8ClampedArray', (done) => {
+    const buf = new ArrayBuffer(3);
+    const view = new Uint8ClampedArray(buf);
+    view[0] = 0xFF;
+    view[1] = 0xD8;
+    view[2] = 0xFF;
+
+    lib.magic(view, (err, result) => {
+      should.not.exist(err);
+      should.exist(result);
+
+      result.mimeType.should.be.equal('image/jpeg');
+      result.extension.should.be.equal('jpg');
+
+      done();
+    });
+  });
+
   it('can be detected for a JPEG file', (done) => {
     const buf = constants.buf420;
 
