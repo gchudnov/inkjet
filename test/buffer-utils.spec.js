@@ -64,11 +64,24 @@ describe('buffer-utils', () => {
   });
 
   it('can convert ArrayBuffer to ArrayBuffer', (done) => {
-    const buffer = new ArrayBuffer(arrData.length);
-    const view = new Uint8Array(buffer);
+    const input = new ArrayBuffer(arrData.length);
+    const view = new Uint8Array(input);
     copyData(arrData, view)
 
-    const actual = toArrayBuffer(buffer);
+    const actual = toArrayBuffer(input);
+    const actualView = new Uint8Array(actual);
+    const actualArr = Array.prototype.slice.call(actualView, 0);
+
+    (actual.byteLength).should.be.eql(arrData.length);
+    (actualArr).should.be.eql(arrData);
+
+    done();
+  });
+
+  it('can convert Buffer to ArrayBuffer', (done) => {
+    const input = Buffer.from(arrData)
+
+    const actual = toArrayBuffer(input);
     const actualView = new Uint8Array(actual);
     const actualArr = Array.prototype.slice.call(actualView, 0);
 
