@@ -141,4 +141,30 @@ describe('buffer-utils', () => {
     done();
   });
 
+  it('can convert ArrayBuffer to ArrayLike data structure', (done) => {
+    const input = new ArrayBuffer(arrData.length);
+    const view = new Uint8Array(input);
+    copyData(arrData, view)
+
+    const actual = toArrayLike(input);
+    const actualArr = Array.prototype.slice.call(actual, 0);
+
+    (actual.length).should.be.eql(arrData.length);
+    (actualArr).should.be.eql(arrData);
+
+    done();
+  });
+
+  it('can convert Buffer to ArrayLike data structure', (done) => {
+    const input = Buffer.from(arrData)
+
+    const actual = toArrayLike(input);
+    const actualArr = Array.prototype.slice.call(actual, 0);
+
+    (actual.length).should.be.eql(arrData.length);
+    (actualArr).should.be.eql(arrData);
+
+    done();
+  });
+
 });
