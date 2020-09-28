@@ -28,7 +28,7 @@ function decodeBuffer(buf, options, cb) {
   }
 
   try {
-    buf = bufferUtils.toUint8Array(buf);
+    buf = bufferUtils.toArrayLike(buf);
 
     if(hasWorker) {
       const wr = require('webworkify')(decodeWorker);
