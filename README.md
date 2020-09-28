@@ -4,6 +4,9 @@
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/gchudnov-open.svg)](https://saucelabs.com/u/gchudnov-open)
 
+## TODO
+
+- SAUCELABS ADD NEW BADGE
 
 > JPEG-image decoding, encoding & EXIF reading library for a browser and node.js
 
@@ -198,9 +201,6 @@ To run the tests for _inkjet_:
 ```bash
 $ npm test
 ```
-
-## Implementation details
-Internally, *decoding*, *encoding* and *EXIF extraction* provided by the following great libraries: [jpgjs](https://github.com/notmasteryet/jpgjs), [jpeg-js](https://github.com/eugeneware/jpeg-js) and [ExifReader](https://github.com/mattiasw/ExifReader).
 
 ## Contact
 

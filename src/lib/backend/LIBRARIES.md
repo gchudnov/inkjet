@@ -1,25 +1,23 @@
 Used libraries:
 
-* Read EXIF: [ExifReader](https://github.com/mattiasw/ExifReader)
-* Decode JPEG: [jpgjs](https://github.com/notmasteryet/jpgjs)
-* Encode JPEG: [jpeg-js](https://github.com/eugeneware/jpeg-js)
+- Read EXIF: [ExifReader v3.12.2](https://github.com/mattiasw/ExifReader)
+- Decode JPEG: [pdf.js v2.5.207](https://github.com/mozilla/pdf.js)
 
 ## Upgrading libraries
 
-### jpgjs
-```
-$ cd projects/
-$ git clone https://github.com/notmasteryet/jpgjs.git
-$ cd jpgjs/
-$ git clone https://github.com/mozilla/pdf.js.git
-$ grunt
-$ cp ./build/pdfjs.js inkjet/lib/
+### Read EXIF
+
+```bash
+git clone https://github.com/mattiasw/ExifReader.git
+cd ExifReader
+cp ./dist/exif-reader.js ./../inkjet/src/lib/backend/
 ```
 
-### ExifReader
-```
-$ cd projects/
-$ git clone https://github.com/mattiasw/ExifReader.git
-$ cd ExifReader
-$ cp ./js/ExifReader.js ./../inkjet/lib/
+### Decode JPEG
+
+```bash
+git clone git@github.com:mozilla/pdf.js.git
+cd pdf.js/src/core
+# embed imports
+cp ./jpg.js ./../inkjet/src/lib/backend/
 ```

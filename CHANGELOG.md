@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.0
+- Updated encoding, decoding and exif reading libraries.
+- Updated dependencies.
+
 ## 2.1.2
 - Fixed import in node.js [#3](https://github.com/gchudnov/inkjet/issues/3)
 

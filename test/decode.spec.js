@@ -12,7 +12,7 @@ describe('Decode', () => {
 
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
       done();
     });
   });
@@ -24,7 +24,7 @@ describe('Decode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
       done();
     });
   });
@@ -36,7 +36,7 @@ describe('Decode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
       done();
     })
   });
@@ -48,7 +48,7 @@ describe('Decode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
       done();
     });
   });
@@ -60,7 +60,7 @@ describe('Decode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
       done();
     });
   });

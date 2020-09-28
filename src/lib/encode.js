@@ -1,4 +1,4 @@
-import encoder from './backend/encoder';
+import { JPEGEncoder } from './backend/jpg-encode';
 
 /**
  * Encode the data to JPEG format
@@ -11,13 +11,22 @@ import encoder from './backend/encoder';
  */
 export default function encode(buf, options, cb) {
   try {
-    const imageData = {
+    const encoder = new JPEGEncoder(options.quality);
+    const opts = {
       data: buf,
       width: options.width,
       height: options.height
+    }
+
+    const encoded = encoder.encode(opts);
+
+    const result = {
+      data: encoded,
+      width: options.width,
+      height: options.height
     };
-    const data = encoder(imageData, options.quality);
-    cb(null, data);
+
+    cb(null, result);
   } catch(err) {
     cb(err);
   }
