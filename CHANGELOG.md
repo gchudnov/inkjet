@@ -2,6 +2,7 @@
 
 ## 3.0.0
 - Updated encoding, decoding and exif reading libraries.
+- Added more tests.
 - Updated dependencies.
 
 ## 2.1.2
