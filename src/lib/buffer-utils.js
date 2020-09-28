@@ -34,23 +34,6 @@ export function toArrayBuffer(buf) {
 }
 
 /**
- * Converts any buffer to Uint8Array
- * @param {Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray} buf Input buffer
- * @returns {Uint8Array}
- */
-export function toUint8Array(buf) {
-  if(buf instanceof Uint8Array || buf instanceof Uint8ClampedArray) {
-    return buf;
-  } else if(buf instanceof ArrayBuffer) {
-    return new Uint8Array(buf);
-  } else if(Buffer.isBuffer(buf)) {
-    return new Uint8Array(buf);
-  } else {
-    return buf; // type unknown, trust the user
-  }
-}
-
-/**
  * Convert any buffer to array-like type: Uint8Array|Uint8ClampedArray|Buffer
  * @param {Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray} buf
  * @returns {Buffer|Uint8Array}

@@ -1,4 +1,4 @@
-import { toBuffer, toArrayBuffer } from '../src/lib/buffer-utils';
+import { toBuffer, toArrayBuffer, toArrayLike } from '../src/lib/buffer-utils';
 
 const arrData = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F];
 
@@ -86,6 +86,44 @@ describe('buffer-utils', () => {
     const actualArr = Array.prototype.slice.call(actualView, 0);
 
     (actual.byteLength).should.be.eql(arrData.length);
+    (actualArr).should.be.eql(arrData);
+
+    done();
+  });
+
+  it('can convert Uint8Array to ArrayBuffer', (done) => {
+    const input = new Uint8Array(arrData)
+
+    const actual = toArrayBuffer(input);
+    const actualView = new Uint8Array(actual);
+    const actualArr = Array.prototype.slice.call(actualView, 0);
+
+    (actual.byteLength).should.be.eql(arrData.length);
+    (actualArr).should.be.eql(arrData);
+
+    done();
+  });
+
+  it('can convert Uint8ClampedArray to ArrayBuffer', (done) => {
+    const input = new Uint8ClampedArray(arrData)
+
+    const actual = toArrayBuffer(input);
+    const actualView = new Uint8Array(actual);
+    const actualArr = Array.prototype.slice.call(actualView, 0);
+
+    (actual.byteLength).should.be.eql(arrData.length);
+    (actualArr).should.be.eql(arrData);
+
+    done();
+  });
+
+  it('can convert Uint8Array to ArrayLike data structure', (done) => {
+    const input = new Uint8Array(arrData)
+
+    const actual = toArrayLike(input);
+    const actualArr = Array.prototype.slice.call(actual, 0);
+
+    (actual.length).should.be.eql(arrData.length);
     (actualArr).should.be.eql(arrData);
 
     done();

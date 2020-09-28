@@ -1,7 +1,8 @@
-Used libraries:
+Used external libraries:
 
 - Read EXIF: [ExifReader v3.12.2](https://github.com/mattiasw/ExifReader)
 - Decode JPEG: [pdf.js v2.5.207](https://github.com/mozilla/pdf.js)
+- Encode JPEG: JPEGEncoder
 
 ## Upgrading libraries
 
