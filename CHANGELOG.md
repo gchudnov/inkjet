@@ -2,8 +2,10 @@
 
 ## 3.0.0
 - Updated encoding, decoding and exif reading libraries.
+- Add Uint8ClampedArray support.
 - Added more tests.
 - Updated dependencies.
+- Should be a drop-in replacement for 2.x, no public API changes.
 
 ## 2.1.2
 - Fixed import in node.js [#3](https://github.com/gchudnov/inkjet/issues/3)
