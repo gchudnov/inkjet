@@ -10,7 +10,7 @@
     "browser:production": "NODE_ENV=production gulp script",
     "zuul": "zuul --no-coverage --sauce-connect -- ./test/*.spec.js",
     "zuul:local": "zuul --local 8080 --ui mocha-bdd -- ./test/*.spec.js",
-    "coverage": "nyc --reporter=lcov npm run test"
+    "coverage": "nyc --reporter=lcov --reporter=html npm run test"
   },
   "repository": {
     "type": "git",
