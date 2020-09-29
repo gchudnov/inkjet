@@ -1,9 +1,10 @@
 .idea
-scripts
+.nyc_output
 coverage
 examples
 gulpfile.js
 images
 node_modules
+scripts
 src
 test
