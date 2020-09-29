@@ -36,7 +36,7 @@ function browserifyTask(next) {
 
     const bundler = browserify({
       entries: bundleConfig.entries,
-      insertGlobals: true,
+      insertGlobals: false,
       detectGlobals: true,
       standalone: bundleConfig.name,
       debug: browserifyConfig.debug
@@ -50,6 +50,7 @@ function browserifyTask(next) {
     const bundle = () => {
       log('Bundling', colors.green(bundleConfig.outputName));
       return bundler
+        .transform("babelify", browserifyConfig.babelConfig)
         .bundle()
         .on('error', handleErrors)
         .pipe(source(bundleConfig.outputName))
