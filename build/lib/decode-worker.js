@@ -1,22 +1,29 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = _default;
 
-exports.default = function (self) {
-  const decode = require('./decode');
-  self.onmessage = ({ data: msg }) => {
-    decode(msg.buf, msg.options, (err, result) => {
+function _default(self) {
+  var decode = require('./decode');
+
+  self.onmessage = function (_ref) {
+    var msg = _ref.data;
+    decode(msg.buf, msg.options, function (err, result) {
       if (err) {
-        const errValue = err instanceof Error ? err.message : err; // Error is not clonable
-        self.postMessage({ err: errValue });
+        var errValue = err instanceof Error ? err.message : err; // Error is not clonable
+
+        self.postMessage({
+          err: errValue
+        });
       } else {
-        self.postMessage({ result: result });
+        self.postMessage({
+          result: result
+        });
       }
     });
   };
-};
+}
 
 ;
-module.exports = exports['default'];

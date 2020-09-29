@@ -57,7 +57,7 @@ gulp.task('script', () => {
       "presets": [
         ["env", {
           "targets": {
-            "browsers": ["last 2 versions", "safari >= 9", "ie >= 10"]
+            "browsers": ["last 2 versions", "ie >= 10"]
           }
         }]
       ],

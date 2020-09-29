@@ -1,15 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = encode;
+exports["default"] = encode;
 
-var _encoder = require('./backend/encoder');
-
-var _encoder2 = _interopRequireDefault(_encoder);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _jpgEncode = require("./backend/jpg-encode");
 
 /**
  * Encode the data to JPEG format
@@ -22,15 +18,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function encode(buf, options, cb) {
   try {
-    const imageData = {
+    var encoder = new _jpgEncode.JPEGEncoder(options.quality);
+    var opts = {
       data: buf,
       width: options.width,
       height: options.height
     };
-    const data = (0, _encoder2.default)(imageData, options.quality);
-    cb(null, data);
+    var encoded = encoder.encode(opts);
+    var result = {
+      data: encoded,
+      width: options.width,
+      height: options.height
+    };
+    cb(null, result);
   } catch (err) {
     cb(err);
   }
 }
-module.exports = exports['default'];

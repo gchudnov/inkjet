@@ -1,11 +1,13 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exif;
+exports["default"] = exif;
 
-var _ExifReader = require('./backend/ExifReader');
+var _exifReader = _interopRequireDefault(require("./backend/exif-reader"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * Read EXIF data from the provided buffer
@@ -18,17 +20,11 @@ var _ExifReader = require('./backend/ExifReader');
  */
 function exif(buf, options, cb) {
   try {
-    const exif = new _ExifReader.ExifReader();
-    exif.load(buf);
+    var tags = _exifReader["default"].load(buf); // The MakerNote tag can be really large. Remove it to lower memory usage.
 
-    // The MakerNote tag can be really large. Remove it to lower memory usage.
-    if (!options.hasOwnProperty('hasMakerNote') || !options.hasMakerNote) {
-      exif.deleteTag('MakerNote');
-    }
 
-    const metadata = exif.getAllTags();
-
-    cb(null, metadata);
+    delete tags['MakerNote'];
+    cb(null, tags);
   } catch (err) {
     if (err.message === 'No Exif data') {
       cb(null, {});
@@ -37,4 +33,3 @@ function exif(buf, options, cb) {
     }
   }
 }
-module.exports = exports['default'];
