@@ -69,7 +69,7 @@ describe('Encode', () => {
         writer.writeFileSync(path.join(__dirname, './out/' + 'encoded-red.jpg'), encoded.data);
       }
 
-      done();
+      done(err);
     });
   });
 
@@ -93,7 +93,7 @@ describe('Encode', () => {
         writer.writeFileSync(path.join(__dirname, './out/' + 'encoded-green.jpg'), encoded.data);
       }
 
-      done();
+      done(err);
     });
   });
 
@@ -117,7 +117,7 @@ describe('Encode', () => {
         writer.writeFileSync(path.join(__dirname, './out/' + 'encoded-blue.jpg'), encoded.data);
       }
 
-      done();
+      done(err);
     });
   });
 
@@ -141,7 +141,7 @@ describe('Encode', () => {
         writer.writeFileSync(path.join(__dirname, './out/' + 'encoded-cyan.jpg'), encoded.data);
       }
 
-      done();
+      done(err);
     });
   });
 

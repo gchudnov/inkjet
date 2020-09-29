@@ -14,7 +14,7 @@ describe('Magic number', () => {
       result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
-      done();
+      done(err);
     });
   });
 
@@ -32,7 +32,7 @@ describe('Magic number', () => {
       result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
-      done();
+      done(err);
     });
   });
 
@@ -50,7 +50,7 @@ describe('Magic number', () => {
       result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
-      done();
+      done(err);
     });
   });
 
@@ -68,7 +68,7 @@ describe('Magic number', () => {
       result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
-      done();
+      done(err);
     });
   });
 
@@ -82,7 +82,7 @@ describe('Magic number', () => {
       result.mimeType.should.be.equal('image/jpeg');
       result.extension.should.be.equal('jpg');
 
-      done();
+      done(err);
     });
   });
 
@@ -96,7 +96,7 @@ describe('Magic number', () => {
       result.mimeType.should.be.equal('image/png');
       result.extension.should.be.equal('png');
 
-      done();
+      done(err);
     });
   });
 
@@ -107,7 +107,7 @@ describe('Magic number', () => {
       should.exist(err);
       should.not.exist(result);
       err.should.be.an.instanceOf(Error);
-      done();
+      done(result);
     });
   });
 

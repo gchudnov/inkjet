@@ -10,7 +10,7 @@ describe('Exif', () => {
       should.not.exist(err);
       should.exist(data);
       data.should.have.properties('ImageDescription');
-      done();
+      done(err);
     });
   });
 
@@ -21,7 +21,7 @@ describe('Exif', () => {
       should.not.exist(err);
       should.exist(data);
       data.should.have.properties('ImageDescription');
-      done();
+      done(err);
     });
   });
 
@@ -30,7 +30,7 @@ describe('Exif', () => {
     lib.exif(jpegData, (err, data) => {
       should.not.exist(err);
       should.exist(data);
-      done();
+      done(err);
     });
   });
 
@@ -39,7 +39,7 @@ describe('Exif', () => {
     lib.exif(jpegData, (err, data) => {
       should.exist(err);
       should.not.exist(data);
-      done();
+      done(data);
     });
   });
 }).timeout(60000);

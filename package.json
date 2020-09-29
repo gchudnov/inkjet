@@ -1,6 +1,6 @@
 {
   "name": "inkjet",
-  "version": "3.0.0-rc0",
+  "version": "3.0.0-alpha0",
   "description": "JPEG-image decoding, encoding & EXIF reading library for browser and node.js",
   "main": "build/index.js",
   "scripts": {

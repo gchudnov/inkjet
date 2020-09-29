@@ -16,7 +16,7 @@ describe('Info', () => {
       data.should.have.a.property('width').equal(1052);
       data.should.have.a.property('height').equal(1052);
 
-      done();
+      done(err);
     });
   });
 
@@ -32,7 +32,7 @@ describe('Info', () => {
       data.should.have.a.property('width').equal(1052);
       data.should.have.a.property('height').equal(1052);
 
-      done();
+      done(err);
     });
   });
 
@@ -42,7 +42,7 @@ describe('Info', () => {
       should.exist(err);
       should.not.exist(data);
       err.should.be.an.instanceOf(Error);
-      done();
+      done(data);
     });
   });
 
