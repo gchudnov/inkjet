@@ -33,7 +33,7 @@ describe('Re-Encode', () => {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.name420), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });
@@ -65,7 +65,7 @@ describe('Re-Encode', () => {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.name422h), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });
@@ -97,7 +97,7 @@ describe('Re-Encode', () => {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.name422v), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });
@@ -129,7 +129,7 @@ describe('Re-Encode', () => {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.nameExif), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });

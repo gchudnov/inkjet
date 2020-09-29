@@ -13,7 +13,7 @@ describe('Decode', () => {
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
-      done();
+      done(err);
     });
   });
 
@@ -25,7 +25,7 @@ describe('Decode', () => {
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
-      done();
+      done(err);
     });
   });
 
@@ -37,7 +37,7 @@ describe('Decode', () => {
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
-      done();
+      done(err);
     })
   });
 
@@ -49,7 +49,7 @@ describe('Decode', () => {
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
-      done();
+      done(err);
     });
   });
 
@@ -59,20 +59,19 @@ describe('Decode', () => {
       should.exist(err);
       should.not.exist(decoded);
       err.should.be.an.instanceOf(Error);
-      done();
+      done(decoded);
     });
   });
 
-  it('fail to process ' + constants.nameP, (done) => {
+  it('can be used to process ' + constants.nameP, (done) => {
     const jpegData = constants.bufP;
     lib.decode(jpegData, (err, decoded) => {
-
-      console.log(err);
-
-      should.exist(err);
-      should.not.exist(decoded);
-      err.should.be.an.instanceOf(Error);
-      done();
+      should.not.exist(err);
+      should.exist(decoded);
+      (decoded.width).should.be.eql(1052);
+      (decoded.height).should.be.eql(1052);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
+      done(err);
     });
   });
 
@@ -84,7 +83,7 @@ describe('Decode', () => {
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
       (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
-      done();
+      done(err);
     });
   });
 
@@ -94,7 +93,7 @@ describe('Decode', () => {
       should.exist(err);
       should.not.exist(decoded);
       err.should.be.an.instanceOf(Error);
-      done();
+      done(decoded);
     });
   });
 
