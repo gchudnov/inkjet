@@ -53,6 +53,16 @@ describe('Decode', () => {
     });
   });
 
+  it('fail to process ' + constants.nameAC, (done) => {
+    const jpegData = constants.bufAC;
+    lib.decode(jpegData, (err, decoded) => {
+      should.exist(err);
+      should.not.exist(decoded);
+      err.should.be.an.instanceOf(Error);
+      done();
+    });
+  });
+
   it('can be used to process ' + constants.nameExif, (done) => {
     const jpegData = constants.bufExif;
     lib.decode(jpegData, (err, decoded) => {
