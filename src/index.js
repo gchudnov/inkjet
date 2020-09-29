@@ -75,7 +75,7 @@ function encodeBuffer(buf, options, cb) {
     buf = bufferUtils.toArrayLike(buf);
 
     if(!options.hasOwnProperty('width') || !options.hasOwnProperty('height')) {
-      return cb(new Error('Provide width & height of the buffer'));
+      return cb(new Error('Width & height of the buffer is not provided.'));
     }
 
     if(hasWorker) {

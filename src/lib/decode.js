@@ -30,8 +30,8 @@ export default function decode(buf, options, cb) {
 
     const width = options.width || j.width;
     const height = options.height || j.height;
-    const rgbData = getData(j, width, height); // NOTE: each color is RGB without alpha-channel
-    const rgbaData = arrayLikeRgbToRgba(rgbData);
+    const rgbData = getData(j, width, height);    // NOTE: each color is RGB without alpha-channel
+    const rgbaData = arrayLikeRgbToRgba(rgbData); // NOTE: convert to RGBA
 
     const result = {
       width: width,
