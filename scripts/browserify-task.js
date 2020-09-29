@@ -1,11 +1,16 @@
 import gulp from 'gulp';
+import async from 'async';
+import once from 'once';
+import log from 'fancy-log';
+import colors from 'ansi-colors';
 import header from 'gulp-header';
 import uglify from 'gulp-uglify';
 import gulpIf from 'gulp-if';
 import browserify from 'browserify';
-import babelify from 'babelify';
-import source from 'vinyl-source-stream2';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
 import pkg from '../package.json';
+import { isProduction, browserifyConfig } from './config';
 
 const banner = [
   '/*',
@@ -22,50 +27,42 @@ function handleErrors(...args) {
   this.emit('end'); // Keep gulp from hanging on this task
 }
 
-gulp.task('script', () => {
+function browserifyTask(next) {
+  log('NODE_ENV:', colors.yellow(process.env.NODE_ENV));
+  log('IS_PRODUCTION:', colors.yellow(isProduction.toString()));
 
-  const isProduction = (process.env.NODE_ENV === 'production');
+  async.each(browserifyConfig.bundleConfigs, (bundleConfig, cb) => {
+    cb = once(cb);
 
-  const bundleConfig = {
-    name: 'inkjet',
-    entries: [`./src/index.js`], // require.resolve('babel-polyfill'),
-    dest: './dist',
-    outputName: `inkjet${isProduction ? '.min' : ''}.js`,
-    isUglify: isProduction,
-  };
+    const bundler = browserify({
+      entries: bundleConfig.entries,
+      insertGlobals: true,
+      detectGlobals: true,
+      standalone: bundleConfig.name,
+      debug: browserifyConfig.debug
+    });
 
-  let bundler = browserify({
-    entries: bundleConfig.entries,
-    insertGlobals: false,
-    detectGlobals: true,
-    standalone: bundleConfig.name,
-    debug: false
-  });
+    let handleEnd = () => {
+      log('Bundled', colors.green(bundleConfig.outputName));
+      cb();
+    };
 
-  let bundle = () => {
-    return bundler
-      .bundle()
-      .on('error', handleErrors)
-      .pipe(source(bundleConfig.outputName))
-      .pipe(header(banner, { pkg: pkg }))
-      .pipe(gulpIf(bundleConfig.isUglify, uglify()))
-      .pipe(gulp.dest(bundleConfig.dest))
-  };
+    const bundle = () => {
+      log('Bundling', colors.green(bundleConfig.outputName));
+      return bundler
+        .bundle()
+        .on('error', handleErrors)
+        .pipe(source(bundleConfig.outputName))
+        .pipe(buffer())
+        .pipe(header(banner, { pkg: pkg }))
+        .pipe(gulpIf(bundleConfig.isUglify, uglify()))
+        .pipe(gulp.dest(bundleConfig.dest))
+        .on('end', handleEnd);
+    };
 
-  bundler
-    .transform(babelify.configure({
-      "presets": [
-        ["env", {
-          "targets": {
-            "browsers": ["last 2 versions", "ie >= 10"]
-          }
-        }]
-      ],
-      "plugins": [
-        "add-module-exports",
-        "transform-es2015-modules-commonjs",
-      ]
-    }));
+    bundle();
 
-  bundle();
-});
+  }, next);
+}
+
+export { browserifyTask };
