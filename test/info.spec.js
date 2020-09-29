@@ -1,6 +1,6 @@
 import should from 'should';
 import lib from '../src/index';
-import constants from './constants';
+import constants from './util/constants';
 
 describe('Info', () => {
 
