@@ -1,4 +1,4 @@
-# ![inkjet logo](images/inkjet-logo.png)
+![inkjet logo](images/inkjet-logo.png)
 
 ![Node.js CI](https://github.com/gchudnov/inkjet/workflows/Node.js%20CI/badge.svg)
 
