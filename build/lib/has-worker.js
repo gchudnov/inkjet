@@ -1,17 +1,18 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-let hasWorker = typeof window !== 'undefined' && 'Worker' in window;
+exports.hasWorker = void 0;
+var hasWorker = typeof window !== 'undefined' && 'Worker' in window;
+exports.hasWorker = hasWorker;
 
 if (hasWorker) {
   try {
-    const w = require('webworkify')(() => {});
+    var w = require('webworkify')(function () {});
+
     w.terminate();
   } catch (e) {
     exports.hasWorker = hasWorker = false;
   }
 }
-
-exports.hasWorker = hasWorker;

@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "mocha test --require @babel/register",
-    "build": "babel src -d build --plugins=add-module-exports,transform-es2015-modules-commonjs",
+    "build": "./node_modules/.bin/babel src --out-dir build",
     "browser": "gulp script",
     "browser:production": "NODE_ENV=production gulp script",
     "zuul": "zuul --no-coverage --sauce-connect -- ./test/*.spec.js",
@@ -36,6 +36,7 @@
     "webworkify": "^1.5.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
