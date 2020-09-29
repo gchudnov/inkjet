@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "mocha test --require @babel/register",
+    "bundle:test": "gulp bundleTest",
     "build": "./node_modules/.bin/babel src --out-dir build",
     "browser": "gulp",
     "browser:release": "NODE_ENV=production gulp",
