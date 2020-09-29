@@ -4,18 +4,28 @@ if(!process.env.NODE_ENV) {
 
 export const isProduction = (process.env.NODE_ENV === 'production');
 
-const srcDir = './build';
+const srcDir = './src';
 const dstDir = './dist';
 
 const bundleConfig = {
   name: 'inkjet',
-  entries: [ `${srcDir}/main.js` ],
+  entries: [ `${srcDir}/index.js` ],
   dest: dstDir,
   outputName: `inkjet${isProduction ? '.min' : ''}.js`,
   isUglify: isProduction,
 };
 
+const babelConfig = {
+  presets: [
+    "@babel/preset-env"
+  ],
+  plugins: [
+    "add-module-exports",
+  ]
+};
+
 export const browserifyConfig = {
   debug: !isProduction,
-  bundleConfigs: [ bundleConfig ]
+  bundleConfigs: [ bundleConfig ],
+  babelConfig: babelConfig
 };
