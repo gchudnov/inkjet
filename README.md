@@ -1,6 +1,6 @@
 # ![inkjet logo](images/inkjet-logo.png)
 
-[![Build Status](https://travis-ci.org/gchudnov/inkjet.svg)](https://travis-ci.org/gchudnov/inkjet)
+![Node.js CI](https://github.com/gchudnov/inkjet/workflows/Node.js%20CI/badge.svg)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/gchudnov-open.svg)](https://saucelabs.com/u/gchudnov-open)
 
