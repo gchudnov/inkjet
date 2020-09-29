@@ -5,6 +5,6 @@ examples
 gulpfile.babel.js
 images
 node_modules
-scripts
 src
+tasks
 test

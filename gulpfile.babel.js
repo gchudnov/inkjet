@@ -2,6 +2,6 @@
 
 require("@babel/register")({});
 
-const { browserifyTask } = require('./scripts/browserify-task');
+const { browserifyTask } = require('./tasks/browserify-task');
 
 exports.default = browserifyTask;
