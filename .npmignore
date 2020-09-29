@@ -2,7 +2,7 @@
 .nyc_output
 coverage
 examples
-gulpfile.js
+gulpfile.babel.js
 images
 node_modules
 scripts
