@@ -111,7 +111,7 @@ inkjet.info(buf, function(err, data) {
 Decodes a JPEG image.
 
 Arguments:
-* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray`
 * `[options]` - an optional object with settings to decode an image. Supported options:
   * `width` - override image width
   * `height` - override image height
