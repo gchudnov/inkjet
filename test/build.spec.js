@@ -2,7 +2,6 @@ import should from 'should';
 
 import lib from '../build/index';
 import constants from './util/constants';
-import writer from "./util/file-writer";
 import init from './util/init';
 
 const frameWidth = init.frameWidth;
