@@ -9,7 +9,7 @@ const dstDir = './dist';
 
 const bundleConfig = {
   name: 'inkjet',
-  entries: [ `${srcDir}/index.js` ],
+  entries: [ `${srcDir}/main.js` ],
   dest: dstDir,
   outputName: `inkjet${isProduction ? '.min' : ''}.js`,
   isUglify: isProduction,
