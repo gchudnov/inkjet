@@ -1,9 +1,10 @@
 import { JpegImage } from './backend/jpg';
+import { arrayLikeRgbToRgba } from './util/color';
 
 /**
  * Decode the JPEG data
  *
- * @param buf Uint8Array
+ * @param buf ArrayLike data structure
  * @param options Object { width: number, height: number }
  * @param cb Callback to invoke on completion
  *
@@ -29,20 +30,17 @@ export default function decode(buf, options, cb) {
 
     const width = options.width || j.width;
     const height = options.height || j.height;
-    const data = getData(j, width, height);
+    const rgbData = getData(j, width, height); // NOTE: each color is RGB without alpha-channel
+    const rgbaData = arrayLikeRgbToRgba(rgbData);
 
     const result = {
       width: width,
       height: height,
-      data: data
+      data: rgbaData
     };
 
     cb(null, result);
   } catch(err) {
-    if(typeof err === 'string') {
-      // jpg.js throws 'string' values, convert to an Error
-      err = new Error(err);
-    }
     cb(err);
   }
 }

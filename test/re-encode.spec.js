@@ -1,7 +1,7 @@
 import should from 'should';
 import path from 'path';
 import lib from '../src/index';
-import constants from './constants';
+import constants from './util/constants';
 import writer from './util/file-writer';
 
 describe('Re-Encode', () => {

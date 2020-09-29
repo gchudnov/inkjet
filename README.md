@@ -4,10 +4,6 @@
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/gchudnov-open.svg)](https://saucelabs.com/u/gchudnov-open)
 
-## TODO
-
-- SAUCELABS ADD NEW BADGE
-
 > JPEG-image decoding, encoding & EXIF reading library for a browser and node.js
 
 ## Installation

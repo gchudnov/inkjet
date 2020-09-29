@@ -1,6 +1,6 @@
 import { hasWorker } from './lib/has-worker';
 
-import * as bufferUtils from './lib/buffer-utils';
+import * as bufferUtils from './lib/util/buffer';
 
 import exif from './lib/exif';
 import decode from './lib/decode';
