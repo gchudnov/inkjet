@@ -7,7 +7,7 @@
     "test": "mocha test --require @babel/register",
     "build": "./node_modules/.bin/babel src --out-dir build",
     "browser": "gulp",
-    "browser:production": "NODE_ENV=production gulp",
+    "browser:release": "NODE_ENV=production gulp",
     "zuul": "zuul --no-coverage --sauce-connect -- ./test/*.spec.js",
     "zuul:local": "zuul --local 8080 --ui mocha-bdd -- ./test/*.spec.js",
     "coverage": "nyc --reporter=lcov --reporter=html npm run test"
