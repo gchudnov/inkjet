@@ -18,3 +18,13 @@ table.matrix td.header {
   border-bottom-width: 4px;
   border-bottom-style: solid;
 }
+
+.almost {
+  background: repeating-linear-gradient(
+    -45deg,
+    #2ECC40,
+    #2ECC40 10px,
+    #deffe2 10px,
+    #deffe2 20px
+  );
+}
