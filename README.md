@@ -2,9 +2,9 @@
 
 ![Node.js CI](https://github.com/gchudnov/inkjet/workflows/Node.js%20CI/badge.svg)
 
-[![browser-matrix](data/inkjet-matrix.png)
-
 > JPEG-image decoding, encoding & EXIF reading library for a browser and node.js
+
+![browser-matrix](data/inkjet-matrix.png)
 
 ## Installation
 
