@@ -12,15 +12,18 @@ const nameDCTF = 'js_logo-dct-float.jpg';
 const nameCP = 'js_logo-sRGB-IEC61966-2-1.jpg';
 const nameExif = 'js_logo-exif.jpg';
 const nameBroken = 'js_broken.jpg';
-const nameEmbed = "js-embedded.jpg"
 
-function readFileSyncOrNull(path) {
-  if('readFileSync' in fs) {
-    return fs.readFileSync(path);
-  } else {
-    return null;
-  }
-}
+const pathPng = path.join(__dirname, '../../images/', namePng);
+const path420 = path.join(__dirname, '../../images/', name420);
+const path422h = path.join(__dirname, '../../images/', name422h);
+const path422v = path.join(__dirname, '../../images/', name422v);
+const path444 = path.join(__dirname, '../../images/', name444);
+const pathAC = path.join(__dirname, '../../images/', nameAC);
+const pathP = path.join(__dirname, '../../images/', nameP);
+const pathDCTF = path.join(__dirname, '../../images/', nameDCTF);
+const pathCP = path.join(__dirname, '../../images/', nameCP);
+const pathExif = path.join(__dirname, '../../images/', nameExif);
+const pathBroken = path.join(__dirname, '../../images/', nameBroken);
 
 export default {
   namePng: namePng,
@@ -34,18 +37,28 @@ export default {
   nameCP: nameCP,
   nameExif: nameExif,
   nameBroken: nameBroken,
-  nameEmbed: nameEmbed,
 
-  bufPng: readFileSyncOrNull(path.join(__dirname, '../../images/', namePng)),
-  buf420: readFileSyncOrNull(path.join(__dirname, '../../images/', name420)),
-  buf422h: readFileSyncOrNull(path.join(__dirname, '../../images/', name422h)),
-  buf422v: readFileSyncOrNull(path.join(__dirname, '../../images/', name422v)),
-  buf444: readFileSyncOrNull(path.join(__dirname, '../../images/', name444)),
-  bufAC: readFileSyncOrNull(path.join(__dirname, '../../images/', nameAC)),
-  bufP: readFileSyncOrNull(path.join(__dirname, '../../images/', nameP)),
-  bufDCTF: readFileSyncOrNull(path.join(__dirname, '../../images/', nameDCTF)),
-  bufCP: readFileSyncOrNull(path.join(__dirname, '../../images/', nameCP)),
-  bufExif: readFileSyncOrNull(path.join(__dirname, '../../images/', nameExif)),
-  bufBroken: readFileSyncOrNull(path.join(__dirname, '../../images/', nameBroken)),
-  bufEmbed: Buffer.from("/9j/4AAQSkZJRgABAQEASABIAAD/4QfsRXhpZgAASUkqAAgAAAAGABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAADEBAgANAAAAZgAAADIBAgAUAAAAdAAAAGmHBAABAAAAiAAAAJoAAABIAAAAAQAAAEgAAAABAAAAR0lNUCAyLjEwLjE0AAAyMDIwOjA5OjMwIDAxOjM3OjA4AAEAAaADAAEAAAABAAAAAAAAAAgAAAEEAAEAAAAAAQAAAQEEAAEAAAAAAQAAAgEDAAMAAAAAAQAAAwEDAAEAAAAGAAAABgEDAAEAAAAGAAAAFQEDAAEAAAADAAAAAQIEAAEAAAAGAQAAAgIEAAEAAADeBgAAAAAAAAgACAAIAP/Y/+AAEEpGSUYAAQEAAAEAAQAA/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8AAEQgBAAEAAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A9Rooor89PUCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooopgFFFFABRRRSAKKKKACiiikAUUUUAFFFFMAooooAKKKKYgooooAKKKKQBRRRQAUUUUDCiiigAooooAKKKKACiiimAUUUUAFFFFIAooooAKKKKQBRRRQAUUUUwCiiigAooopiCiiigAooopAFFFFABRRRQMKKKKACiiigAooooAKKKKQBRRRQBTooorYgKKKKAHUUUUDCiiigCtRRRViCiiigCCiiiqEFFFFAG3RRRXKaBRRRQAlFFFABRRRQAUUUUAFFFFABRRRSAKKKKAKdFFFbEBRRRQA6iiigYUUUUAVqKKKsQUUUUAQUUUVQgooooA26KKK5TQKKKKAEooooAKKKKACiiigAooooAWiiigAooooA5aiiiu8zCiiigCaiiikIKKKKAPOqKKK9s5wooooA76iiivGOkKKKKAOnooorgLCiiigB1FFFIYUUUUAFFFFABRRRQAtFFFABRRRQBy1FFFd5mFFFFAE1FFFIQUUUUAedUUUV7ZzhRRRQB31FFFeMdIUUUUAdPRRRXAWFFFFADqKKKQwooooAKKKKACiiigBaKKKACiiigDlqKKK7zMKKKKAJqKKKQBRRRQBmUUUVuZhRRRQBzlFFFdxAUUUUAen0UUV4B0hRRRQBZooorMoKKKKACiiigAooooAWiiigAooooA5aiiiu8zCiiigCaiiikAUUUUAZlFFFbmYUUUUAc5RRRXcQFFFFAHp9FFFeAdIUUUUAWaKKKzKCiiigAooooAKKKKAOWooor0TEKKKKAMWiiiukkKKKKAN+iiiuMoKKKKAMyiiiugQUU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", "base64"),
+  pathPng: pathPng,
+  path420: path420,
+  path422h: path422h,
+  path422v: path422v,
+  path444: path444,
+  pathAC: pathAC,
+  pathP: pathP,
+  pathDCTF: pathDCTF,
+  pathCP: pathCP,
+  pathExif: pathExif,
+  pathBroken: pathBroken,
+
+  bufPng: fs.readFileSync(pathPng),
+  buf420: fs.readFileSync(path420),
+  buf422h: fs.readFileSync(path422h),
+  buf422v: fs.readFileSync(path422v),
+  buf444: fs.readFileSync(path444),
+  bufAC: fs.readFileSync(pathAC),
+  bufP: fs.readFileSync(pathP),
+  bufDCTF: fs.readFileSync(pathDCTF),
+  bufCP: fs.readFileSync(pathCP),
+  bufExif: fs.readFileSync(pathExif),
+  bufBroken: fs.readFileSync(pathBroken),
 }

@@ -9,8 +9,6 @@
     "build": "./node_modules/.bin/babel src --out-dir build",
     "browser": "gulp",
     "browser:release": "NODE_ENV=production gulp",
-    "zuul": "zuul --no-coverage --sauce-connect -- ./test/*.spec.js",
-    "zuul:local": "zuul --local 8080 --ui mocha-bdd -- ./test/*.spec.js",
     "coverage": "nyc --reporter=lcov --reporter=html npm run test"
   },
   "repository": {
@@ -45,12 +43,12 @@
     "async": "^3.2.0",
     "babel-plugin-add-module-exports": "^1.0.4",
     "babelify": "^10.0.0",
-    "brfs": "^2.0.2",
     "browserify": "^16.5.2",
     "fancy-log": "^1.3.3",
     "gulp": "^4.0.2",
     "gulp-header": "^2.0.9",
     "gulp-if": "^3.0.0",
+    "gulp-replace": "^1.0.0",
     "gulp-uglify": "^3.0.2",
     "mocha": "^8.1.3",
     "nyc": "^15.1.0",
