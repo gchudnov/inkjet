@@ -1,8 +1,8 @@
-![inkjet logo](images/inkjet-logo.png)
+![inkjet-logo](data/inkjet-logo.png)
 
 ![Node.js CI](https://github.com/gchudnov/inkjet/workflows/Node.js%20CI/badge.svg)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/gchudnov-open.svg)](https://saucelabs.com/u/gchudnov-open)
+[![browser-matrix](data/inkjet-matrix.png)
 
 > JPEG-image decoding, encoding & EXIF reading library for a browser and node.js
 
@@ -200,11 +200,21 @@ inkjet.info(buf, function(err, data) {
 
 ## Tests
 
-To run the tests for *inkjet*:
+To run the tests for *inkjet* in Node.js:
 
 ```bash
 npm test
 ```
+
+To run tests in a browser:
+
+```bash
+npm run bundle:test
+```
+
+a bundle file `inkjet-test-bundle.js` with all tests will be generated in `inkjet/test/browser` directory.
+
+Open `inkjet/test/browser/index.html` in the target browser. Tests will run automatically.
 
 ## Contact
 

@@ -42,4 +42,5 @@ describe('Exif', () => {
       done(data);
     });
   });
+
 }).timeout(60000);
