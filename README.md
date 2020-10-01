@@ -218,7 +218,7 @@ Open `inkjet/test/browser/index.html` in the target browser. Tests will run auto
 
 ## Contact
 
-[Grigoriy Chudnov] (mailto:g.chudnov@gmail.com)
+[Grigorii Chudnov] (mailto:g.chudnov@gmail.com)
 
 
 ## License
