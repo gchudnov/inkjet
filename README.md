@@ -34,7 +34,7 @@ const inkjet = require('inkjet');
 const filepath = './images/js_logo-4-2-0.jpg';
 const buf = fs.readFileSync(filepath);
 
-inkjet.decode(buf, function(err, decoded) {
+inkjet.decode(buf, (err, decoded) => {
   // decoded: { width: number, height: number, data: Uint8Array }
 });
 ```
@@ -63,7 +63,7 @@ const options = {
   quality: 80
 };
 
-inkjet.encode(buf, options, function(err, encoded) {
+inkjet.encode(buf, options, (err, encoded) => {
   // encoded: { width: number, height: number, data: Uint8Array }
 });
 ```
@@ -75,7 +75,7 @@ const inkjet = require('inkjet');
 
 const filepath = './images/js_logo-exif.jpg';
 const buf = fs.readFileSync(filepath);
-inkjet.exif(buf, function(err, metadata) {
+inkjet.exif(buf, (err, metadata) => {
   // metadata -- an object that maps EXIF tags to string values
 });
 ```
@@ -87,7 +87,7 @@ const inkjet = require('inkjet');
 
 const filepath = './images/js_logo-4-2-0.jpg';
 const buf = fs.readFileSync(filepath);
-inkjet.magic(buf, function(err, data) {
+inkjet.magic(buf, (err, data) => {
   // data -- an object that contains mime-type and extension
 });
 ```
@@ -99,7 +99,7 @@ const inkjet = require('inkjet');
 
 const filepath = './images/js_logo-4-2-0.jpg';
 const buf = fs.readFileSync(filepath);
-inkjet.info(buf, function(err, data) {
+inkjet.info(buf, (err, data) => {
   // data -- an object that contains width, height, mime type and extension data
 });
 ```
@@ -121,7 +121,7 @@ Arguments:
                 where data represents colors in RGBA format.
 
 ```javsscript
-inkjet.decode(buf, function(err, decoded) {
+inkjet.decode(buf, (err, decoded) => {
   // ...
 });
 ```
@@ -141,7 +141,7 @@ Arguments:
   * `encoded` - an object that describes the encoded image: `{ width: number, height: number, data: Uint8Array }`
 
 ```javascript
-inkjet.encode(buf, function(err, encoded) {
+inkjet.encode(buf, (err, encoded) => {
   // ...
 });
 ```
@@ -159,7 +159,7 @@ Arguments:
   * `metadata` - metadata object, a set of tags and their values.
 
 ```javascript
-inkjet.exif(buf, function(err, metadata) {
+inkjet.exif(buf, (err, metadata) => {
   // ...
 });
 ```
@@ -175,7 +175,7 @@ Arguments:
   * `data` - data object { "mimeType": string, "extension": string }
 
 ```javascript
-inkjet.magic(buf, function(err, data) {
+inkjet.magic(buf, (err, data) => {
   // ...
 });
 ```
@@ -191,7 +191,7 @@ Arguments:
   * `data` - data object { "type": string, "mimeType": string, "extension": string, "width": number, "height: number" }
 
 ```javascript
-inkjet.info(buf, function(err, data) {
+inkjet.info(buf, (err, data) => {
   // data: {
   //   type: "image"
   //   mimeType: ...
