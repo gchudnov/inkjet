@@ -29,10 +29,10 @@ Decoding, encoding and EXIF extraction operations are offloaded to [WebWorkers](
 ### Decode JPEG
 
 ```javascript
-var inkjet = require('inkjet');
+const inkjet = require('inkjet');
 
-var filepath = './images/js_logo-4-2-0.jpg';
-var buf = fs.readFileSync(filepath);
+const filepath = './images/js_logo-4-2-0.jpg';
+const buf = fs.readFileSync(filepath);
 
 inkjet.decode(buf, function(err, decoded) {
   // decoded: { width: number, height: number, data: Uint8Array }
@@ -42,12 +42,12 @@ inkjet.decode(buf, function(err, decoded) {
 ### Encode JPEG
 
 ```javascript
-var inkjet = require('inkjet');
+const inkjet = require('inkjet');
 
-var width = 320;
-var height = 180;
-var frameData = new Buffer(width * height * 4);
-var i = 0;
+const width = 320;
+const height = 180;
+const frameData = new Buffer(width * height * 4);
+const i = 0;
 
 while (i < frameData.length) {
   frameData[i++] = 0xFF; // R, red
@@ -56,8 +56,8 @@ while (i < frameData.length) {
   frameData[i++] = 0xFF; // A, alpha - ignored in JPEGs
 }
 
-var buf = frameData;
-var options = {
+const buf = frameData;
+const options = {
   width: width,
   height: height,
   quality: 80
@@ -71,10 +71,10 @@ inkjet.encode(buf, options, function(err, encoded) {
 ### Read EXIF
 
 ```javascript
-var inkjet = require('inkjet');
+const inkjet = require('inkjet');
 
-var filepath = './images/js_logo-exif.jpg';
-var buf = fs.readFileSync(filepath);
+const filepath = './images/js_logo-exif.jpg';
+const buf = fs.readFileSync(filepath);
 inkjet.exif(buf, function(err, metadata) {
   // metadata -- an object that maps EXIF tags to string values
 });
@@ -83,10 +83,10 @@ inkjet.exif(buf, function(err, metadata) {
 ### Deduce image type
 
 ```javascript
-var inkjet = require('inkjet');
+const inkjet = require('inkjet');
 
-var filepath = './images/js_logo-4-2-0.jpg';
-var buf = fs.readFileSync(filepath);
+const filepath = './images/js_logo-4-2-0.jpg';
+const buf = fs.readFileSync(filepath);
 inkjet.magic(buf, function(err, data) {
   // data -- an object that contains mime-type and extension
 });
@@ -95,10 +95,10 @@ inkjet.magic(buf, function(err, data) {
 ### Image information
 
 ```javascript
-var inkjet = require('inkjet');
+const inkjet = require('inkjet');
 
-var filepath = './images/js_logo-4-2-0.jpg';
-var buf = fs.readFileSync(filepath);
+const filepath = './images/js_logo-4-2-0.jpg';
+const buf = fs.readFileSync(filepath);
 inkjet.info(buf, function(err, data) {
   // data -- an object that contains width, height, mime type and extension data
 });
