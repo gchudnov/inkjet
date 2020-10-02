@@ -1,0 +1,30 @@
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+table.matrix {
+  margin: 32px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+table.matrix td {
+  width: 80px;
+  text-align: center;
+}
+
+table.matrix td.header {
+  border-bottom-width: 4px;
+  border-bottom-style: solid;
+}
+
+.almost {
+  background: repeating-linear-gradient(
+    -45deg,
+    #2ECC40,
+    #2ECC40 10px,
+    #deffe2 10px,
+    #deffe2 20px
+  );
+}

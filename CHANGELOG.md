@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 3.0.0
+- Should be a drop-in replacement for 2.x, no public API changes.
+- Updated encoding, decoding and exif reading libraries.
+- Add progressive JPEG decoding.
+- Add Uint8ClampedArray support.
+- Updated project dependencies.
+
 ## 2.1.2
 - Fixed import in node.js [#3](https://github.com/gchudnov/inkjet/issues/3)
 

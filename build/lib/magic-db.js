@@ -3,7 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = {
+exports["default"] = void 0;
+var _default = {
   "474946383961": {
     "mimeType": "image/gif",
     "extension": "gif"
@@ -57,4 +58,4 @@ exports.default = {
     "extension": "pdf"
   }
 };
-module.exports = exports["default"];
+exports["default"] = _default;

@@ -1,41 +1,37 @@
-# ![inkjet logo](http://i.imgur.com/tOd3r4M.png)
+![inkjet-logo](data/inkjet-logo.png)
 
-[![Build Status](https://travis-ci.org/gchudnov/inkjet.svg)](https://travis-ci.org/gchudnov/inkjet)
-
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/gchudnov-open.svg)](https://saucelabs.com/u/gchudnov-open)
-
+![Node.js CI](https://github.com/gchudnov/inkjet/workflows/Node.js%20CI/badge.svg)
 
 > JPEG-image decoding, encoding & EXIF reading library for a browser and node.js
+
+![browser-matrix](data/inkjet-matrix.png)
 
 ## Installation
 
 installing with npm:
+
 ```bash
-$ npm install inkjet --save
+npm install inkjet --save
 ```
 
 ## In browser
 
-To use _inkjet_ in a browser, use `inkjet.js` or `inkjet.min.js` in `/dist` directory, or build it manually:
+To use *inkjet* in a browser, use `inkjet.js` or `inkjet.min.js` in `/dist` directory, or build it manually:
 
 ```bash
-$ npm install
-$ npm run browser
-```
-
-installing with bower:
-```bash
-$ bower install inkjet
+npm install
+npm run browser
 ```
 
 ## Usage
 Decoding, encoding and EXIF extraction operations are offloaded to [WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) if the environment supports them.
 
 ### Decode JPEG
+
 ```javascript
 var inkjet = require('inkjet');
 
-var filepath = './images/jpeg420exif.jpg';
+var filepath = './images/js_logo-4-2-0.jpg';
 var buf = fs.readFileSync(filepath);
 
 inkjet.decode(buf, function(err, decoded) {
@@ -44,6 +40,7 @@ inkjet.decode(buf, function(err, decoded) {
 ```
 
 ### Encode JPEG
+
 ```javascript
 var inkjet = require('inkjet');
 
@@ -53,10 +50,10 @@ var frameData = new Buffer(width * height * 4);
 var i = 0;
 
 while (i < frameData.length) {
-  frameData[i++] = 0xFF; // red
-  frameData[i++] = 0x00; // green
-  frameData[i++] = 0x00; // blue
-  frameData[i++] = 0xFF; // alpha - ignored in JPEGs
+  frameData[i++] = 0xFF; // R, red
+  frameData[i++] = 0x00; // G, green
+  frameData[i++] = 0x00; // B, blue
+  frameData[i++] = 0xFF; // A, alpha - ignored in JPEGs
 }
 
 var buf = frameData;
@@ -72,10 +69,11 @@ inkjet.encode(buf, options, function(err, encoded) {
 ```
 
 ### Read EXIF
+
 ```javascript
 var inkjet = require('inkjet');
 
-var filepath = './images/jpeg420exif.jpg';
+var filepath = './images/js_logo-exif.jpg';
 var buf = fs.readFileSync(filepath);
 inkjet.exif(buf, function(err, metadata) {
   // metadata -- an object that maps EXIF tags to string values
@@ -83,10 +81,11 @@ inkjet.exif(buf, function(err, metadata) {
 ```
 
 ### Deduce image type
+
 ```javascript
 var inkjet = require('inkjet');
 
-var filepath = './images/jpeg420exif.jpg';
+var filepath = './images/js_logo-4-2-0.jpg';
 var buf = fs.readFileSync(filepath);
 inkjet.magic(buf, function(err, data) {
   // data -- an object that contains mime-type and extension
@@ -94,10 +93,11 @@ inkjet.magic(buf, function(err, data) {
 ```
 
 ### Image information
+
 ```javascript
 var inkjet = require('inkjet');
 
-var filepath = './images/jpeg420exif.jpg';
+var filepath = './images/js_logo-4-2-0.jpg';
 var buf = fs.readFileSync(filepath);
 inkjet.info(buf, function(err, data) {
   // data -- an object that contains width, height, mime type and extension data
@@ -106,17 +106,19 @@ inkjet.info(buf, function(err, data) {
 
 ## API
 
-### .decode(buf, [options], cb)
+### .decode(buf, [options], cb);
+
 Decodes a JPEG image.
 
 Arguments:
-* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray`
 * `[options]` - an optional object with settings to decode an image. Supported options:
   * `width` - override image width
   * `height` - override image height
 * `cb` - a callback that gets 2 arguments:
   * `err` - decoding `Error`
   * `decoded` - an object that describes the decoded image: `{ width: number, height: number, data: Uint8Array }`
+                where data represents colors in RGBA format.
 
 ```javsscript
 inkjet.decode(buf, function(err, decoded) {
@@ -125,10 +127,11 @@ inkjet.decode(buf, function(err, decoded) {
 ```
 
 ### .encode(buf, [options], cb);
-Encodes buffer to a JPEG format.
+
+Encodes the provided buffer to a JPEG format.
 
 Arguments:
-* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray`
 * `[options]` - an optional object with settings to encode an image. Supported options:
   * `width` - width of the image in `buf`
   * `height`- height of the image in `buf`
@@ -143,11 +146,12 @@ inkjet.encode(buf, function(err, encoded) {
 });
 ```
 
-### .exif(buf, [options], cb)
+### .exif(buf, [options], cb);
+
 Get EXIF metadata for the image. The metadata tags defined in the Exif standard cover date and time information, camera settings, descriptions, resolution and  location information.
 
 Arguments:
-* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray`
 * `[options]` - an optional object with settings to encode an image. Supported options:
   * `hasMakerNote` - exclude *MakerNote* tag from metadata. Default value: `true`, *MakerNote* tag is excluded.
 * `cb` - a callback that gets 2 arguments:
@@ -160,11 +164,12 @@ inkjet.exif(buf, function(err, metadata) {
 });
 ```
 
-### .magic(buf, cb)
+### .magic(buf, cb);
+
 Deduce image type (mime type and extension) for the provided buffer.
 
 Arguments:
-* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray`
 * `cb` - a callback that gets 2 arguments:
   * `err` - `Error` object
   * `data` - data object { "mimeType": string, "extension": string }
@@ -175,11 +180,12 @@ inkjet.magic(buf, function(err, data) {
 });
 ```
 
-### .info(buf, cb)
+### .info(buf, cb);
+
 Get image information without reading and decoding an image.
 
 Arguments:
-* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array`
+* `buf` - source buffer, one of the following types: `Buffer|ArrayBuffer|Uint8Array|Uint8ClampedArray`
 * `cb` - a callback that gets 2 arguments:
   * `err` - `Error` object
   * `data` - data object { "type": string, "mimeType": string, "extension": string, "width": number, "height: number" }
@@ -194,19 +200,27 @@ inkjet.info(buf, function(err, data) {
 
 ## Tests
 
-To run the tests for _inkjet_:
+To run the tests for *inkjet* in Node.js:
+
 ```bash
-$ npm test
+npm test
 ```
 
-## Implementation details
-Internally, *decoding*, *encoding* and *EXIF extraction* provided by the following great libraries: [jpgjs](https://github.com/notmasteryet/jpgjs), [jpeg-js](https://github.com/eugeneware/jpeg-js) and [ExifReader](https://github.com/mattiasw/ExifReader).
+To run tests in a browser:
+
+```bash
+npm run bundle:test
+```
+
+a bundle file `inkjet-test-bundle.js` with all tests will be generated in `inkjet/test/browser` directory.
+
+Open `inkjet/test/browser/index.html` in the target browser. Tests will run automatically.
 
 ## Contact
 
-[Grigoriy Chudnov] (mailto:g.chudnov@gmail.com)
+[Grigorii Chudnov] (mailto:g.chudnov@gmail.com)
 
 
 ## License
 
-Distributed under the [The MIT License (MIT)](https://github.com/gchudnov/inkjet/blob/master/LICENSE).
+Distributed under the [The MIT License (MIT)](LICENSE).

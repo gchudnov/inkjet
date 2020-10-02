@@ -1,7 +1,7 @@
 import should from 'should';
 import path from 'path';
 import lib from '../src/index';
-import constants from './constants';
+import constants from './util/constants';
 import writer from './util/file-writer';
 
 describe('Re-Encode', () => {
@@ -13,7 +13,7 @@ describe('Re-Encode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
       const buf = decoded.data;
       const options = {
@@ -27,13 +27,13 @@ describe('Re-Encode', () => {
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
         (encoded.height).should.be.eql(1052);
-        (encoded.data).should.be.instanceOf(Uint8Array);
+        (encoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
         if('writeFileSync' in writer) {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.name420), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });
@@ -45,7 +45,7 @@ describe('Re-Encode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
       const buf = decoded.data;
       const options = {
@@ -59,13 +59,13 @@ describe('Re-Encode', () => {
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
         (encoded.height).should.be.eql(1052);
-        (encoded.data).should.be.instanceOf(Uint8Array);
+        (encoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
         if('writeFileSync' in writer) {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.name422h), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });
@@ -77,7 +77,7 @@ describe('Re-Encode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
       const buf = decoded.data;
       const options = {
@@ -91,13 +91,13 @@ describe('Re-Encode', () => {
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
         (encoded.height).should.be.eql(1052);
-        (encoded.data).should.be.instanceOf(Uint8Array);
+        (encoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
         if('writeFileSync' in writer) {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.name422v), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });
@@ -109,7 +109,7 @@ describe('Re-Encode', () => {
       should.exist(decoded);
       (decoded.width).should.be.eql(1052);
       (decoded.height).should.be.eql(1052);
-      (decoded.data).should.be.instanceOf(Uint8Array);
+      (decoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
       const buf = decoded.data;
       const options = {
@@ -123,13 +123,13 @@ describe('Re-Encode', () => {
         should.exist(encoded);
         (encoded.width).should.be.eql(1052);
         (encoded.height).should.be.eql(1052);
-        (encoded.data).should.be.instanceOf(Uint8Array);
+        (encoded.data.buffer).should.be.instanceOf(ArrayBuffer);
 
         if('writeFileSync' in writer) {
           writer.writeFileSync(path.join(__dirname, './out/' + constants.nameExif), encoded.data);
         }
 
-        done();
+        done(err);
       });
     });
   });

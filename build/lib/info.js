@@ -1,15 +1,13 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = info;
+exports["default"] = info;
 
-var _imageinfo = require('imageinfo');
+var _imageinfo = _interopRequireDefault(require("imageinfo"));
 
-var _imageinfo2 = _interopRequireDefault(_imageinfo);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * Get image information
@@ -17,8 +15,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param {function} cb Callback to invoke on completion
  */
 function info(buf, cb) {
-  setTimeout(() => {
-    const info = (0, _imageinfo2.default)(buf);
+  setTimeout(function () {
+    var info = (0, _imageinfo["default"])(buf);
+
     if (!info) {
       cb(new Error('Cannot get image info'));
     } else {
@@ -32,4 +31,3 @@ function info(buf, cb) {
     }
   }, 0);
 }
-module.exports = exports['default'];

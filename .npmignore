@@ -1,9 +1,13 @@
+.github
 .idea
-config
+.nyc_output
+babel.config.json
 coverage
+data
 examples
+gulpfile.babel.js
 images
 node_modules
 src
+tasks
 test
-gulpfile.js
